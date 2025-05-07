@@ -1,0 +1,66 @@
+<section class="content profile">
+  <h2>Mes Véhicules</h2>
+  <div class="vehicle-list">
+    <div class="vehicle-card">
+      <img src="https://placehold.co/400x300" alt="Camping-car Luxe Horizon" class="vehicle-image">
+      <div class="vehicle-details">
+        <h3>Camping-car Luxe Horizon</h3>
+        <p><strong>Type:</strong> Camping-car</p>
+        <p><strong>Capacité:</strong> 4 personnes</p>
+        <p><strong>Prix/jour:</strong> 140€</p>
+        <div class="vehicle-actions">
+          <button class="btn btn-edit">Voir / Modifier</button>
+          <button class="btn btn-delete">Supprimer</button>
+        </div>
+      </div>
+    </div>
+    <div class="vehicle-card">
+      <img src="https://placehold.co/400x300" alt="Van Aventure Plus" class="vehicle-image">
+      <div class="vehicle-details">
+        <h3>Van Aventure Plus</h3>
+        <p><strong>Type:</strong> Van</p>
+        <p><strong>Capacité:</strong> 2 personnes</p>
+        <p><strong>Prix/jour:</strong> 90€</p>
+        <div class="vehicle-actions">
+          <button class="btn btn-edit">Voir / Modifier</button>
+          <button class="btn btn-delete">Supprimer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="btn btn-add" id="addVehicleBtn">Ajouter un véhicule</button>
+</section>
+
+<div id="addVehicleModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Ajouter un véhicule</h2>
+    <form id="addVehicleForm">
+      <div class="input-group">
+        <label for="vehicleName">Nom du véhicule</label>
+        <input type="text" id="vehicleName" name="vehicleName" required>
+      </div>
+      <div class="input-group">
+        <label for="vehicleType">Type de véhicule</label>
+        <select id="vehicleType" name="vehicleType" required>
+          <option value="">Sélectionnez un type</option>
+          <option value="camping-car">Camping-car</option>
+          <option value="van">Van</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label for="vehicleCapacity">Capacité (personnes)</label>
+        <input type="number" id="vehicleCapacity" name="vehicleCapacity" min="1" required>
+      </div>
+      <div class="input-group">
+        <label for="vehiclePrice">Prix par jour (€)</label>
+        <input type="number" id="vehiclePrice" name="vehiclePrice" min="0" step="0.01" required>
+      </div>
+      <div class="input-group">
+        <label for="vehicleDescription">Description</label>
+        <textarea id="vehicleDescription" name="vehicleDescription" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-add">Ajouter le véhicule</button>
+    </form>
+  </div>
+</div>

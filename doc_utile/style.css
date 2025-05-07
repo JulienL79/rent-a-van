@@ -1,0 +1,1202 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+/* ============================================================================================
+VARIABLES
+=============================================================================================== */
+
+:root {
+    --primary-color: #3498db;
+    --primary-color-darked: #2980b9;
+    --secondary-color: #2ecc71;
+    --secondary-color-darked: #25A158;
+    --danger-color: #de4838;
+    --danger-color-darked: #B0392C;
+    --text-color: #333;
+    --bg-color: #f8f9fa;
+    --bg-color-secondary: #f1f3f5;
+    --active-color: #e9ecef;
+    --message-received-color: rgba(52, 152, 219, 0.3);
+    --message-sent-color: rgba(46, 204, 113, 0.3);
+    --font-size-logo: 3rem;
+    --font-size-nav-sm: 2.4rem;
+    --font-size-nav-md: 1.6rem;
+    --font-size-nav-lg: 2rem;
+    --font-size-h1-sm: 3.2rem;
+    --font-size-h1-lg: 4rem;
+    --font-size-h2-sm: 2.6rem;
+    --font-size-h2-lg: 3.2rem;
+    --font-size-h3-sm: 2rem;
+    --font-size-h3-lg: 2.4rem;
+    --font-size-h2-sm-dialog: 2rem;
+    --font-size-h3-sm-dialog: 1.4rem;
+    --font-size-text-sm-dialog: 1rem;
+    --font-size-body-sm: 1.4rem;
+    --font-size-body-md: 1.6rem;
+    --font-size-body-lg: 1.8rem;
+    --font-weight-logo: 800;
+    --font-weight-icon-after: 700;
+    --font-weight-title: 600;
+    --font-weight-body: 400;
+    --font-weight-other: 500;
+}
+
+/* ============================================================================================
+TOOLS
+=============================================================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-size: var(--font-size-body-sm);
+    padding: 0;
+    margin: 0;
+}
+
+/* ============================================================================================
+GENERALITIES
+=============================================================================================== */
+
+body,
+html {
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+}
+
+h1 {
+    font-size: var(--font-size-h1-sm);
+    font-weight: var(--font-weight-title);
+    color: var(--primary-color);
+}
+
+h2 {
+    font-size: var(--font-size-h2-sm);
+    font-weight: var(--font-weight-title);
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+}
+
+h3 {
+    font-size: var(--font-size-h3-sm);
+    font-weight: var(--font-weight-title);
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+}
+
+a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+a:hover::after {
+    width: 100%;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+}
+
+strong {
+    font-weight: bold;
+}
+
+/* =============================================================================================
+CONTAINER
+================================================================================================ */
+
+/* ============================================================================================
+MAIN LAYOUT
+=============================================================================================== */
+
+/* ********************************************************************************************
+HEADER
+*********************************************************************************************** */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    margin: 0 1rem;
+    padding: 1rem;
+    background-color: var(--bg-color);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--primary-color);
+}
+
+.logo a::after {
+    display: none;
+}
+
+.nav-links {
+    display: none;
+    gap: 2rem;
+    padding-top: 10rem;
+    font-size: var(--font-size-nav-sm);
+    font-weight: var(--font-weight-title);
+}
+
+.nav-links.active {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 100%;
+    height: 100%;
+    padding-left: 2rem;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 98;
+    background-color: var(--bg-color);
+    animation: slideRight ease-out 1s;
+}
+
+.nav-links a {
+    padding: 0 2rem;
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.current-link {
+    color: var(--primary-color);
+}
+
+.nav-links a::after {
+    background-color: var(--primary-color);
+}
+
+.profile-menu {
+    position: relative;
+}
+
+.dropdown {
+    display: flex;
+    /* La sous-liste est cachée par défaut */
+    flex-direction: column;
+    align-items: start;
+    width: 150%;
+    margin-top: 1rem;
+    margin-left: 5rem;
+    position: absolute;
+    top: 120%;
+    /* Pour positionner la sous-liste sous l'élément parent */
+    background-color: var(--bg-color);
+    z-index: 1;
+}
+
+.dropdown a {
+    display: block;
+    margin: 5px 0;
+    padding: 5px;
+    text-align: center;
+}
+
+.profile-menu:hover .dropdown,
+.profile-menu:focus-within .dropdown {
+    display: flex;
+    /* Affiche la sous-liste quand on survole ou clique */
+}
+
+.menu-hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
+    cursor: pointer;
+    z-index: 99;
+}
+
+.line {
+    width: 90%;
+    height: 4px;
+    border-radius: .5rem;
+    background-color: var(--primary-color);
+    transition: transform 0.8s ease;
+}
+
+.menu-hamburger .line:nth-child(2) {
+    transition: all 0.5s ease;
+}
+
+.menu-hamburger.open .line:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.menu-hamburger.open .line:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-hamburger.open .line:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* ********************************************************************************************
+MAIN
+*********************************************************************************************** */
+
+.container {
+    flex-grow: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 2rem 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 90%;
+}
+
+/* ********************************************************************************************
+FOOTER
+*********************************************************************************************** */
+
+footer {
+    background: var(--text-color);
+    color: var(--bg-color);
+    padding: 2rem 5%;
+    text-align: center;
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    gap: 2rem;
+    margin: 3rem auto 0 auto;
+}
+
+.footer-links a::after {
+    background-color: var(--bg-color);
+}
+
+/* ============================================================================================
+VARIOUS
+=============================================================================================== */
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: none;
+}
+
+input:focus,
+textarea:focus {
+    outline: 2px solid var(--primary-color);
+}
+
+.input-group {
+    margin-bottom: 1rem;
+}
+
+button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    align-self: center;
+    font-family: inherit;
+}
+
+button:hover {
+    background-color: var(--primary-color-darked);
+}
+
+/* ============================================================================================
+PAGE - HOME
+=============================================================================================== */
+
+.intro {
+    height: 85vh;
+    width: 100%;
+    background-image: url('https://placehold.co/1920x1080');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-image 0.5s ease;
+}
+
+.search-form {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 2rem;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.toggle-switch {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    background: #e0e0e0;
+    border-radius: 50px;
+    padding: 5px;
+}
+
+.toggle-switch label {
+    margin: 0;
+    padding: 0.5rem 1.5rem;
+    cursor: pointer;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+
+.toggle-switch input[type="radio"] {
+    display: none;
+}
+
+.toggle-switch input[type="radio"]:checked+label {
+    background: var(--primary-color);
+    transform: scale(1.2);
+    color: white;
+}
+
+.search-form input[type="text"],
+.search-form input[type="date"] {
+    width: 100%;
+    padding: 0.8rem;
+    margin: 0.5rem 0;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.search-form input[type="text"]:focus,
+.search-form input[type="date"]:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.search-form button {
+    width: 100%;
+    padding: 1rem;
+    margin-top: 1rem;
+    border: none;
+    border-radius: 10px;
+    background: var(--primary-color);
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.search-form button:hover {
+    background: #2980b9;
+}
+
+.articles {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    padding: 4rem 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.articles>h2 {
+    width: 100%;
+}
+
+.article {
+    width: 100%;
+    max-height: 80vh;
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.article:hover {
+    transform: translateY(-5px);
+}
+
+.article img {
+    width: 100%;
+    max-height: 80%;
+    object-fit: cover;
+}
+
+.article-content {
+    padding: 1.5rem;
+}
+
+.article h3 {
+    margin-top: 0;
+    color: var(--primary-color);
+}
+
+.testimonials {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 4rem 5%;
+    text-align: center;
+    max-width: 100%;
+}
+
+.testimonial-slider {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.testimonial-slider::-webkit-scrollbar {
+    display: none;
+}
+
+.testimonial {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    padding: 2rem;
+}
+
+.testimonials h2 {
+    color: white;
+}
+
+.testimonial q {
+    font-style: italic;
+    font-size: 1.2rem;
+}
+
+/* ============================================================================================
+PAGE - HOME - SLIDER  / ARTICLES
+=============================================================================================== */
+.testimonials,
+.vehicle-slider-list {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+}
+
+.testimonial-slider,
+.vehicle-slider {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.vehicle-slider .vehicle-card {
+    flex: 0 0 calc(100%);
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+
+.slider-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 10;
+    transition: background 0.3s ease;
+}
+
+.slider-arrow:hover {
+    background: var(--primary-color-darked);
+}
+
+.slider-arrow.left {
+    left: 20px;
+}
+
+.slider-arrow.right {
+    right: 20px;
+}
+
+/* ============================================================================================
+PAGE - LOGIN / SIGNUP
+=============================================================================================== */
+
+.form-container {
+    width: 90%;
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.forgot-password {
+    text-align: right;
+    margin-top: 0.5rem;
+}
+
+.forgot-password a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.forgot-password a::after {
+    height: 1.5px;
+}
+
+.signup-link,
+.login-link {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+.signup-link a,
+.login-link a {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.terms {
+    margin: 1rem 0;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+}
+
+.terms>input {
+    margin: 0 5px 0 0;
+    width: 5%;
+}
+
+.terms label {
+    margin: 0;
+    vertical-align: sub;
+}
+
+.terms label a {
+    color: var(--primary-color);
+}
+
+/* =============================================================================================
+PAGE - PROFIL - SIDEBAR
+================================================================================================ */
+
+.sidebar {
+    display: none;
+    min-width: 200px;
+    width: 20%;
+    background-color: var(--sidebar-bg);
+    padding: 2rem;
+    border-radius: 10px;
+}
+
+.sidebar h2 {
+    margin-top: 0;
+    color: var(--primary-color);
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar li {
+    margin-bottom: 1.5rem;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: var(--text-color);
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+    background-color: var(--hover-color);
+    color: var(--primary-color);
+}
+
+/* =============================================================================================
+PAGE - PROFIL - PARAMETRES
+================================================================================================ */
+
+.content {
+    max-width: 100%;
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+}
+
+.settings-section + .settings-section {
+    margin-top: 2rem;
+}
+
+/* =============================================================================================
+PAGE PROFIL - CHAT
+================================================================================================ */
+
+.conversation-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+.conversation-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #777;
+    margin-right: 1rem;
+}
+
+.conversation-info h3 {
+    margin: 0;
+}
+
+.conversation-info p {
+    margin: 0;
+    color: #777;
+}
+
+.message-container {
+    flex-grow: 1;
+    max-height: 50vh;
+    overflow-y: auto;
+    padding: 1rem 0;
+}
+
+.message {
+    max-width: 70%;
+    margin-bottom: 1rem;
+    padding: 1rem 2rem;
+    border-radius: 20px;
+    position: relative;
+}
+
+.message-received {
+    background-color: var(--message-received-color);
+    align-self: flex-start;
+    margin-right: auto;
+}
+
+.message-sent {
+    background-color: var(--message-sent-color);
+    align-self: flex-end;
+    margin-left: auto;
+}
+
+.message-time {
+    font-size: 0.9rem;
+    color: #777;
+    text-align: right;
+    margin-top: 0.25rem;
+}
+
+.message-input input {
+    margin: 1rem 0;
+}
+
+/* =============================================================================================
+PAGE PROFIL - MAILBOX
+================================================================================================ */
+
+.message-list {
+    overflow-y: auto;
+    max-height: 50vh;
+}
+
+.message-item {
+    border-bottom: 1px solid #eee;
+    padding: 1rem 0;
+    display: flex;
+    align-items: center;
+    height: 70px;
+    width: 100%;
+}
+
+.message-content {
+    flex: 1;
+    width: calc(100% - 70px);
+}
+
+.message-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.message-sender {
+    font-weight: bold;
+}
+
+.message-preview {
+    color: #555;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+    /* S'assure que le texte prend bien une ligne unique */
+    width: 100%;
+    /* Prend la largeur disponible dans le parent */
+    max-width: 100%;
+    /* Permet à l’élément de se réduire correctement */
+}
+
+/* =============================================================================================
+PAGE PROFIL - MES RESERVATIONS
+================================================================================================ */
+
+.vehicle-list,
+.reservation-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.vehicle-card,
+.reservation-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    transition: box-shadow 0.3s ease;
+}
+
+.reservation-card:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.vehicle-image {
+    width: 100%;
+    max-height: 100%;
+    border-radius: 6px;
+    object-fit: cover;
+}
+
+.vehicle-details,
+.reservation-details {
+    align-self: flex-start;
+    width: 100%;
+}
+
+.vehicle-details p,
+.reservation-details p {
+    margin: 0.5rem 0;
+}
+
+.reservation-status {
+    font-weight: bold;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    display: inline-block;
+    margin-top: 0.5rem;
+}
+
+.status-confirmed {
+    background-color: #e7f5e7;
+    color: #2ecc71;
+}
+
+.status-pending {
+    background-color: #fff7e6;
+    color: #f39c12;
+}
+
+.status-completed {
+    background-color: #e8f4fd;
+    color: #3498db;
+}
+
+/* =============================================================================================
+PAGE PROFIL - MES VEHICULES
+================================================================================================ */
+
+.vehicle-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.btn-delete {
+    background-color: var(--danger-color);
+}
+
+.btn-delete:hover {
+    background-color: var(--danger-color-darked);
+}
+
+#addVehicleBtn {
+    margin-top: 1rem;
+    background-color: var(--secondary-color);
+}
+
+#addVehicleBtn:hover {
+    background-color: var(--secondary-color-darked);
+}
+
+/* MODALE - MES VEHICULES ******************************************************************* */
+
+.modal {
+    display: block;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: var(--bg-color-secondary);
+    margin: 30% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* =============================================================================================
+PAGE PROFIL - MON VEHICULE
+================================================================================================ */
+
+.calendar {
+    margin-top: 2rem;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.calendar-day {
+    aspect-ratio: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.calendar-day.available {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.calendar-day.unavailable {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.product-details .vehicle-details {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+/* =============================================================================================
+PAGE CGV/ETC
+================================================================================================ */
+
+.paragraph {
+    margin-top: 2rem;
+}
+
+.social-links {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.social-links a {
+    display: inline-block;
+    margin-right: 1.5rem;
+    color: var(--primary-color);
+    font-size: 3rem;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: var(--secondary-color);
+}
+
+.social-links a::after {
+    display: none;
+}
+
+/* =============================================================================================
+KEY FRAMES ANIMATION
+================================================================================================ */
+
+@keyframes slideRight {
+    0% {
+        transform: translateX(-100px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* ============================================================================================
+TABLET VERSION
+=============================================================================================== */
+
+@media screen and (min-width: 768px) {
+
+    body {
+        font-size: var(--font-size-body-md);
+    }
+
+    /* FOOTER ********************************************************************************  */
+
+    .footer-links {
+        flex-direction: row;
+        gap: 4rem;
+    }
+
+
+
+    /* PAGE PROFIL - SIDEBAR **************************************************************** */
+
+    .sidebar {
+        display: block;
+    }
+
+    /* PAGE PROFIL - CONTENT **************************************************************** */
+
+    .content.profile {
+        max-width: calc(100% - 210px);
+    }
+
+    /* PAGE PROFIL - MES RESA - MODALE ****************************************************** */
+
+    .modal-content {
+        margin: 10% auto;
+    }
+}
+
+/* ============================================================================================
+DESKTOP VERSION
+=============================================================================================== */
+
+@media screen and (min-width: 1024px) {
+
+    body {
+        font-size: var(--font-size-body-lg);
+    }
+
+    h1 {
+        font-size: var(--font-size-h1-lg)
+    }
+
+    h2 {
+        font-size: var(--font-size-h2-lg)
+    }
+
+    h3 {
+        font-size: var(--font-size-h3-lg)
+    }
+
+    /* HEADER ********************************************************************************  */
+
+    .menu-hamburger {
+        display: none;
+    }
+
+    .nav-links {
+        display: flex;
+        margin-top: 0;
+        padding-top: 0;
+        font-size: var(--font-size-nav-lg);
+    }
+
+    .dropdown {
+        display: none;
+        /* La sous-liste est cachée par défaut */
+        width: 130%;
+        left: -2rem;
+        margin: 0;
+        background-color: var(--bg-color-secondary);
+        z-index: 1;
+    }
+
+    .dropdown a {
+        padding: .5rem 1rem;
+    }
+
+    .profile-menu:hover .dropdown,
+    .profile-menu:focus-within .dropdown {
+        display: block;
+        /* Affiche la sous-liste quand on survole ou clique */
+    }
+
+    /* PAGE HOME **************************************************************** */
+
+    .article {
+        width: 30%;
+    }
+
+    /* PAGE HOME - SIGNUP / LOGIN *********************************************************** */
+
+    .form-container {
+        max-width: 600px;
+    }
+
+    /* PAGE PROFIL - RESERVATIONS ************************************************ */
+    .vehicle-card,
+    .reservation-card {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .vehicle-info>p {
+        padding-right: 50px;
+    }
+
+    .vehicle-image {
+        min-width: 150px;
+        max-width: 300px;
+        width: 35%;
+        max-height: 100%;
+    }
+
+    .product-details .vehicle-image {
+        width: 100%;
+        max-height: 100%;
+        border-radius: 6px;
+        object-fit: cover;
+    }
+
+    .product-details .vehicle-details {
+        width: 100%;
+    }
+
+    .vehicle-details,
+    .reservation-details {
+        width: 65%;
+    }
+}

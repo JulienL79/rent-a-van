@@ -1,0 +1,42 @@
+<section class="payment-form">
+    <h2>Paiement sécurisé</h2>
+    <form id="payment-form">
+      <div class="form-group">
+        <label for="card-holder">Titulaire de la carte</label>
+        <input type="text" id="card-holder" name="card-holder" required>
+      </div>
+      <div class="form-group">
+        <label for="card-number">Numéro de carte</label>
+        <input type="text" id="card-number" name="card-number" required pattern="\d{16}" maxlength="16" placeholder="1234 5678 9012 3456">
+      </div>
+      <div class="card-details">
+        <div class="form-group">
+          <label for="expiry-date">Date d'expiration</label>
+          <input type="text" id="expiry-date" name="expiry-date" required pattern="\d{2}/\d{2}" maxlength="5" placeholder="MM/YY">
+        </div>
+        <div class="form-group">
+          <label for="cvv">CVV</label>
+          <input type="number" id="cvv" name="cvv" required min="100" max="999">
+        </div>
+      </div>
+      <button type="submit" class="submit-btn">Payer 714.00€</button>
+    </form>
+    <div class="payment-icons">
+      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="40" height="40" rx="4" fill="#1A1F71"/>
+        <path d="M14 26L18 14H22L18 26H14Z" fill="#F1F1F1"/>
+        <path d="M24 26L28 14H32L28 26H24Z" fill="#F1F1F1"/>
+        <path d="M20 22L22 18H26L24 22H20Z" fill="#F1F1F1"/>
+      </svg>
+      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="40" height="40" rx="4" fill="#FF5F00"/>
+        <circle cx="15" cy="20" r="10" fill="#EB001B"/>
+        <circle cx="25" cy="20" r="10" fill="#F79E1B"/>
+      </svg>
+      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="40" height="40" rx="4" fill="#006FCF"/>
+        <path d="M20 10L16 30H24L28 10H20Z" fill="#F1F1F1"/>
+        <path d="M12 10L8 30H16L20 10H12Z" fill="#F1F1F1"/>
+      </svg>
+    </div>
+  </section>

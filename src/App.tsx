@@ -1,35 +1,76 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Router } from "routes/Router"
+import { useEffect } from "react"
+import { InitialLoader } from "@atoms/InitialLoader"
+import { Navbar } from "@molecules/Navbar"
+import { INavItemProps } from "@atoms/NavItem"
+import { awakeServer, fetchGameData } from "@api/gameApi"
+import { useDataStore } from "@store/useDataStore"
+import { useErrorStore } from "@store/useErrorStore"
+import "./css-global/reset.css"
+import "./css-global/main.css"
+import { Footer } from "@molecules/Footer"
 
-function App() {
-  const [count, setCount] = useState(0)
+export const App = () => {
+    const { isConnected, isFilled, connectToDataBase, addGameDatas, setIsFilled } = useDataStore()
+    const { setError } = useErrorStore()
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    const headerList : INavItemProps[] = [
+        {to:"/information", content:"Loto", className:"game"},
+        {to:"/information", content:"Euromillions", className:"game"}
+    ]
+
+    useEffect(() => {
+        const connectServer = async () => {
+            const response = await awakeServer()
+            if(response.success) {
+                connectToDataBase()
+                console.log("Server Alive")
+            } else {
+                setError(response.message as string)
+            }
+        }
+
+        if(!isConnected) {
+            connectServer()
+        }
+        
+    }, [isConnected]);
+
+    useEffect(() => {
+        const fetchData = async (gameName: "euromillions" | "loto") => {
+            const response = await fetchGameData(gameName)
+
+            if(response.success) {
+                addGameDatas(gameName, response.success)
+                return true
+            } else {
+                setError(response.message as string)
+                return false
+            }
+        }
+
+        const fetchAllData = async () => {
+            const lotoDatas = await fetchData("loto");
+            const euromillionsDatas = await fetchData("euromillions");
+    
+            if (lotoDatas && euromillionsDatas) {
+                setIsFilled();
+            }
+        };
+
+        if (isConnected && !isFilled) {
+            fetchAllData();
+        }
+
+    }, [isConnected, isFilled])
+
+    return (
+        <>
+            <InitialLoader/>
+
+            <Navbar navLinks={headerList}/>
+            <Router/>
+            <Footer />
+        </>
+    )
 }
-
-export default App

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="RentaVan | Le site de location de particulier à particulier pour la location de camping-cars et vans">
+  <title>RentaVan | Home</title>
+  <link rel="icon" href="">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    type="text/css">
+  <link rel="stylesheet" href="../public/assets/css/reset.css" type="text/css">
+  <link rel="stylesheet" href="../public/assets/css/style.css" type="text/css">
+</head>
+
+<body>
+  <header>
+    <nav>
+      <div class='logo'>
+        <p><strong>RentaVan</strong></p>
+        <a href="index.php">
+          <img src='./public/assets/img/logo.png' alt='Logo RentaVan'>
+        </a>
+      </div>
+      <ul class='nav-links'>
+        <li><a href="index.php?page=home&vh=cc">Camping-car</a></li>
+        <li><a href="index.php?page=home&vh=van">Van</a></li>
+        <li class='profile-menu'>
+          <a href="index.php?page=profile">Mon espace</a>
+          <ul class="dropdown">
+            <!--<?php if(isset($_SESSION['logged']) && $_SESSION['logged']): ?> -->
+            <li><a href="index.php?page=profile">Mon profil</a></li>
+            <li><a href="index.php?page=profile&sp=order">Mes Réservations</a></li>
+            <li><a href="index.php?page=profile&sp=product">Mes Véhicules</a></li>
+            <li><a href="index.php?page=profile&sp=mailbox">Messagerie</a></li>
+            <li><a href="index.php?page=profile&sp=setting">Paramètres</a></li>
+            <li><a href="index.php?page=profile&action=logout" class='delete-btn'>Se déconnecter</a></li>
+            <!-- <?php else: ?> -->
+            <li><a href="index.php?page=profile&action=login">Se connecter</a></li>
+            <!-- <?php endif; ?> -->
+          </ul>
+        </li>
+      </ul>
+      <div class="menu-hamburger" id="burger-menu">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <aside class="sidebar">
+      <h2>Menu</h2>
+      <ul>
+        <li><a href="#" class="active">Mon Profil</a></li>
+        <li><a href="#">Mes Réservations</a></li>
+        <li><a href="#">Mes Véhicules</a></li>
+        <li><a href="#">Messagerie</a></li>
+        <li><a href="#">Paramètres</a></li>
+        <li><a href="#">Déconnexion</a></li>
+      </ul>
+    </aside>
+
+    <section class="content profile product-details">
+      <h2>Nom véhicule</h2>
+      <div class="vehicle-details">
+        <img src="https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Camping-car Luxe Horizon" class="vehicle-image">
+        <div class="vehicle-info">
+          <p><strong>Type:</strong> Camping-car</p>
+          <p><strong>Capacité:</strong> 4 personnes</p>
+          <p><strong>Prix/jour:</strong> 140€</p>
+          <p><strong>Description:</strong> Ce camping-car luxueux offre tout le confort nécessaire pour vos aventures. Équipé d'une cuisine complète, d'une salle de bain privée et d'un espace de couchage confortable pour 4 personnes.</p>
+          <button class="btn btn-primary">Modifier les informations</button>
+        </div>
+      </div>
+      <div class="calendar">
+        <div class="calendar-header">
+          <h3>Calendrier de disponibilité</h3>
+          <div>
+            <button class="btn btn-primary" id="prevMonth">&lt;</button>
+            <span id="currentMonth">Juin 2023</span>
+            <button class="btn btn-primary" id="nextMonth">&gt;</button>
+          </div>
+        </div>
+        <div class="calendar-grid" id="calendarGrid">
+          <!-- Les jours du calendrier seront générés ici par JavaScript -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2023 Locavan. Tous droits réservés.</p>
+    <div class="footer-links">
+      <a href="/mentions-legales">Mentions légales</a>
+      <a href="/cgv">CGV</a>
+      <a href="/politique-confidentialite">Politique de confidentialité</a>
+      <a href="/contact">Contact</a>
+    </div>
+  </footer>
+
+  <script type="text/javascript" src="../public/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      const calendarGrid = document.getElementById('calendarGrid');
+      const currentMonthSpan = document.getElementById('currentMonth');
+      const prevMonthBtn = document.getElementById('prevMonth');
+      const nextMonthBtn = document.getElementById('nextMonth');
+
+      let currentDate = new Date();
+
+      function generateCalendar(year, month) {
+        calendarGrid.innerHTML = '';
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        const firstDay = new Date(year, month, 1).getDay();
+
+        currentMonthSpan.textContent = new Date(year, month).toLocaleString('default', { month: 'long', year: 'numeric' });
+
+        // Ajout des en-têtes des jours de la semaine
+        const weekdays = ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'];
+        weekdays.forEach(day => {
+          const dayElement = document.createElement('div');
+          dayElement.classList.add('calendar-day');
+          dayElement.textContent = day;
+          calendarGrid.appendChild(dayElement);
+        });
+
+        // Ajout des espaces vides pour les jours avant le premier du mois
+        for (let i = 0; i < firstDay; i++) {
+          const emptyDay = document.createElement('div');
+          calendarGrid.appendChild(emptyDay);
+        }
+
+        // Génération des jours du mois
+        for (let day = 1; day <= daysInMonth; day++) {
+          const dayElement = document.createElement('div');
+          dayElement.classList.add('calendar-day');
+          dayElement.textContent = day;
+
+          // Simulons des disponibilités aléatoires
+          if (Math.random() > 0.5) {
+            dayElement.classList.add('available');
+          } else {
+            dayElement.classList.add('unavailable');
+          }
+
+          calendarGrid.appendChild(dayElement);
+        }
+      }
+
+      generateCalendar(currentDate.getFullYear(), currentDate.getMonth());
+
+      prevMonthBtn.addEventListener('click', () => {
+        currentDate.setMonth(currentDate.getMonth() - 1);
+        generateCalendar(currentDate.getFullYear(), currentDate.getMonth());
+      });
+
+      nextMonthBtn.addEventListener('click', () => {
+        currentDate.setMonth(currentDate.getMonth() + 1);
+        generateCalendar(currentDate.getFullYear(), currentDate.getMonth());
+      });
+    });
+  </script>
+
+</body>
+
+</html>

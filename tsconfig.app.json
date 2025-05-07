@@ -7,6 +7,8 @@
     "module": "ESNext",
     "skipLibCheck": true,
 
+    "typeRoots": ["./node_modules/@types", "./types"],
+
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
@@ -20,7 +22,25 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+
+    /* Gestion des alias */
+    "baseUrl": "./src",
+    "paths": {
+      "@atoms/*": ["components/atoms/*"],
+      "@molecules/*": ["components/molecules/*"],
+      "@organisms/*": ["components/organisms/*"],
+      "@templates/*": ["components/templates/*"],
+      "@pages/*": ["components/pages/*"],
+      "@store/*": ["store/*"],
+      "@api/*": ["api/*"],
+      "@types/*": ["types/*"],
+      "@utils/*": ["utils/*"],
+      "@routes/*": ["routes/*"]
+    },
   },
-  "include": ["src"]
+  "include": [
+    "src/**/*",
+    "types/**/*"
+  ]
 }
