@@ -1,7 +1,7 @@
 import React from "react";
 import { ILoaderProps } from "./LoaderProps";
 import { Image } from "@atoms/Image";
-import Logo from '/icon.png'
+// import Logo from '/icon.png'
 import "./Loader.css"
 
 export const Loader : React.FC<ILoaderProps> = ({
@@ -13,7 +13,7 @@ export const Loader : React.FC<ILoaderProps> = ({
             <div className="loader">
                 <div className="spinner large-spinner"></div>
                 
-                <Image src={Logo} alt="Logo" className="loading-image"/>
+                {/* <Image src={Logo} alt="Logo" className="loading-image"/> */}
                 
                 <div className="spinner small-spinner"></div>
             </div>

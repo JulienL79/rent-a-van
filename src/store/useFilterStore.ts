@@ -1,40 +1,67 @@
 import { create } from "zustand";
 
 interface IFilterState {
-    filterResult: Date | null,
-    pronosticRecentFilter: Date | null,
-    pronosticStartDate: Date | null,
-    pronosticEndDate: Date | null,
-    setFilterResult: (newDate: Date) => void,
-    setPronosticRecentFilter: (newDate: Date) => void,
-    setPronosticStartDate: (newDate: Date) => void,
-    setPronosticEndDate: (newDate: Date) => void,
+    vehicleType: "camping-car" | "van",
+    locationCoord: string | null,
+    locationCity: string | null,
+    startDate: Date | null,
+    endDate: Date | null,
+    beds: number | null,
+    options: string[] | null,
+    sortingByPrice: "ascending" | "descending" | null,
+    setVehicleType: (type: "camping-car" | "van") => void,
+    makeSearch: (locationCoord: string, locationCity: string, startDate: Date, endDate: Date) => void,
+    resetSearch: () => void,
+    setFilters: (filter: IFilter) => void,
     resetFilters: () => void
 }
 
+interface IFilter {
+    beds?: number,
+    options?: string[],
+    sortingByPrice?: "ascending" | "descending"
+}
+
 export const useFilterStore = create<IFilterState>((set) => ({
-    filterResult: null,
-    pronosticRecentFilter: null,
-    pronosticStartDate: null,
-    pronosticEndDate: null,
-    setFilterResult: (newDate) => {
-        set({filterResult : newDate})
+    vehicleType: "camping-car",
+    locationCoord: null,
+    locationCity: null,
+    startDate: null,
+    endDate: null,
+    beds: null,
+    options: null,
+    sortingByPrice: null,
+    setVehicleType: (type : "camping-car" | "van") => {
+        set({vehicleType : type})
     },
-    setPronosticRecentFilter: (newDate) => {
-        set({pronosticRecentFilter : newDate})
+    makeSearch: (locationCoord : string, locationCity : string, startDate : Date, endDate : Date) => {
+        set({
+            locationCoord : locationCoord,
+            locationCity : locationCity,
+            startDate : startDate,
+            endDate : endDate
+        })
     },
-    setPronosticStartDate: (newDate) => {
-        set({pronosticStartDate : newDate})
+    resetSearch: () => {
+        set({
+            locationCoord : null,
+            locationCity : null,
+            startDate : null,
+            endDate : null
+        })
     },
-    setPronosticEndDate: (newDate) => {
-        set({pronosticEndDate : newDate})
+    setFilters: (filter : IFilter) => {
+        set({
+            beds : filter.beds ? filter.beds : null,
+            options : filter.options ? filter.options : null,
+            sortingByPrice : filter.sortingByPrice ? filter.sortingByPrice : null
+        })
     },
     resetFilters: () => {
         set({
-            filterResult : null,
-            pronosticRecentFilter : null,
-            pronosticStartDate : null,
-            pronosticEndDate : null
+            beds : null,
+            options : null,
+            sortingByPrice : null
         })
     }
 }))

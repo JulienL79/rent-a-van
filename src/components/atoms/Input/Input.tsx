@@ -6,21 +6,43 @@ export const Input: React.FC<IInputProps> = ({
     id,
     type,
     placeholder,
-    className = "",
+    classNameInput = "",
     value = "",
     required = false,
     min,
+    max,
     step,
+    autoComplete = "on",
     onChange
 }) => {
 
-    if(step) {
+
+    if(type === "number" || type === "range") {
+        const maxNumber = max ? max : undefined;
+        const minNumber = min ? min : undefined;
+        const stepValue = step ? step : undefined;
+
         return (
-            <input id={id} type={type} placeholder={placeholder} className={className} value={value} required={required} min={min} step={step} onChange={onChange}/>
+            <input id={id} type={type} placeholder={placeholder} className={classNameInput} value={value} required={required} min={minNumber} max={maxNumber} step={stepValue} onChange={onChange}/>
+        )
+
+    } if(type === "textarea" ) {
+        
+        const maxLength = max ? max : undefined;
+        const minLength = min ? min : undefined;
+
+        return (
+            <textarea id={id} placeholder={placeholder} className={classNameInput} value={value} required={required} autoComplete={autoComplete} minLength={minLength} maxLength={maxLength} onChange={onChange}/>
+        )
+
+    } else {
+        const maxLength = max ? max : undefined;
+        const minLength = min ? min : undefined;
+
+        return (
+            <input id={id} type={type} placeholder={placeholder} className={classNameInput} value={value} required={required} autoComplete={autoComplete} minLength={minLength} maxLength={maxLength} onChange={onChange}/>
         )
     }
 
-    return (
-        <input id={id} type={type} placeholder={placeholder} className={className} value={value} required={required} onChange={onChange}/>
-    )
+
 };

@@ -1,0 +1,207 @@
+.app-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--bg-color);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.app-header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo {
+    /* display: flex;
+    flex-direction: column;
+    align-items: center; */
+    color: var(--primary-color);
+    font-weight: 900;
+    font-size: var(--font-size-logo);
+    letter-spacing: -0.3rem;
+    word-spacing: -0.1rem;
+}
+
+.logo:hover {
+    text-shadow: 
+        0px 0px 10px rgba(var(--primary-color-rgb), 0.4), /* Ombre principale */
+        0px 0px 20px rgba(var(--primary-color-rgb), 0.3), /* Effet diffus */
+        0px 0px 30px rgba(var(--primary-color-rgb), 0.1); /* Lueur étendue */
+
+}
+
+.logo::after {
+    display: none;
+}
+
+.nav-links {
+    display: none;
+    gap: 2rem;
+    padding-top: 10rem;
+    font-size: var(--font-size-nav-sm);
+    font-weight: var(--font-weight-title);
+}
+
+.nav-links.open {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 100%;
+    height: 100%;
+    padding-left: 2rem;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 98;
+    background-color: var(--bg-color);
+    animation: slideRight ease-out 1s;
+}
+
+.nav-links a {
+    padding: 0 2rem;
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.current-link {
+    color: var(--primary-color);
+}
+
+.nav-links a::after {
+    background-color: var(--primary-color);
+}
+
+.profile-menu {
+    position: relative;
+}
+
+.dropdown {
+    display: flex;
+    /* La sous-liste est cachée par défaut */
+    flex-direction: column;
+    align-items: start;
+    width: 150%;
+    margin-top: 1rem;
+    margin-left: 5rem;
+    position: absolute;
+    top: 120%;
+    /* Pour positionner la sous-liste sous l'élément parent */
+    background-color: var(--bg-color);
+    z-index: 1;
+}
+
+.dropdown a {
+    display: block;
+    margin: 5px 0;
+    padding: 5px;
+    text-align: center;
+}
+
+.profile-menu:hover .dropdown,
+.profile-menu:focus-within .dropdown {
+    display: flex;
+    /* Affiche la sous-liste quand on survole ou clique */
+}
+
+.menu-hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
+    cursor: pointer;
+    z-index: 99;
+}
+
+.line {
+    width: 90%;
+    height: 4px;
+    border-radius: .5rem;
+    background-color: var(--primary-color);
+    transition: transform 0.8s ease;
+}
+
+.menu-hamburger .line:nth-child(2) {
+    transition: all 0.5s ease;
+}
+
+.menu-hamburger.open .line:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.menu-hamburger.open .line:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-hamburger.open .line:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* ============================================================================================
+DESKTOP VERSION
+=============================================================================================== */
+
+@media screen and (min-width: 1024px) {
+
+    .menu-hamburger {
+        display: none;
+    }
+
+    .nav-links {
+        display: flex;
+        margin-top: 0;
+        padding-top: 0;
+        font-size: var(--font-size-nav-lg);
+    }
+
+    .dropdown {
+        display: none;
+        /* La sous-liste est cachée par défaut */
+        width: 130%;
+        left: -2rem;
+        margin: 0;
+        background-color: var(--bg-color-secondary);
+        z-index: 1;
+    }
+
+    .dropdown a {
+        padding: .5rem 1rem;
+    }
+
+    .profile-menu:hover .dropdown,
+    .profile-menu:focus-within .dropdown {
+        display: block;
+        /* Affiche la sous-liste quand on survole ou clique */
+    }
+}
+
+/* =============================================================================================
+KEY FRAMES ANIMATION
+================================================================================================ */
+
+@keyframes slideRight {
+    0% {
+        transform: translateX(-100px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}

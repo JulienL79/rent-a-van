@@ -1,11 +1,42 @@
-.form {
+form {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    border: 1px solid var(--color-primary);
-    background-color: #424242;
-    border-radius: 10px;
-    width: 100%;
-    height: auto;
+}
+
+.form-container {
+    width: 90%;
+    max-width: 400px;
+    margin: 20px auto;
     padding: 2rem;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.forgot-password {
+    text-align: right;
+    margin-top: 0.5rem;
+}
+
+.form-footer {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+/* ============================================================================================
+DESKTOP VERSION
+=============================================================================================== */
+
+@media screen and (min-width: 1024px) {
+
+    /* PAGE HOME - SIGNUP / LOGIN *********************************************************** */
+
+    .form-container {
+        max-width: 600px;
+    }
 }

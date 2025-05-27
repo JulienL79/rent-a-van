@@ -1,14 +1,6 @@
 import { ReactNode } from "react"
+import { IInputProps } from "@atoms/Input"
 
-export interface IFormFieldProps {
+export interface IFormFieldProps extends IInputProps{
         label: ReactNode,
-        id: string,
-        value?: string | number,
-        type: string,
-        placeholder: string,
-        required?: boolean,
-        min?: number,
-        step?: string,
-        onChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
-        className?: string
 }

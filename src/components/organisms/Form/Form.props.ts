@@ -1,17 +1,10 @@
 import { ReactNode } from "react";
-
-interface IFormField {
-    label: string;
-    id: string;
-    type: string;
-    placeholder: string;
-    required: boolean;
-    min?: number,
-    step?: string
-}
+import { IFormFieldProps } from "@molecules/FormField";
 
 export interface IFormProps {
-    fields: IFormField[]
+    fields: IFormFieldProps[]
     onSubmit: (data: { [key: string]: string }) => void
-    buttonContent: ReactNode
+    buttonContent: ReactNode,
+    title: string,
+    type: "login" | "register" | "resetPassword" | "updateProfile" | "updatePassword"
 }

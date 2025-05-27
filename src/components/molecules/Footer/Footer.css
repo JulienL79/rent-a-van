@@ -1,9 +1,32 @@
-footer {
-    display: flex;
-    justify-content: center;
+.app-footer {
+    background: var(--text-color);
+    color: var(--bg-color);
+    padding: 2rem 5%;
     text-align: center;
-    padding: 3rem 3rem;
-    width: 100%;
-    background-color: var(--color-primary);
-    color: var(--color-secondary);
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    gap: 2rem;
+    margin: 3rem auto 0 auto;
+}
+
+.footer-links a::after {
+    background-color: var(--bg-color);
+}
+
+/* ============================================================================================
+TABLET VERSION
+=============================================================================================== */
+
+@media screen and (min-width: 768px) {
+
+    .footer-links {
+        flex-direction: row;
+        gap: 4rem;
+    }
 }

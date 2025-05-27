@@ -1,11 +1,11 @@
 import { Route, Routes } from "react-router-dom"
 import { Helmet } from "react-helmet"
-import { PrivateRoute } from "./PrivateRoute"
+import { PrivateAuthRoute } from "./PrivateAuthRoute"
+import { PrivateNonAuthRoute } from "./PrivateNonAuthRoute"
 import { Home } from "@pages/Home"
 import { NotFound } from "@pages/Notfound"
-import { GameInformation } from "@pages/GameInformation"
-import { Result } from "@pages/Result/Result"
-import { Pronostic } from "@pages/Pronostic/Pronostic"
+import { Register } from "@pages/Register"
+import { Login } from "@pages/Login"
 
 
 export const Router = () => {
@@ -15,32 +15,30 @@ export const Router = () => {
             <Route path="/" element={
                 <>
                     <Helmet>
-                        <title>Pronostic Place - Résultats et pronostics</title>
+                        <title>RentAVan - Accueil</title>
                     </Helmet>
                     <Home />
                 </>
             } />
 
-            <Route element={<PrivateRoute />}>
-                <Route path="/information" element={
+            <Route element={<PrivateNonAuthRoute />}>
+                <Route path="/login" element={
                     <>
-                        <GameInformation />
+                        <Helmet>
+                            <title>RentAVan - Connexion</title>
+                        </Helmet>
+                        <Login />
                     </>
                 } />
             </Route>
 
-            <Route element={<PrivateRoute />}>
-                <Route path="/result" element={
+            <Route element={<PrivateNonAuthRoute />}>
+                <Route path="/register" element={
                     <>
-                        <Result />
-                    </>
-                } />
-            </Route>
-
-            <Route element={<PrivateRoute />}>
-                <Route path="/pronostic" element={
-                    <>
-                        <Pronostic />
+                        <Helmet>
+                            <title>RentAVan - Inscription</title>
+                        </Helmet>
+                        <Register />
                     </>
                 } />
             </Route>
@@ -48,7 +46,7 @@ export const Router = () => {
             <Route path="*" element={
                 <>
                     <Helmet>
-                        <title>Page non trouvée</title>
+                        <title>RentAVan - Page non trouvée</title>
                     </Helmet>
                     <NotFound/>
                 </>

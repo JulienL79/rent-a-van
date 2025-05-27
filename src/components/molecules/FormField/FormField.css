@@ -1,6 +1,16 @@
 .form-field {
+    margin-bottom: 1rem;
+}
+
+.form-field.checkbox-field {
     display: flex;
-    justify-content: space-between;
     align-items: center;
 }
 
+.form-field.checkbox-field input[type="checkbox"] {
+    width: 50px;
+}
+
+.form-field.checkbox-field {
+    text-align: left;
+}

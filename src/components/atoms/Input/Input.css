@@ -1,13 +1,13 @@
-input {
-    font-size: var(--font-size-body-sm);
-    border: 1px solid var(--color-primary);
-    border-radius: 5px;
-    color: var(--color-primary);
-    background-color: var(--color-secondary);
-    padding: 0.5rem 1rem;
+input,
+textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: none;
 }
 
-input:focus {
-    outline: none;
-    border: 1px solid var(--color-third);
+input:focus,
+textarea:focus {
+    outline: 2px solid var(--primary-color);
 }

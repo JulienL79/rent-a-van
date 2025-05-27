@@ -8,7 +8,7 @@ export const Label : React.FC<ILabelProps> = ({
     className = ""
 }) => {
     return(
-        <label htmlFor={htmlFor} className={className}>
+        <label htmlFor={htmlFor} className={`label-app ${className}`}>
             {children}
         </label>
     )

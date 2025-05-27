@@ -6,11 +6,11 @@ export const Button : React.FC<IButtonProps> = ({className = "", content, onClic
 
     if(onClick === undefined) {
         return (
-            <button className={className} type="submit" disabled={isDisabled}>{content}</button>
+            <button className={`button-app ${className}`} type="submit" disabled={isDisabled}>{content}</button>
         )
     }
 
     return (
-        <button className={className} onClick={() => onClick()} disabled={isDisabled}>{content}</button>
+        <button className={`button-app ${className}`} onClick={() => onClick()} disabled={isDisabled}>{content}</button>
     )
 }
