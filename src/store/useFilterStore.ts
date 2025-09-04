@@ -6,11 +6,15 @@ interface IFilterState {
     locationCity: string | null,
     startDate: Date | null,
     endDate: Date | null,
+    radius: number,
     beds: number | null,
     options: string[] | null,
     sortingByPrice: "ascending" | "descending" | null,
     setVehicleType: (type: "camping-car" | "van") => void,
-    makeSearch: (locationCoord: string, locationCity: string, startDate: Date, endDate: Date) => void,
+    setStartDate: (startDate: Date) => void,
+    setEndDate: (startDate: Date) => void,
+    setLocationCity: (city: string) => void,
+    setRadius: (radius: number) => void,
     resetSearch: () => void,
     setFilters: (filter: IFilter) => void,
     resetFilters: () => void
@@ -28,26 +32,32 @@ export const useFilterStore = create<IFilterState>((set) => ({
     locationCity: null,
     startDate: null,
     endDate: null,
+    radius: 50,
     beds: null,
     options: null,
     sortingByPrice: null,
-    setVehicleType: (type : "camping-car" | "van") => {
+    setVehicleType: (type) => {
         set({vehicleType : type})
     },
-    makeSearch: (locationCoord : string, locationCity : string, startDate : Date, endDate : Date) => {
-        set({
-            locationCoord : locationCoord,
-            locationCity : locationCity,
-            startDate : startDate,
-            endDate : endDate
-        })
+    setStartDate: (startDate) => {
+        set({startDate})
+    },
+    setEndDate: (endDate) => {
+        set({endDate})
+    },
+    setLocationCity: (city) => {
+        set({locationCity : city})
+    },
+    setRadius: (radius) => {
+        set({radius})
     },
     resetSearch: () => {
         set({
             locationCoord : null,
             locationCity : null,
             startDate : null,
-            endDate : null
+            endDate : null,
+            radius: 50
         })
     },
     setFilters: (filter : IFilter) => {

@@ -7,7 +7,21 @@ textarea {
     resize: none;
 }
 
+textarea {
+    height: 100px;
+}
+
 input:focus,
 textarea:focus {
     outline: 2px solid var(--primary-color);
+}
+
+input[type="checkbox"],
+input[type="range"] {
+    cursor: pointer;
+    outline: none;
+}
+
+input[type="range"] {
+    padding: 0;
 }

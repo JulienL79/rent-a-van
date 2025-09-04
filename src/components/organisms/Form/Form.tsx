@@ -1,51 +1,124 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { IFormProps } from "./Form.props";
 import { FormField } from "@molecules/FormField";
 import { Button } from "@atoms/Button";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { ContactInfo } from "@molecules/ContactInfo";
+import { useModalStore } from "@store/useModalStore";
+import { useFilterStore } from "@store/useFilterStore";
 import "./Form.css"
 
-export const Form: React.FC<IFormProps> = ({ fields, onSubmit, buttonContent, title, type }) => {
-    const [formData, setFormData] = useState<{ [key: string]: string }>({})
+type FormValue = string | File | boolean;
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
-        const { id, value } = e.target;
+export const Form: React.FC<IFormProps> = ({ fields, onSubmit, buttonContent, title, type }) => {
+    const [formData, setFormData] = useState<{ [key: string]: any }>({})
+    const [formErrors, setFormErrors] = useState<{ [key: string]: string[] }>({});
+    const navigate = useNavigate()
+    const { setMessage, clearMessage } = useModalStore()
+    const { vehicleType, setVehicleType } = useFilterStore()
+
+    const handleChangeType = (type: "camping-car" | "van") => {
+        setVehicleType(type)
+    }
+
+    const handleChange = (
+        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => {
+        const target = e.target as HTMLInputElement;
+        const { id, type, value } = target;
+
+        let newValue: FormValue = value;
+
+        if (type === "file") {
+            newValue = target.files?.[0] ?? "";
+        } else if (type === "checkbox") {
+            newValue = target.checked;
+        }
+
         setFormData((prev) => ({
             ...prev,
-            [id]: value,
+            [id]: newValue,
         }));
+
+        const field = fields.find((f) => f.id === id);
+        if (field?.onChange) {
+            field.onChange?.(e as React.ChangeEvent<HTMLInputElement>);
+        }
+
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            onSubmit(formData);
-            setFormData({})
-        } catch(err) {
-            console.error(err)
+            const result = await onSubmit(formData);
+            console.log(result)
+            if (result?.ok) {
+                setFormData({});
+                setFormErrors({});
+                const navigateTo = type === "login" ? "/" : type === "register" ? "/login" : "/";
+                navigate(navigateTo, { replace: true });
+
+                const messageToast = type === "register" ? "Inscription réussie ! Vous pouvez maintenant vous connecter." : null;
+                if (messageToast) {
+                    setMessage({ type: "success", content: messageToast });
+                }
+            } else if (result?.errors) {
+                console.log(result.errors);
+                setFormErrors(result.errors);
+            }
+        } catch (err) {
+            console.error("Erreur inattendue :", err);
         }
+
     };
+
+    useEffect(() => {
+        if (formErrors.global && formErrors.global.length > 0) {
+            clearMessage();
+            setMessage({ type: "error", content: formErrors.global.join(" ") });
+        }
+    }, [formErrors.global]);
+
+    useEffect(() => {
+        const initialValues: { [key: string]: any } = {};
+
+        fields.forEach((field) => {
+            initialValues[field.id] = field.value ?? "";
+        });
+
+        setFormData(initialValues);
+    }, [fields]);
 
     return (
         <div className="form-container">
-            <h2 className="form-title">{title}</h2>
+            {type !== "search" && <h2 className="form-title">{title}</h2>}
             <form onSubmit={handleSubmit} className="form">
+                {type === "search" && (
+                    <div className="toggle-switch-search">
+                        <p onClick={() => handleChangeType("camping-car")} className={vehicleType === "camping-car" ? "active" : ""}>Camping-car</p>
+                        <p onClick={() => handleChangeType("van")} className={vehicleType === "van" ? "active" : ""}>Van</p>
+                    </div>
+                )}
+
                 {fields.map((field) => (
                     <FormField
                         key={field.id}
                         label={field.label}
                         id={field.id}
                         type={field.type}
+                        name={field.name}
                         placeholder={field.placeholder}
                         required={field.required}
                         onChange={handleChange}
                         min={field.min}
+                        max={field.max}
                         step={field.step}
                         value={formData[field.id] || ""}
+                        error={formErrors[field.id]}
                     />
                 ))}
-                <Button content={buttonContent}/>
+                <Button content={buttonContent} />
             </form>
             {
                 type === "login" && (
@@ -61,8 +134,14 @@ export const Form: React.FC<IFormProps> = ({ fields, onSubmit, buttonContent, ti
                     </div>
                 )
             }
+            {
+                type === "contact" && (
+                    <div className="form-footer">
+                        <ContactInfo />
+                    </div>
+                )
+            }
         </div>
-        
     );
 
 }

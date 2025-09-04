@@ -1,0 +1,15 @@
+.home-search {
+    height: 85vh;
+    width: 100%;
+    background-image: url('https://placehold.co/1920x1080');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-image 0.5s ease;
+}
+
+.home-search form {
+    background: rgba(255, 255, 255, 0.9);
+}

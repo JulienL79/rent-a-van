@@ -136,6 +136,41 @@ strong {
     font-weight: bold;
 }
 
+.app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+
+.page {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    padding: 2rem 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 90%;
+}
+
+.paragraph {
+    margin-top: 2rem;
+}
+
+.paragraph ul {
+    list-style-type: initial; /* Ajoute une étoile devant chaque élément */
+    padding-left: 2rem; /* Ajoute un retrait pour l'alignement */
+}
+
+.paragraph li {
+    margin-top: 0.5rem; /* Ajoute un espace entre les éléments de la liste */
+}
+
+
 /* ============================================================================================
 VARIOUS
 =============================================================================================== */

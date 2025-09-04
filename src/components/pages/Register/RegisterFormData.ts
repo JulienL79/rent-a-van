@@ -1,6 +1,12 @@
+import { createUser } from "@api/userApi";
 import { TermsAndPrivacy } from "./TermAndPrivacy";
+import { UserRegisterPayload } from "../../../types/User";
+import { FormSubmitResult } from "../../../types/FormSubmitResult";
+import { IFormProps } from "@organisms/Form";
 
-export const registerFormData = {
+export const registerFormData : IFormProps = {
+    title: "Créer un compte",
+    type: "register",
     fields: [
         {
             id: "firstName",
@@ -21,7 +27,16 @@ export const registerFormData = {
             onChange: () => {},
         },
         {
-            id: "address",
+            id: "birthdate",
+            type: "date",
+            placeholder: "",
+            required: true,
+            autoComplete: "bday",
+            label: "Date de naissance",
+            onChange: () => {},
+        },
+        {
+            id: "addressStreet",
             type: "text",
             placeholder: "",
             required: true,
@@ -30,7 +45,7 @@ export const registerFormData = {
             onChange: () => {},
         },
         {
-            id: "city",
+            id: "addressCity",
             type: "text",
             placeholder: "",
             required: true,
@@ -39,7 +54,7 @@ export const registerFormData = {
             onChange: () => {},
         },
         {
-            id: "postalCode",
+            id: "addressZip",
             type: "text",
             placeholder: "",
             required: true,
@@ -48,7 +63,7 @@ export const registerFormData = {
             onChange: () => {},
         },
         {
-            id: "country",
+            id: "addressCountry",
             type: "text",
             placeholder: "",
             required: true,
@@ -66,7 +81,7 @@ export const registerFormData = {
             onChange: () => {},
         },
         {
-            id: "phone",
+            id: "phoneNumber",
             type: "tel",
             placeholder: "",
             required: true,
@@ -93,16 +108,46 @@ export const registerFormData = {
             onChange: () => {},
         },
         {
-            id: "terms",
+            id: "termsAccepted",
             type: "checkbox",
             placeholder: "",
             required: true,
             autoComplete: "",
             label: TermsAndPrivacy,
             onChange: () => {},
-        }
+        },
     ],
     buttonContent: "S'inscrire",
-    onSubmit: () => {},
-    title: "Créer un compte"
-}
+    onSubmit: async (
+        formData: { [key: string]: string | File | boolean },
+    ): Promise<FormSubmitResult> => {
+        const payload: UserRegisterPayload = {
+            firstname: formData.firstName as string,
+            lastname: formData.lastName as string,
+            email: formData.email as string,
+            password: formData.password as string,
+            confirmPassword: formData.confirmPassword as string,
+            phoneNumber: formData.phoneNumber as string,
+            birthdate: new Date(formData.birthdate as string),
+            addressStreet: formData.addressStreet as string,
+            addressCity: formData.addressCity as string,
+            addressZip: formData.addressZip as string,
+            addressCountry: formData.addressCountry as string,
+            termsAccepted: formData.termsAccepted === true,
+        };
+
+        const result = await createUser(payload);
+        console.log(result)
+        if (result.ok) {
+            return { ok: true };
+        } else {
+            return {
+                ok: false,
+                errors: {
+                    global: result.data.message ? [result.data.message] : undefined,
+                    ...result.data.data
+                },
+            };
+        }
+    },
+};

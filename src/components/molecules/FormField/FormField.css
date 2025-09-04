@@ -14,3 +14,11 @@
 .form-field.checkbox-field {
     text-align: left;
 }
+
+.form-field-errors {
+    background-color: var(--danger-color);
+    border-radius: 5px;
+    color: var(--bg-color);
+    padding: 5px;
+    margin-top: 5px;
+}

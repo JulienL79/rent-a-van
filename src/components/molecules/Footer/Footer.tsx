@@ -4,11 +4,11 @@ import "./Footer.css"
 export const Footer = () => {
     return (
         <footer className="app-footer">	
-            <p>&copy; 2025 Locavan. Tous droits réservés.</p>
+            <p>&copy; 2025 RentAVan. Tous droits réservés.</p>
             <div className="footer-links">
-                <NavItem to={`/mentions-legales`} content={"Mentions légales"}/>
-                <NavItem to={`/cgv`} content={"CGV"}/>
-                <NavItem to={`/politique-confidentialite`} content={"Politique de confidentialité"}/>
+                <NavItem to={`/legal`} content={"Mentions légales"}/>
+                <NavItem to={`/terms`} content={"CGV"}/>
+                <NavItem to={`/privacy`} content={"Politique de confidentialité"}/>
                 <NavItem to={`/contact`} content={"Contact"}/>
             </div>
         </footer>

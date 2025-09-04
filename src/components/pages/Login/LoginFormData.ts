@@ -1,4 +1,10 @@
-export const loginFormData = {
+import { useAuthStore } from "@store/useAuthStore"
+import { FormSubmitResult } from "../../../types/FormSubmitResult"
+import { IFormProps } from "@organisms/Form";
+
+export const loginFormData : IFormProps = {
+    title: "Connexion",
+    type: "login",
     fields: [
         {
             id: "email",
@@ -20,6 +26,25 @@ export const loginFormData = {
         }
     ],
     buttonContent: "Se connecter",
-    onSubmit: () => {},
-    title: "Connexion"
+    onSubmit: async (
+    formData: { [key: string]: string | File | boolean }
+  ): Promise<FormSubmitResult> => {
+    const { login } = useAuthStore.getState();
+
+    const email = formData.email as string
+    const password = formData.password as string
+
+    try {
+      await login(email, password);
+
+      return { ok: true };
+
+    } catch (error) {
+      console.error("Erreur lors de la connexion :", error);
+      return {
+        ok: false,
+        errors: {global: ["Identifiants incorrects"]},
+      };
+    }
+  },
 }

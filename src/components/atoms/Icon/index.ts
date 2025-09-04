@@ -1,2 +1,2 @@
 export * from "./Icon"
-export * from "./Iconprops"
+export * from "./Icon.props"

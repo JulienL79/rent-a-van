@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import { IErrorModal } from "./ErrorModal.props";
-import { Button } from "@atoms/Button";
+import { IModal } from "./Modal.props";
 import React from "react";
-import "./ErrorModal.css"
+import "./Modal.css"
 
-export const ErrorModal : React.FC<IErrorModal> = ({ message, onClose }) => {
+export const Modal: React.FC<IModal> = ({ message, type, onClose }) => {
     const [visible, setVisible] = useState(true);
 
     useEffect(() => {
@@ -22,9 +21,11 @@ export const ErrorModal : React.FC<IErrorModal> = ({ message, onClose }) => {
     };
 
     return (
-        <div className={`error-modal ${visible ? "show" : "hide"}`}>
-            <span>{message}</span>
-            <Button className="close-btn" content="✖" onClick={() => handleClose()}/>
+        <div className={`toast-container ${visible ? "show" : "hide"}`}>
+            <div className={`toast ${type}-modal`}>
+                <span className="toast-message">{message}</span>
+                <button className="toast-close" onClick={handleClose}>✖</button>
+            </div>
         </div>
     );
 };

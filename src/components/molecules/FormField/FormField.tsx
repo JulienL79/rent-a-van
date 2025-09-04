@@ -4,10 +4,11 @@ import "./FormField.css"
 import { Label } from "@atoms/Label"
 import { Input } from "@atoms/Input"
 
-export const FormField:React.FC<IFormFieldProps> = ({
+export const FormField: React.FC<IFormFieldProps> = ({
     label,
     id,
     type,
+    name,
     placeholder,
     onChange,
     autoComplete = "on",
@@ -16,14 +17,15 @@ export const FormField:React.FC<IFormFieldProps> = ({
     required = false,
     min,
     max,
-    step
+    step,
+    error
 }) => {
 
-    if(classNameInput === "other") {
+    if (classNameInput === "other") {
         return (<></>)
     }
 
-    if(type === "checkbox") {
+    if (type === "checkbox") {
         return (
             <div className="form-field checkbox-field">
                 <Input
@@ -40,6 +42,7 @@ export const FormField:React.FC<IFormFieldProps> = ({
                     classNameInput={classNameInput}
                 />
                 <Label htmlFor={id}>{label}</Label>
+
             </div>
         )
     }
@@ -53,6 +56,7 @@ export const FormField:React.FC<IFormFieldProps> = ({
                 onChange={onChange}
                 placeholder={placeholder}
                 type={type}
+                name={name}
                 required={required}
                 min={min}
                 max={max}
@@ -60,6 +64,16 @@ export const FormField:React.FC<IFormFieldProps> = ({
                 step={step}
                 classNameInput={classNameInput}
             />
+            {Array.isArray(error) &&
+
+                <div className="form-field-errors">
+                    {error.map((errMsg, index) => (
+                        <p key={`error-${index}`} className="form-field-error">
+                            {errMsg}
+                        </p>
+                    ))}
+                </div>
+            }
         </div>
     )
 }

@@ -10,8 +10,8 @@
   <link rel="icon" href="">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
     type="text/css">
-  <link rel="stylesheet" href="../public/assets/css/reset.css" type="text/css">
-  <link rel="stylesheet" href="../public/assets/css/style.css" type="text/css">
+  <link rel="stylesheet" href="./reset.css" type="text/css">
+  <link rel="stylesheet" href="./style.css" type="text/css">
 </head>
 
 <body>
@@ -51,44 +51,62 @@
   </header>
 
   <main class="container">
-    <aside class="sidebar">
-      <h2>Menu</h2>
-      <ul>
-        <li><a href="#" class="active">Mon Profil</a></li>
-        <li><a href="#">Mes Réservations</a></li>
-        <li><a href="#">Mes Véhicules</a></li>
-        <li><a href="#">Messagerie</a></li>
-        <li><a href="#">Paramètres</a></li>
-        <li><a href="#">Déconnexion</a></li>
-      </ul>
-    </aside>
+<section class="intro">
+    <form class="search-form">
+        <div class="toggle-switch">
+        <input type="radio" id="camping-car" name="vehicle-type" value="camping-car" checked>
+        <label for="camping-car">Camping-car</label>
+        <input type="radio" id="van" name="vehicle-type" value="van">
+        <label for="van">Van</label>
+        </div>
+        <input type="text" placeholder="Lieu de départ">
+        <input type="date" placeholder="Date de départ">
+        <input type="date" placeholder="Date de retour">
+        <button type="submit">Rechercher</button>
+    </form>
+</section>
 
-    <section class="content profile product-details">
-      <h2>Nom véhicule</h2>
-      <div class="vehicle-details">
-        <img src="https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Camping-car Luxe Horizon" class="vehicle-image">
-        <div class="vehicle-info">
-          <p><strong>Type:</strong> Camping-car</p>
-          <p><strong>Capacité:</strong> 4 personnes</p>
-          <p><strong>Prix/jour:</strong> 140€</p>
-          <p><strong>Description:</strong> Ce camping-car luxueux offre tout le confort nécessaire pour vos aventures. Équipé d'une cuisine complète, d'une salle de bain privée et d'un espace de couchage confortable pour 4 personnes.</p>
-          <button class="btn btn-primary">Modifier les informations</button>
+<section class="articles">
+    <article class="article">
+        <img src="https://placehold.co/400x300" alt="Un camping-car moderne dans un paysage de montagne">
+        <div class="article-content">
+        <h3>Les avantages du camping-car</h3>
+        <p>Découvrez pourquoi le camping-car est le choix idéal pour vos aventures en plein air.</p>
         </div>
-      </div>
-      <div class="calendar">
-        <div class="calendar-header">
-          <h3>Calendrier de disponibilité</h3>
-          <div>
-            <button class="btn btn-primary" id="prevMonth">&lt;</button>
-            <span id="currentMonth">Juin 2023</span>
-            <button class="btn btn-primary" id="nextMonth">&gt;</button>
-          </div>
+    </article>
+    <article class="article">
+        <img src="https://placehold.co/400x300" alt="Un van aménagé garé près d'un lac">
+        <div class="article-content">
+        <h3>La vie en van : liberté et simplicité</h3>
+        <p>Explorez les joies de la vie nomade et les possibilités infinies qu'offre un van aménagé.</p>
         </div>
-        <div class="calendar-grid" id="calendarGrid">
-          <!-- Les jours du calendrier seront générés ici par JavaScript -->
+    </article>
+    <article class="article">
+        <img src="https://placehold.co/400x300" alt="Une famille profitant d'un repas devant leur camping-car">
+        <div class="article-content">
+        <h3>Vacances en famille : optez pour le camping-car</h3>
+        <p>Créez des souvenirs inoubliables en famille grâce à des vacances en camping-car.</p>
         </div>
-      </div>
-    </section>
+    </article>
+</section>
+
+<section class="testimonials">
+    <h2>Ce que disent nos clients</h2>
+    <div class="testimonial-slider">
+        <div class="testimonial">
+        <q>Grâce à Locavan, nous avons découvert des endroits magnifiques en toute liberté. Une expérience inoubliable !</q>
+        <p>- Marie et Pierre</p>
+        </div>
+        <div class="testimonial">
+        <q>Le van que nous avons loué était parfaitement équipé et très confortable. Je recommande vivement !</q>
+        <p>- Sophie</p>
+        </div>
+        <div class="testimonial">
+        <q>Un service client au top et des véhicules impeccables. Nous reviendrons pour nos prochaines vacances !</q>
+        <p>- Lucas</p>
+        </div>
+    </div>
+</section>
   </main>
 
   <footer>

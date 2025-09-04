@@ -5,6 +5,7 @@ import "./Input.css"
 export const Input: React.FC<IInputProps> = ({
     id,
     type,
+    name,
     placeholder,
     classNameInput = "",
     value = "",
@@ -23,24 +24,24 @@ export const Input: React.FC<IInputProps> = ({
         const stepValue = step ? step : undefined;
 
         return (
-            <input id={id} type={type} placeholder={placeholder} className={classNameInput} value={value} required={required} min={minNumber} max={maxNumber} step={stepValue} onChange={onChange}/>
+            <input id={id} type={type} placeholder={placeholder} className={classNameInput} value={value} required={required} min={minNumber} max={maxNumber} step={stepValue} onChange={onChange} name={name ? name : id}/>
         )
 
     } if(type === "textarea" ) {
         
-        const maxLength = max ? max : undefined;
-        const minLength = min ? min : undefined;
+        const maxLength = max ? Number(max) : undefined;
+        const minLength = min ? Number(min) : undefined;
 
         return (
-            <textarea id={id} placeholder={placeholder} className={classNameInput} value={value} required={required} autoComplete={autoComplete} minLength={minLength} maxLength={maxLength} onChange={onChange}/>
+            <textarea id={id} placeholder={placeholder} className={classNameInput} value={value} required={required} autoComplete={autoComplete} minLength={minLength} maxLength={maxLength} onChange={onChange} name={name ? name : id}/>
         )
 
     } else {
-        const maxLength = max ? max : undefined;
-        const minLength = min ? min : undefined;
+        const maxLength = max ? Number(max) : undefined;
+        const minLength = min ? Number(min) : undefined;
 
         return (
-            <input id={id} type={type} placeholder={placeholder} className={classNameInput} value={value} required={required} autoComplete={autoComplete} minLength={minLength} maxLength={maxLength} onChange={onChange}/>
+            <input id={id} type={type} placeholder={placeholder} className={classNameInput} value={value} required={required} autoComplete={autoComplete} minLength={minLength} maxLength={maxLength} onChange={onChange} name={name ? name : id}/>
         )
     }
 
