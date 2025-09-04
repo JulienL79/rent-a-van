@@ -61,6 +61,7 @@ export const Form: React.FC<IFormProps> = ({ fields, onSubmit, buttonContent, ti
 
                 const messageToast = type === "register" ? "Inscription réussie ! Vous pouvez maintenant vous connecter." : null;
                 if (messageToast) {
+                    clearMessage()
                     setMessage({ type: "success", content: messageToast });
                 }
             } else if (result?.errors) {
@@ -72,13 +73,6 @@ export const Form: React.FC<IFormProps> = ({ fields, onSubmit, buttonContent, ti
         }
 
     };
-
-    useEffect(() => {
-        if (formErrors.global && formErrors.global.length > 0) {
-            clearMessage();
-            setMessage({ type: "error", content: formErrors.global.join(" ") });
-        }
-    }, [formErrors.global]);
 
     useEffect(() => {
         const initialValues: { [key: string]: any } = {};
@@ -101,23 +95,32 @@ export const Form: React.FC<IFormProps> = ({ fields, onSubmit, buttonContent, ti
                     </div>
                 )}
 
-                {fields.map((field) => (
-                    <FormField
-                        key={field.id}
-                        label={field.label}
-                        id={field.id}
-                        type={field.type}
-                        name={field.name}
-                        placeholder={field.placeholder}
-                        required={field.required}
-                        onChange={handleChange}
-                        min={field.min}
-                        max={field.max}
-                        step={field.step}
-                        value={formData[field.id] || ""}
-                        error={formErrors[field.id]}
-                    />
-                ))}
+                {fields.map((field) => {
+                    const value = formData[field.id] || "";
+                    const isRange = field.type === "range";
+
+                    const dynamicLabel = isRange
+                        ? `${field.label} : ${value} km`
+                        : field.label;
+
+                    return (
+                        <FormField
+                            key={field.id}
+                            label={dynamicLabel}
+                            id={field.id}
+                            type={field.type}
+                            name={field.name}
+                            placeholder={field.placeholder}
+                            required={field.required}
+                            onChange={handleChange}
+                            min={field.min}
+                            max={field.max}
+                            step={field.step}
+                            value={value}
+                            error={formErrors[field.id]}
+                        />
+                    )
+                })}
                 <Button content={buttonContent} />
             </form>
             {

@@ -4,7 +4,7 @@ import { UserRegisterPayload } from "../../../types/User";
 import { FormSubmitResult } from "../../../types/FormSubmitResult";
 import { IFormProps } from "@organisms/Form";
 
-export const registerFormData : IFormProps = {
+export const registerFormData: IFormProps = {
     title: "Créer un compte",
     type: "register",
     fields: [
@@ -136,18 +136,16 @@ export const registerFormData : IFormProps = {
             termsAccepted: formData.termsAccepted === true,
         };
 
-        const result = await createUser(payload);
-        console.log(result)
-        if (result.ok) {
+        try {
+            await createUser(payload);
             return { ok: true };
-        } else {
-            return {
-                ok: false,
-                errors: {
-                    global: result.data.message ? [result.data.message] : undefined,
-                    ...result.data.data
-                },
-            };
+        } catch (error: any) {
+
+            if (error.data && typeof error.data === "object") {
+                return { ok: false, errors:  error.data };
+            }
+
+            return { ok: false, errors: {} };
         }
     },
 };

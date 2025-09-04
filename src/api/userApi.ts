@@ -1,57 +1,32 @@
+import { api, handleError } from "./core";
 import {
     UpdateCredentialsPayload,
     UserRegisterPayload,
     UserUpdatePayload,
 } from "../types/User";
-import axios from "axios";
-
-const API_URL = import.meta.env.VITE_API_URL;
-
-axios.defaults.withCredentials = true;
 
 export const fetchAllUsers = async () => {
     try {
-        const response = await axios.get(`${API_URL}/users`);
-        const user = response.data;
-        return user.data;
+        return await api.get<any[]>("/users");
     } catch (err) {
-        console.error("Erreur lors de la récupération des utilisateurs :", err);
-        throw new Error("Erreur lors de la récupération des utilisateurs");
+        handleError(err, "Erreur lors de la récupération des utilisateurs");
     }
 };
 
-export const fetchUserById = async (user_id: string) => {
+export const fetchUserById = async (userId: string) => {
     try {
-        if (user_id) {
-            const response = await axios.get(`${API_URL}/users/${user_id}`);
-            const user = response.data;
-            return user.data;
-        } else {
-            throw new Error("Erreur lors de la récupération de l'utilisateur");
-        }
+        return await api.get<any>(`/users/${userId}`);
     } catch (err) {
-        console.error("Erreur lors de la récupération de l'utilisateur :", err);
-        throw new Error("Erreur lors de la récupération de l'utilisateur");
+        handleError(err, "Erreur lors de la récupération de l'utilisateur");
     }
 };
 
-export const fetchUserByIdWithDetails = async (user_id: string) => {
+export const fetchUserByIdWithDetails = async (userId: string) => {
     try {
-        if (user_id) {
-            const response = await axios.get(
-                `${API_URL}/users/details/${user_id}`,
-            );
-            const user = response.data;
-            return user.data;
-        } else {
-            throw new Error("Erreur lors de la récupération de l'utilisateur ");
-        }
+        return await api.get<any>(`/users/details/${userId}`);
     } catch (err) {
-        console.error(
-            "Erreur lors de la récupération de l'utilisateur avec détails :",
+        handleError(
             err,
-        );
-        throw new Error(
             "Erreur lors de la récupération de l'utilisateur avec détails",
         );
     }
@@ -59,55 +34,36 @@ export const fetchUserByIdWithDetails = async (user_id: string) => {
 
 export const createUser = async (userInformation: UserRegisterPayload) => {
     try {
-        const response = await axios.post(
-            `${API_URL}/auth/register`,
-            userInformation,
-        );
-        return { ok: true, data: response.data };
-    } catch (err) {
-        if (axios.isAxiosError(err) && err.response?.data) {
-            return { ok: false, data: err.response.data };
-        }
-        return { ok: false, data: { message: "L'utilisateur existe déjà" } };
+        return await api.post<any>("/auth/register", userInformation);
+    } catch (err: any) {
+        handleError(err, "Erreur lors de la création du compte");
     }
 };
 
-export const deleteUser = async (user_id: string) => {
+export const deleteUser = async (userId: string) => {
     try {
-        const response = await axios.delete(`${API_URL}/users/${user_id}`);
-        console.log(response);
-        return response;
+        return await api.delete<any>(`/users/${userId}`);
     } catch (err) {
-        console.error("Erreur lors de la suppression de l'utilisateur:", err);
-        return false;
+        handleError(err, "Erreur lors de la suppression de l'utilisateur");
     }
 };
 
-export const updateUser = async (user_id: string, user: UserUpdatePayload) => {
+export const updateUser = async (userId: string, user: UserUpdatePayload) => {
     try {
-        const response = await axios.put(`${API_URL}/users/${user_id}`, user);
-        console.log(response);
-        return response;
+        return await api.put<any>(`/users/${userId}`, user);
     } catch (err) {
-        console.error("Erreur lors de la modification de l'utilisateur:", err);
-        throw new Error("Erreur lors de la modification de l'utilisateur");
+        handleError(err, "Erreur lors de la modification de l'utilisateur");
     }
 };
 
 export const updateUserCredentials = async (
-    user_id: string,
-    user: UpdateCredentialsPayload,
+    userId: string,
+    credentials: UpdateCredentialsPayload,
 ) => {
     try {
-        const response = await axios.put(
-            `${API_URL}/users/credentials/${user_id}`,
-            user,
-        );
-        console.log(response);
-        return response;
+        return await api.put<any>(`/users/credentials/${userId}`, credentials);
     } catch (err) {
-        console.error("Erreur lors de la modification de l'utilisateur:", err);
-        throw new Error("Erreur lors de la modification de l'utilisateur");
+        handleError(err, "Erreur lors de la modification des identifiants");
     }
 };
 
@@ -116,61 +72,42 @@ export const updateUserProfilePicture = async (
     picture?: File,
 ) => {
     try {
-        let response;
-
         if (picture) {
             const formData = new FormData();
             formData.append("pictures", picture);
-
-            response = await axios.put(
-                `${API_URL}/users/pictures/${userId}`,
-                formData,
-                {
-                    headers: { "Content-Type": "multipart/form-data" },
-                },
-            );
+            return await api.put<any>(`/users/pictures/${userId}`, formData);
         } else {
-            // Aucun fichier → on envoie une requête vide pour déclencher la suppression
-            response = await axios.put(
-                `${API_URL}/users/pictures/${userId}`,
-                null,
-            );
+            return await api.put<any>(`/users/pictures/${userId}`, null);
         }
-
-        return response;
     } catch (err) {
-        console.error(
-            "Erreur lors de la modification de la photo de profil:",
+        handleError(
             err,
+            "Erreur lors de la modification de la photo de profil",
         );
-        throw new Error("Erreur lors de la modification de la photo de profil");
     }
 };
 
 export const loginAPI = async (email: string, password: string) => {
     try {
-        const response = await axios.post(`${API_URL}/auth/login`, {
-            email,
-            password,
-        });
-        return { ok: true, data: response.data };
-    } catch (err) {
-        if (axios.isAxiosError(err) && err.response?.data) {
-            return { ok: false, data: err.response.data };
-        }
-        return { ok: false, data: { message: "Erreur de connexion" } };
+        return await api.post<any>("/auth/login", { email, password });
+    } catch (err: any) {
+        handleError(err, "Erreur de connexion");
     }
 };
 
 export const logoutAPI = async () => {
-    const response = await axios.get(`${API_URL}/auth/logout`);
-    console.log(response);
-    return;
+    try {
+        return await api.get<any>("/auth/logout");
+    } catch (err) {
+        handleError(err, "Erreur lors de la déconnexion");
+    }
 };
 
 export const checkAuth = async () => {
-    const response = await axios.get(`${API_URL}/auth/me`);
-    console.log("response du server:", response);
-    const user = response.data.data;
-    return user;
+    try {
+        const response = await api.get<any>("/auth/me");
+        return response.data;
+    } catch (err : any) {
+        throw err.response.data;
+    }
 };
