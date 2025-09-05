@@ -2,8 +2,8 @@ import { create } from "zustand";
 
 interface IFilterState {
     vehicleType: "camping-car" | "van",
-    locationCoord: string | null,
     locationCity: string | null,
+    locationCode: string | null,
     startDate: Date | null,
     endDate: Date | null,
     radius: number,
@@ -13,7 +13,8 @@ interface IFilterState {
     setVehicleType: (type: "camping-car" | "van") => void,
     setStartDate: (startDate: Date) => void,
     setEndDate: (startDate: Date) => void,
-    setLocationCity: (city: string) => void,
+    setLocationCode: (code: string | null) => void,
+    setLocationCity: (city: string | null) => void,
     setRadius: (radius: number) => void,
     resetSearch: () => void,
     setFilters: (filter: IFilter) => void,
@@ -28,8 +29,10 @@ interface IFilter {
 
 export const useFilterStore = create<IFilterState>((set) => ({
     vehicleType: "camping-car",
-    locationCoord: null,
+    locationCoordLat: null,
+    locationCoordLon: null,
     locationCity: null,
+    locationCode: null,
     startDate: null,
     endDate: null,
     radius: 50,
@@ -48,12 +51,15 @@ export const useFilterStore = create<IFilterState>((set) => ({
     setLocationCity: (city) => {
         set({locationCity : city})
     },
+    setLocationCode: (code) => {
+        set({locationCode : code})
+    },
     setRadius: (radius) => {
         set({radius})
     },
     resetSearch: () => {
         set({
-            locationCoord : null,
+            locationCode : null,
             locationCity : null,
             startDate : null,
             endDate : null,

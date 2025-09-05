@@ -1,7 +1,11 @@
-import { FormSubmitResult } from "../../../types/FormSubmitResult";
+import { fetchCityByNameAndPostalCode } from "@api/addressApi";
 import { IFormProps } from "@organisms/Form";
+import { useFilterStore } from "@store/useFilterStore";
+import { FormSubmitResult } from "../../../types/FormSubmitResult";
 
-export const homeFormData : IFormProps = {
+const filterState = useFilterStore.getState();
+
+export const homeFormData: IFormProps = {
     title: "Recherche",
     type: "search",
     fields: [
@@ -11,7 +15,10 @@ export const homeFormData : IFormProps = {
             placeholder: "",
             required: true,
             label: "Date de début",
-            onChange: () => {},
+            onChange: (e) => {
+                const value = e.target.value;
+                filterState.setStartDate(new Date(value));
+            },
         },
         {
             id: "endDate",
@@ -19,16 +26,24 @@ export const homeFormData : IFormProps = {
             placeholder: "",
             required: true,
             label: "Date de fin",
-            onChange: () => {},
+            onChange: (e) => {
+                const value = e.target.value;
+                filterState.setEndDate(new Date(value));
+            },
         },
         {
             id: "city",
             type: "text",
-            placeholder: "Votre ville",
+            placeholder: "Ville ou code postal",
             required: true,
             autoComplete: "address-level2",
             label: "Lieu de départ",
-            onChange: () => {},
+            withSuggestions: true,
+            fetchSuggestions: fetchCityByNameAndPostalCode,
+            onChange: (e) => {
+                const value = e.target.value;
+                filterState.setLocationCity(value);
+            },
         },
         {
             id: "radius",
@@ -39,14 +54,14 @@ export const homeFormData : IFormProps = {
             min: "10",
             max: "100",
             step: "5",
-            onChange: () => {},
+            onChange: (e) => {
+                const value = e.target.value;
+                filterState.setRadius(Number(value));
+            },
         },
     ],
     buttonContent: "Rechercher",
-    onSubmit: async (
-        formData: { [key: string]: string | File | boolean },
-    ): Promise<FormSubmitResult> => {
-        console.log(formData)
-        return { ok: true}
-    },
+    onSubmit: async (): Promise<FormSubmitResult> => {
+            return {ok : true}
+        },
 };

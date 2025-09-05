@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { IFormProps } from "./Form.props";
+import { IFormProps, TFormFieldConfig } from "./Form.props";
 import { FormField } from "@molecules/FormField";
 import { Button } from "@atoms/Button";
 import { useState } from "react";
@@ -8,6 +8,7 @@ import { ContactInfo } from "@molecules/ContactInfo";
 import { useModalStore } from "@store/useModalStore";
 import { useFilterStore } from "@store/useFilterStore";
 import "./Form.css"
+import { FormFieldWithSuggestion, IFormFieldWithSuggestionProps } from "@molecules/FormFieldWithSuggestion";
 
 type FormValue = string | File | boolean;
 
@@ -17,6 +18,13 @@ export const Form: React.FC<IFormProps> = ({ fields, onSubmit, buttonContent, ti
     const navigate = useNavigate()
     const { setMessage, clearMessage } = useModalStore()
     const { vehicleType, setVehicleType } = useFilterStore()
+
+    function isFieldWithSuggestion(
+        field: TFormFieldConfig
+    ): field is IFormFieldWithSuggestionProps {
+        return "withSuggestions" in field;
+    }
+
 
     const handleChangeType = (type: "camping-car" | "van") => {
         setVehicleType(type)
@@ -96,30 +104,54 @@ export const Form: React.FC<IFormProps> = ({ fields, onSubmit, buttonContent, ti
                 )}
 
                 {fields.map((field) => {
-                    const value = formData[field.id] || "";
-                    const isRange = field.type === "range";
 
-                    const dynamicLabel = isRange
-                        ? `${field.label} : ${value} km`
-                        : field.label;
+                    if (isFieldWithSuggestion(field) && field.withSuggestions === true) {
+                        return (
+                            <FormFieldWithSuggestion
+                                key={field.id}
+                                label={field.label}
+                                type="text"
+                                id={field.id}
+                                name={field.name}
+                                placeholder={field.placeholder}
+                                required={field.required}
+                                onChange={handleChange}
+                                onSelect={field.onSelect}
+                                fetchSuggestions={field.fetchSuggestions}
+                                withSuggestions={true}
+                                value={formData[field.id] || ""}
+                                error={formErrors[field.id]}
+                            />
+                        )
 
-                    return (
-                        <FormField
-                            key={field.id}
-                            label={dynamicLabel}
-                            id={field.id}
-                            type={field.type}
-                            name={field.name}
-                            placeholder={field.placeholder}
-                            required={field.required}
-                            onChange={handleChange}
-                            min={field.min}
-                            max={field.max}
-                            step={field.step}
-                            value={value}
-                            error={formErrors[field.id]}
-                        />
-                    )
+                    } else {
+                        const value = formData[field.id] || "";
+                        const isRange = field.type === "range";
+
+                        const dynamicLabel = isRange
+                            ? `${field.label} : ${value} km`
+                            : field.label;
+
+                        return (
+                            <FormField
+                                key={field.id}
+                                label={dynamicLabel}
+                                id={field.id}
+                                type={field.type}
+                                name={field.name}
+                                placeholder={field.placeholder}
+                                required={field.required}
+                                onChange={handleChange}
+                                min={field.min}
+                                max={field.max}
+                                step={field.step}
+                                value={value}
+                                error={formErrors[field.id]}
+                            />
+                        )
+                    }
+
+
                 })}
                 <Button content={buttonContent} />
             </form>

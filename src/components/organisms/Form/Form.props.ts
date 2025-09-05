@@ -1,12 +1,14 @@
 import { ReactNode } from "react";
 import { IFormFieldProps } from "@molecules/FormField";
 import { FormSubmitResult } from "../../../types/FormSubmitResult";
+import { IFormFieldWithSuggestionProps } from "@molecules/FormFieldWithSuggestion";
 
-type FormValue = string | File | boolean;
+type TFormValue = string | File | boolean;
+export type TFormFieldConfig = IFormFieldProps | IFormFieldWithSuggestionProps;
 
 export interface IFormProps {
-    fields: IFormFieldProps[]
-    onSubmit: (data: { [key: string]: FormValue }) => Promise<FormSubmitResult>
+    fields: TFormFieldConfig[]
+    onSubmit: (data: { [key: string]: TFormValue }) => Promise<FormSubmitResult>
     buttonContent: ReactNode,
     title: string,
     type: "login" | "register" | "resetPassword" | "updateProfile" | "updatePassword" | "contact" | "search"

@@ -46,11 +46,11 @@ export const Header: React.FC = () => {
                 <ul className={`nav-links ${isMenuOpen ? "open" : ""} ${isClosing ? "closing" : ""}`}>
                     <li><NavItem to={`/`} content={"Camping-car"} onClick={() => {
                         handleChangeType("camping-car")
-                        handleNavClick
+                        handleNavClick()
                     }} /></li>
                     <li><NavItem to={`/`} content={"Van"} onClick={() => {
                         handleChangeType("van")
-                        handleNavClick
+                        handleNavClick()
                     }} /></li>
                     <li className='profile-menu'>
                         {
