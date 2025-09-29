@@ -14,8 +14,8 @@ export const NavItem : React.FC<INavItemProps> = ({
 
     const handleClick = (e: React.MouseEvent) => {
         if (onClick) {
-            e.preventDefault(); // Empêcher la navigation
-            onClick(content as string); // Appeler la fonction onClick avec le contenu
+            e.preventDefault();
+            onClick();
         }
         navigate(to)
     };

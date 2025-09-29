@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom"
-import { Helmet } from "react-helmet"
 import { PrivateAuthRoute } from "./PrivateAuthRoute"
 import { PrivateNonAuthRoute } from "./PrivateNonAuthRoute"
 import { Home } from "@pages/Home"
@@ -11,6 +10,7 @@ import { Terms } from "@pages/Terms"
 import { Legal } from "@pages/Legal"
 import { Contact } from "@pages/Contact"
 import { Logout } from "@pages/Logout"
+import { ProfileVehicle } from "@pages/ProfileVehicle"
 
 
 export const Router = () => {
@@ -19,19 +19,13 @@ export const Router = () => {
         <Routes>
             <Route path="/" element={
                 <>
-                    <Helmet>
-                        <title>RentAVan - Accueil</title>
-                    </Helmet>
-                    <Home/>
+                    <Home />
                 </>
             } />
 
             <Route element={<PrivateNonAuthRoute />}>
                 <Route path="/login" element={
                     <>
-                        <Helmet>
-                            <title>RentAVan - Connexion</title>
-                        </Helmet>
                         <Login />
                     </>
                 } />
@@ -40,9 +34,6 @@ export const Router = () => {
             <Route element={<PrivateAuthRoute />}>
                 <Route path="/profile/logout" element={
                     <>
-                        <Helmet>
-                            <title>RentAVan - Déconnexion</title>
-                        </Helmet>
                         <Logout />
                     </>
                 } />
@@ -51,9 +42,6 @@ export const Router = () => {
             <Route element={<PrivateNonAuthRoute />}>
                 <Route path="/register" element={
                     <>
-                        <Helmet>
-                            <title>RentAVan - Inscription</title>
-                        </Helmet>
                         <Register />
                     </>
                 } />
@@ -62,55 +50,46 @@ export const Router = () => {
             <Route element={<PrivateAuthRoute />}>
                 <Route path="/profile" element={
                     <>
-                        <Helmet>
-                            <title>RentAVan - Mon profil</title>
-                        </Helmet>
+
+                    </>
+                } />
+            </Route>
+
+            <Route element={<PrivateAuthRoute />}>
+                <Route path="/profile/vehicles" element={
+                    <>
+                        <ProfileVehicle />
                     </>
                 } />
             </Route>
 
             <Route path="/privacy" element={
-                                    <>
-                        <Helmet>
-                            <title>RentAVan - Politique de Confidentialité</title>
-                        </Helmet>
-                        <Privacy/>
-                    </>
-            }/>
+                <>
+                    <Privacy />
+                </>
+            } />
 
             <Route path="/terms" element={
-                                    <>
-                        <Helmet>
-                            <title>RentAVan - Conditions Générales de Vente</title>
-                        </Helmet>
-                        <Terms/>
-                    </>
-            }/>
+                <>
+                    <Terms />
+                </>
+            } />
 
             <Route path="/legal" element={
-                                    <>
-                        <Helmet>
-                            <title>RentAVan - Informations Légales</title>
-                        </Helmet>
-                        <Legal/>
-                    </>
-            }/>
+                <>
+                    <Legal />
+                </>
+            } />
 
             <Route path="/contact" element={
-                                    <>
-                        <Helmet>
-                            <title>RentAVan - Contact</title>
-                        </Helmet>
-                        <Contact/>
-                    </>
-            }/>
+                <>
+                    <Contact />
+                </>
+            } />
 
             <Route path="*" element={
                 <>
-                    <Helmet>
-                        <title>RentAVan - Page non trouvée</title>
-                    </Helmet>
-                    <NotFound/>
+                    <NotFound />
                 </>
             } />
         </Routes>

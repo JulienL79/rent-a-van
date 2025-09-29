@@ -1,7 +1,13 @@
+import { PageMeta } from "@atoms/PageMeta";
+
 export function Terms() {
 
     return (
         <div className="page">
+            <PageMeta
+                title="RentAVan - Politique de confidentialité"
+                description="Découvrez comment RentAVan collecte, utilise et protège vos données personnelles conformément à la réglementation en vigueur."
+            />
             <section className="content">
                 <h1>Conditions Générales de Vente</h1>
 

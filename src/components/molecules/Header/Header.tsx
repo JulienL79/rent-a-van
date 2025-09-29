@@ -15,6 +15,10 @@ export const Header: React.FC = () => {
         setVehicleType(type)
     }
 
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
     const handleClick = () => {
         if (isMenuOpen) {
             setIsClosing(true);
@@ -46,10 +50,12 @@ export const Header: React.FC = () => {
                 <ul className={`nav-links ${isMenuOpen ? "open" : ""} ${isClosing ? "closing" : ""}`}>
                     <li><NavItem to={`/`} content={"Camping-car"} onClick={() => {
                         handleChangeType("camping-car")
+                        scrollToTop()
                         handleNavClick()
                     }} /></li>
                     <li><NavItem to={`/`} content={"Van"} onClick={() => {
                         handleChangeType("van")
+                        scrollToTop()
                         handleNavClick()
                     }} /></li>
                     <li className='profile-menu'>
@@ -59,8 +65,8 @@ export const Header: React.FC = () => {
                                     <NavItem to={`/profile`} content={"Mon espace"} onClick={handleNavClick} />
                                     <ul className="dropdown">
                                         <li><NavItem to={`/profile`} content={"Mon profil"} onClick={handleNavClick} /></li>
-                                        <li><NavItem to={`/profile/order`} content={"Mes Réservations"} onClick={handleNavClick} /></li>
-                                        <li><NavItem to={`/profile/product`} content={"Mes Véhicules"} onClick={handleNavClick} /></li>
+                                        <li><NavItem to={`/profile/orders`} content={"Mes Réservations"} onClick={handleNavClick} /></li>
+                                        <li><NavItem to={`/profile/vehicles`} content={"Mes Véhicules"} onClick={handleNavClick} /></li>
                                         <li><NavItem to={`/profile/mailbox`} content={"Messagerie"} onClick={handleNavClick} /></li>
                                         <li><NavItem to={`/profile/settings`} content={"Paramètres"} onClick={handleNavClick} /></li>
                                         <li><NavItem to={`/profile/logout`} content={"Se Déconnecter"} onClick={handleNavClick} /></li>

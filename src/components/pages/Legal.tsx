@@ -1,7 +1,13 @@
+import { PageMeta } from "@atoms/PageMeta";
+
 export function Legal() {
 
     return (
         <div className="page">
+            <PageMeta
+                title="RentAVan - Mentions légales"
+                description="Consultez les informations légales concernant RentAVan, y compris l’éditeur, l’hébergement et les droits applicables."
+            />
 
             <section className="content">
                 <h1>Mentions Légales</h1>

@@ -12,6 +12,7 @@ import { fetchCityCoordinates } from "@api/addressApi";
 import { useModalStore } from "@store/useModalStore";
 import { RawSearchPayload } from "../../../types/Search";
 import { searchVehicles } from "@api/searchApi";
+import { PageMeta } from "@atoms/PageMeta";
 
 export const Home = () => {
     const [articles, setArticles] = useState(campingcarArticles)
@@ -94,6 +95,11 @@ export const Home = () => {
 
     return (
         <div className="page home">
+            <PageMeta
+                title="RentAVan - Accueil"
+                description="Bienvenue sur RentAVan, votre plateforme de location de vans partout en France."
+            />
+
             <div className="home-search">
                 <Form {...formDataWithStoreValues} />
             </div>
