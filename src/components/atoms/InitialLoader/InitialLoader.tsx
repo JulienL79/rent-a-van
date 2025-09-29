@@ -1,20 +1,21 @@
-import { useEffect, useState } from 'react';
-import './InitialLoader.css'
+import { useEffect, useState } from "react";
+import "./InitialLoader.css";
 
 export const InitialLoader = () => {
     const [visible, setVisible] = useState(true);
 
     useEffect(() => {
-        setTimeout(() => {
-            setVisible(false);
-        }, 3000);
+        const timer = setTimeout(() => setVisible(false), 2000);
+        return () => clearTimeout(timer);
     }, []);
 
     return (
         <div className={`initial-loader ${visible ? "show" : "hide"}`}>
-            <div>
-                <p>Pronostic Place</p>
-                <figure className="sphere"><span className="shadow"></span></figure>
+            <div className="loader-content">
+                <p className="title">RentAVan</p>
+                <div className="loading-bar">
+                    <div className="progress"></div>
+                </div>
             </div>
         </div>
     );
