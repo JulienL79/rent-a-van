@@ -1,10 +1,10 @@
 import { PageMeta } from "@atoms/PageMeta";
-import { VehicleCard } from "@molecules/VehicleCard";
+import { Card } from "@molecules/Card";
 
 const data = [
-    { id: '1', brand: "Ford", model: "Transit", totalPrice: 1000, description: "A reliable van for all your transport needs." },
-    { id: '2', brand: "Mercedes", model: "Sprinter", totalPrice: 1500, description: "A spacious van with modern features." },
-    { id: '3', brand: "Volkswagen", model: "California", totalPrice: 2000, description: "A stylish camper for your adventures." }
+    { id: '1', brand: "Ford", model: "Transit", totalPrice: 1000, description: "A reliable van for all your transport needs.", picture: null },
+    { id: '2', brand: "Mercedes", model: "Sprinter", totalPrice: 1500, description: "A spacious van with modern features.", picture: null },
+    { id: '3', brand: "Volkswagen", model: "California", totalPrice: 2000, description: "A stylish camper for your adventures.", picture: null }
 ]
 
 export function Result() {
@@ -17,7 +17,7 @@ export function Result() {
             />
 
             {data.map(vehicle => (
-                <VehicleCard key={vehicle.id} type="result" vehicle={vehicle} />
+                <Card key={vehicle.id} type="result" data={vehicle} />
             ))}
         </div>
     );

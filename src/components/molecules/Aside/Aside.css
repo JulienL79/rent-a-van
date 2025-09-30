@@ -1,0 +1,39 @@
+.sidebar {
+    display: none;
+    min-width: 180px;
+    width: 20%;
+    background-color: var(--bg-color-secondary);
+    padding: 2rem;
+    border-radius: 10px;
+    height: 100%;
+}
+
+.sidebar h2 {
+    margin-top: 0;
+    color: var(--primary-color);
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar li {
+    margin-bottom: 2rem;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+    background-color: var(--hover-color);
+    color: var(--primary-color);
+}
+
+/* ============================================================================================
+TABLET VERSION
+=============================================================================================== */
+
+@media screen and (min-width: 768px) {
+    .sidebar {
+        display: block;
+    }
+}

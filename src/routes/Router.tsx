@@ -10,7 +10,7 @@ import { Terms } from "@pages/Terms"
 import { Legal } from "@pages/Legal"
 import { Contact } from "@pages/Contact"
 import { Logout } from "@pages/Logout"
-import { ProfileVehicle } from "@pages/ProfileVehicle"
+import { Profile } from "@pages/Profile"
 
 
 export const Router = () => {
@@ -32,7 +32,7 @@ export const Router = () => {
             </Route>
 
             <Route element={<PrivateAuthRoute />}>
-                <Route path="/profile/logout" element={
+                <Route path="/logout" element={
                     <>
                         <Logout />
                     </>
@@ -48,17 +48,9 @@ export const Router = () => {
             </Route>
 
             <Route element={<PrivateAuthRoute />}>
-                <Route path="/profile" element={
+                <Route path="/profile/:page" element={
                     <>
-
-                    </>
-                } />
-            </Route>
-
-            <Route element={<PrivateAuthRoute />}>
-                <Route path="/profile/vehicles" element={
-                    <>
-                        <ProfileVehicle />
+                        <Profile />
                     </>
                 } />
             </Route>

@@ -1,5 +1,4 @@
 .button-app {
-    background-color: var(--primary-color);
     color: white;
     border: none;
     padding: 0.75rem 2rem;
@@ -11,8 +10,28 @@
     width: 100%;
 }
 
-.button-app:hover {
+.primary-button {
+    background-color: var(--primary-color);
+}
+
+.primary-button:hover {
     background-color: var(--primary-color-darked);
+}
+
+.secondary-button {
+    background-color: var(--secondary-color);
+}
+
+.secondary-button:hover {
+    background-color: var(--secondary-color-darked);
+}
+
+.danger-button {
+    background-color: var(--danger-color);
+}
+
+.danger-button:hover {
+    background-color: var(--danger-color-darked);
 }
 
 /* ============================================================================================

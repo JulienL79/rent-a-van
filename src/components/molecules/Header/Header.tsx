@@ -62,14 +62,14 @@ export const Header: React.FC = () => {
                         {
                             isAuthenticated ?
                                 <>
-                                    <NavItem to={`/profile`} content={"Mon espace"} onClick={handleNavClick} />
+                                    <NavItem to={`/profile/home`} content={"Mon espace"} onClick={handleNavClick} />
                                     <ul className="dropdown">
-                                        <li><NavItem to={`/profile`} content={"Mon profil"} onClick={handleNavClick} /></li>
-                                        <li><NavItem to={`/profile/orders`} content={"Mes Réservations"} onClick={handleNavClick} /></li>
+                                        <li><NavItem to={`/profile/home`} content={"Mon profil"} onClick={handleNavClick} /></li>
+                                        <li><NavItem to={`/profile/bookings`} content={"Mes Réservations"} onClick={handleNavClick} /></li>
                                         <li><NavItem to={`/profile/vehicles`} content={"Mes Véhicules"} onClick={handleNavClick} /></li>
                                         <li><NavItem to={`/profile/mailbox`} content={"Messagerie"} onClick={handleNavClick} /></li>
                                         <li><NavItem to={`/profile/settings`} content={"Paramètres"} onClick={handleNavClick} /></li>
-                                        <li><NavItem to={`/profile/logout`} content={"Se Déconnecter"} onClick={handleNavClick} /></li>
+                                        <li><NavItem to={`/logout`} content={"Se Déconnecter"} onClick={handleNavClick} /></li>
                                     </ul>
                                 </>
                                 :

@@ -75,6 +75,7 @@ h1 {
     font-size: var(--font-size-h1-sm);
     font-weight: var(--font-weight-title);
     color: var(--primary-color);
+    margin-bottom: 2.5rem;
 }
 
 h2 {
@@ -89,6 +90,10 @@ h3 {
     font-weight: var(--font-weight-title);
     color: var(--primary-color);
     margin-bottom: 1.5rem;
+}
+
+p {
+    line-height: 1.2;
 }
 
 a {
@@ -112,20 +117,21 @@ a::after {
     transition: width 0.3s ease;
 }
 
-a.text-link::after {
-    display: none;
-}
-
-a:hover::after {
-    width: 100%;
-}
-
 a:hover {
     text-decoration: none;
 }
 
 a.text-link:hover {
     text-shadow: 0 0 5px rgba(var(--primary-color-rgb), 0.5);
+}
+
+a:hover::after {
+    width: 100%;
+}
+
+a.text-link::after,
+a.btn-link::after {
+    display: none;
 }
 
 img {
@@ -175,7 +181,9 @@ main {
 VARIOUS
 =============================================================================================== */
 
-
+.primary-color-darked {
+    color: var(--primary-color-darked);
+}
 
 /* ============================================================================================
 TABLET VERSION

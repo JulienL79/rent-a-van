@@ -1,0 +1,62 @@
+.profile-page .content {
+    width: 100%;
+}
+
+.card-list {
+    gap: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-filter {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.card-filter a {
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.card-filter a.active,
+.card-filter a:hover {
+    color: var(--primary-color);
+    text-shadow:
+        0px 0px 10px rgba(var(--primary-color-rgb), 0.4),
+        /* Ombre principale */
+        0px 0px 20px rgba(var(--primary-color-rgb), 0.3),
+        /* Effet diffus */
+        0px 0px 30px rgba(var(--primary-color-rgb), 0.1);
+}
+
+.card-filter a:hover::after {
+    display: none;
+}
+
+@media screen and (min-width: 768px) {
+
+    .page.profile-page {
+        justify-content: space-between;
+    }
+
+    .profile-page .content {
+        width: 65%;
+    }
+
+    .card-filter {
+        gap: 3rem;
+    }
+}
+
+/* ============================================================================================
+DESKTOP VERSION
+=============================================================================================== */
+
+@media screen and (min-width: 1024px) {
+    .profile-page .content {
+        width: 75%;
+    }
+}

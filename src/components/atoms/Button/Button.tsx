@@ -2,7 +2,7 @@ import { IButtonProps } from "./Button.props";
 import React from "react";
 import "./Button.css"
 
-export const Button : React.FC<IButtonProps> = ({className = "", content, onClick, isDisabled= false}) => {
+export const Button : React.FC<IButtonProps> = ({className = "primary-button", content, onClick, isDisabled= false}) => {
 
     if(onClick === undefined) {
         return (
