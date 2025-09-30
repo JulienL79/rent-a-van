@@ -2,7 +2,7 @@ import { api, handleError } from "./core";
 
 export const fetchAllVehicles = async () => {
     try {
-        return await api.get<any[]>("/vehicles");
+        return await api.get<{ message: string; data: any[] }>("/vehicles");
     } catch (err) {
         handleError(err, "Erreur lors de la récupération des véhicules");
     }
@@ -21,7 +21,7 @@ export const fetchVehicleDetails = async (id: string) => {
 
 export const fetchVehiclesByUser = async (userId: string) => {
     try {
-        return await api.get<any[]>(`/vehicles/user/${userId}`);
+        return await api.get<{ message: string; data: any[] }>(`/vehicles/user/${userId}`);
     } catch (err) {
         handleError(
             err,

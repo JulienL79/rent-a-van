@@ -2,9 +2,9 @@ import { checkAuth, loginAPI, logoutAPI } from "@api/userApi";
 import { create } from "zustand";
 
 interface IDataUser {
+    id: string,
     firstName: string,
     lastName: string,
-    token: string,
 }
 
 interface IDataState {

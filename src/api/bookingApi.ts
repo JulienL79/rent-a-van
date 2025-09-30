@@ -2,7 +2,7 @@ import { api, handleError } from "./core";
 
 export const fetchAllBookings = async () => {
     try {
-        return await api.get<any[]>("/bookings");
+        return await api.get<{ message: string; data: any[] }>("/bookings");
     } catch (err) {
         handleError(err, "Erreur lors de la récupération des réservations");
     }
@@ -10,7 +10,7 @@ export const fetchAllBookings = async () => {
 
 export const fetchBookingsByOwner = async (ownerId: string) => {
     try {
-        return await api.get<any[]>(`/bookings/owner/${ownerId}`);
+        return await api.get<{ message: string; data: any[] }>(`/bookings/owner/${ownerId}`);
     } catch (err) {
         handleError(
             err,
@@ -21,7 +21,7 @@ export const fetchBookingsByOwner = async (ownerId: string) => {
 
 export const fetchBookingsByRenter = async (renterId: string) => {
     try {
-        return await api.get<any[]>(`/bookings/renter/${renterId}`);
+        return await api.get<{ message: string; data: any[] }>(`/bookings/renter/${renterId}`);
     } catch (err) {
         handleError(
             err,
@@ -32,7 +32,7 @@ export const fetchBookingsByRenter = async (renterId: string) => {
 
 export const fetchBookingsByVehicle = async (vehicleId: string) => {
     try {
-        return await api.get<any[]>(`/bookings/vehicle/${vehicleId}`);
+        return await api.get<{ message: string; data: any[] }>(`/bookings/vehicle/${vehicleId}`);
     } catch (err) {
         handleError(
             err,
