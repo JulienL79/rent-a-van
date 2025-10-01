@@ -10,6 +10,7 @@ export const homeFormData: IFormProps = {
     type: "search",
     fields: [
         {
+            kind: "base",
             id: "startDate",
             type: "date",
             placeholder: "",
@@ -21,6 +22,7 @@ export const homeFormData: IFormProps = {
             },
         },
         {
+            kind: "base",
             id: "endDate",
             type: "date",
             placeholder: "",
@@ -32,6 +34,7 @@ export const homeFormData: IFormProps = {
             },
         },
         {
+            kind: "suggestion",
             id: "city",
             type: "text",
             placeholder: "Ville ou code postal",
@@ -46,6 +49,7 @@ export const homeFormData: IFormProps = {
             },
         },
         {
+            kind: "base",
             id: "radius",
             type: "range",
             placeholder: "",

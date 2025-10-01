@@ -2,15 +2,18 @@ import { IButtonProps } from "./Button.props";
 import React from "react";
 import "./Button.css"
 
-export const Button : React.FC<IButtonProps> = ({className = "primary-button", content, onClick, isDisabled= false}) => {
+export const Button : React.FC<IButtonProps> = ({className = "primary-button", content, onClick, isDisabled = false, isScrollToTop = true}) => {
 
-    if(onClick === undefined) {
-        return (
-            <button className={`button-app ${className}`} type="submit" disabled={isDisabled}>{content}</button>
-        )
+    const handleClick = () => {
+        if(isScrollToTop) {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        if(onClick) {
+            onClick();
+        }
     }
 
     return (
-        <button className={`button-app ${className}`} onClick={() => onClick()} disabled={isDisabled}>{content}</button>
+        <button className={`button-app ${className} ${isDisabled && 'disabled-button'}`} onClick={handleClick} disabled={isDisabled}>{content}</button>
     )
 }

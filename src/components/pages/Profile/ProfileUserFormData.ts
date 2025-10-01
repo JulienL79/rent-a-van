@@ -1,31 +1,28 @@
-import { createUser } from "@api/userApi";
-import { TermsAndPrivacy } from "./TermAndPrivacy";
-import { UserRegisterPayload } from "../../../types/User";
-import { FormSubmitResult } from "../../../types/FormSubmitResult";
 import { IFormProps } from "@organisms/Form";
+import { FormSubmitResult } from "../../../types/FormSubmitResult";
 
-export const registerFormData: IFormProps = {
-    title: "Créer un compte",
-    type: "register",
+export const profileDetailsFormData: IFormProps = {
+    title: "Mes informations",
+    type: "updateProfile",
     fields: [
         {
             kind: "base",
-            id: "firstName",
+            id: "firstname",
             type: "text",
             placeholder: "",
             required: true,
             autoComplete: "given-name",
-            label: "Prénom",
+            label: "Prénom*",
             onChange: () => {},
         },
         {
             kind: "base",
-            id: "lastName",
+            id: "lastname",
             type: "text",
             placeholder: "",
             required: true,
             autoComplete: "family-name",
-            label: "Nom de famille",
+            label: "Nom de famille*",
             onChange: () => {},
         },
         {
@@ -35,7 +32,7 @@ export const registerFormData: IFormProps = {
             placeholder: "",
             required: true,
             autoComplete: "bday",
-            label: "Date de naissance",
+            label: "Date de naissance*",
             onChange: () => {},
         },
         {
@@ -45,7 +42,7 @@ export const registerFormData: IFormProps = {
             placeholder: "",
             required: true,
             autoComplete: "street-address",
-            label: "Adresse",
+            label: "Adresse*",
             onChange: () => {},
         },
         {
@@ -55,7 +52,7 @@ export const registerFormData: IFormProps = {
             placeholder: "",
             required: true,
             autoComplete: "address-level2",
-            label: "Ville",
+            label: "Ville*",
             onChange: () => {},
         },
         {
@@ -65,7 +62,7 @@ export const registerFormData: IFormProps = {
             placeholder: "",
             required: true,
             autoComplete: "postal-code",
-            label: "Code postal",
+            label: "Code postal*",
             onChange: () => {},
         },
         {
@@ -75,17 +72,7 @@ export const registerFormData: IFormProps = {
             placeholder: "",
             required: true,
             autoComplete: "country-name",
-            label: "Pays",
-            onChange: () => {},
-        },
-        {
-            kind: "base",
-            id: "email",
-            type: "email",
-            placeholder: "",
-            required: true,
-            autoComplete: "email",
-            label: "Adresse e-mail",
+            label: "Pays*",
             onChange: () => {},
         },
         {
@@ -95,7 +82,49 @@ export const registerFormData: IFormProps = {
             placeholder: "",
             required: true,
             autoComplete: "tel",
-            label: "Numéro de téléphone",
+            label: "Numéro de téléphone*",
+            onChange: () => {},
+        },
+        {
+            kind: "base",
+            id: "drivingLicense",
+            type: "text",
+            placeholder: "",
+            required: false,
+            autoComplete: "",
+            label: "N° de permis de conduire",
+            onChange: () => {},
+        },
+    ],
+    buttonContent: "Valider",
+    onSubmit: async (): Promise<FormSubmitResult> => {
+        return { ok: true };
+    },
+};
+
+export const profileCredentialsFormData: IFormProps = {
+    title: "Mes informations",
+    type: "updateCredentials",
+    fields: [
+        {
+            kind: "base",
+            id: "email",
+            type: "email",
+            placeholder: "",
+            required: true,
+            autoComplete: "email",
+            label: "Adresse e-mail*",
+            onChange: () => {},
+
+        },
+        {
+            kind: "base",
+            id: "oldPassword",
+            type: "password",
+            placeholder: "",
+            required: true,
+            autoComplete: "current-password",
+            label: "Mot de passe actuel*",
             onChange: () => {},
         },
         {
@@ -103,9 +132,9 @@ export const registerFormData: IFormProps = {
             id: "password",
             type: "password",
             placeholder: "",
-            required: true,
-            autoComplete: "current-password",
-            label: "Mot de passe",
+            required: false,
+            autoComplete: "new-password",
+            label: "Nouveau mot de passe",
             onChange: () => {},
         },
         {
@@ -113,51 +142,14 @@ export const registerFormData: IFormProps = {
             id: "confirmPassword",
             type: "password",
             placeholder: "",
-            required: true,
+            required: false,
             autoComplete: "new-password",
             label: "Confirmer le mot de passe",
             onChange: () => {},
-        },
-        {
-            kind: "base",
-            id: "termsAccepted",
-            type: "checkbox",
-            placeholder: "",
-            required: true,
-            autoComplete: "",
-            label: TermsAndPrivacy,
-            onChange: () => {},
-        },
-    ],
-    buttonContent: "S'inscrire",
-    onSubmit: async (
-        formData: { [key: string]: string | File | boolean | string[] },
-    ): Promise<FormSubmitResult> => {
-        const payload: UserRegisterPayload = {
-            firstname: formData.firstName as string,
-            lastname: formData.lastName as string,
-            email: formData.email as string,
-            password: formData.password as string,
-            confirmPassword: formData.confirmPassword as string,
-            phoneNumber: formData.phoneNumber as string,
-            birthdate: new Date(formData.birthdate as string),
-            addressStreet: formData.addressStreet as string,
-            addressCity: formData.addressCity as string,
-            addressZip: formData.addressZip as string,
-            addressCountry: formData.addressCountry as string,
-            termsAccepted: formData.termsAccepted === true,
-        };
-
-        try {
-            await createUser(payload);
-            return { ok: true };
-        } catch (error: any) {
-
-            if (error.data && typeof error.data === "object") {
-                return { ok: false, errors:  error.data };
-            }
-
-            return { ok: false, errors: {} };
         }
+    ],
+    buttonContent: "Valider",
+    onSubmit: async (): Promise<FormSubmitResult> => {
+        return { ok: true };
     },
 };

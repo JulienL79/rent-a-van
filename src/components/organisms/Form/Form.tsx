@@ -10,38 +10,42 @@ import { useFilterStore } from "@store/useFilterStore";
 import "./Form.css"
 import { FormFieldWithSuggestion, IFormFieldWithSuggestionProps } from "@molecules/FormFieldWithSuggestion";
 
-type FormValue = string | File | boolean;
+type FormValue = string | File | boolean | string[];
 
-export const Form: React.FC<IFormProps> = ({ fields, onSubmit, buttonContent, title, type }) => {
+export const Form: React.FC<IFormProps> = ({ fields, onSubmit, buttonContent, title, type, isDisabled = false }) => {
     const [formData, setFormData] = useState<{ [key: string]: any }>({})
     const [formErrors, setFormErrors] = useState<{ [key: string]: string[] }>({});
     const navigate = useNavigate()
     const { setMessage, clearMessage } = useModalStore()
     const { vehicleType, setVehicleType } = useFilterStore()
 
-    function isFieldWithSuggestion(
+    const isFieldWithSuggestion = (
         field: TFormFieldConfig
-    ): field is IFormFieldWithSuggestionProps {
-        return "withSuggestions" in field;
+    ): field is Extract<TFormFieldConfig, { kind: "suggestion" }> => {
+        return field.kind === "suggestion";
     }
-
 
     const handleChangeType = (type: "camping-car" | "van") => {
         setVehicleType(type)
     }
 
     const handleChange = (
-        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
     ) => {
-        const target = e.target as HTMLInputElement;
+        const target = e.target as HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
         const { id, type, value } = target;
 
-        let newValue: FormValue = value;
+        let newValue: FormValue;
 
         if (type === "file") {
-            newValue = target.files?.[0] ?? "";
+            newValue = (target as HTMLInputElement).files?.[0] ?? "";
         } else if (type === "checkbox") {
-            newValue = target.checked;
+            newValue = (target as HTMLInputElement).checked;
+        } else if (type === "select-multiple") {
+            const selectedOptions = Array.from((target as HTMLSelectElement).selectedOptions);
+            newValue = selectedOptions.map((opt) => opt.value);
+        } else {
+            newValue = value;
         }
 
         setFormData((prev) => ({
@@ -51,8 +55,15 @@ export const Form: React.FC<IFormProps> = ({ fields, onSubmit, buttonContent, ti
 
         const field = fields.find((f) => f.id === id);
         if (field?.onChange) {
-            field.onChange?.(e as React.ChangeEvent<HTMLInputElement>);
+            if (type === "textarea") {
+                field.onChange(e as React.ChangeEvent<HTMLTextAreaElement>);
+            } else if (type === "select-one" || type === "select-multiple") {
+                field.onChange(e as React.ChangeEvent<HTMLSelectElement>);
+            } else {
+                field.onChange(e as React.ChangeEvent<HTMLInputElement>);
+            }
         }
+
 
     };
 
@@ -64,8 +75,8 @@ export const Form: React.FC<IFormProps> = ({ fields, onSubmit, buttonContent, ti
             if (result?.ok) {
                 setFormData({});
                 setFormErrors({});
-                const navigateTo = type === "login" ? "/" : type === "register" ? "/login" : "/";
-                navigate(navigateTo, { replace: true });
+                const navigateTo = type === "login" ? "/" : type === "register" ? "/login" : null;
+                if (navigateTo) { navigate(navigateTo, { replace: true }); }
 
                 const messageToast = type === "register" ? "Inscription réussie ! Vous pouvez maintenant vous connecter." : null;
                 if (messageToast) {
@@ -96,6 +107,7 @@ export const Form: React.FC<IFormProps> = ({ fields, onSubmit, buttonContent, ti
         <div className={`form-container ${type}-form`}>
             {type !== "search" && <h2 className="form-title">{title}</h2>}
             <form onSubmit={handleSubmit} className="form">
+                {/* Seulement pour le form de recherche */}
                 {type === "search" && (
                     <div className="toggle-switch-search">
                         <p onClick={() => handleChangeType("camping-car")} className={vehicleType === "camping-car" ? "active" : ""}>Camping-car</p>
@@ -104,7 +116,7 @@ export const Form: React.FC<IFormProps> = ({ fields, onSubmit, buttonContent, ti
                 )}
 
                 {fields.map((field) => {
-
+                    // Si le champ doit afficher des suggestions
                     if (isFieldWithSuggestion(field) && field.withSuggestions === true) {
                         return (
                             <FormFieldWithSuggestion
@@ -116,11 +128,11 @@ export const Form: React.FC<IFormProps> = ({ fields, onSubmit, buttonContent, ti
                                 placeholder={field.placeholder}
                                 required={field.required}
                                 onChange={handleChange}
-                                onSelect={field.onSelect}
                                 fetchSuggestions={field.fetchSuggestions}
                                 withSuggestions={true}
                                 value={formData[field.id] || ""}
                                 error={formErrors[field.id]}
+                                isDisabled={isDisabled}
                             />
                         )
 
@@ -147,14 +159,20 @@ export const Form: React.FC<IFormProps> = ({ fields, onSubmit, buttonContent, ti
                                 step={field.step}
                                 value={value}
                                 error={formErrors[field.id]}
+                                isDisabled={isDisabled}
                             />
                         )
                     }
 
 
                 })}
-                <Button content={buttonContent} />
+                {!isDisabled && (<Button content={buttonContent} isDisabled={isDisabled} />)}
             </form>
+
+            {/* ====================================================
+                FORM FOOTER
+                ======================================================== */}
+
             {
                 type === "login" && (
                     <div className="form-footer">

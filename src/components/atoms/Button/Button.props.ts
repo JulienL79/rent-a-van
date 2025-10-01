@@ -4,5 +4,6 @@ export interface IButtonProps {
     className?: string,
     content: ReactNode,
     isDisabled?: boolean,
+    isScrollToTop?: boolean,
     onClick?: (() => void)
 }

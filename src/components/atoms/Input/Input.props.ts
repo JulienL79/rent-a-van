@@ -10,5 +10,7 @@ export interface IInputProps {
     max?: number | string,
     autoComplete?: string,
     step?: string,
-    onChange: (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => void
+    isDisabled?: boolean,
+    options?: { label: string; value: string }[];
+    onChange: (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement> |React.ChangeEvent<HTMLSelectElement>) => void
 }

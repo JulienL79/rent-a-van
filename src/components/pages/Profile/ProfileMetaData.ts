@@ -1,6 +1,6 @@
-import { IProfileData } from "./Profile.props";
+import { IProfileMetaData } from "./Profile.props";
 
-export const profileDatas : IProfileData[] = [
+export const profileMetaDatas : IProfileMetaData[] = [
     {
         page: 'home',
         titlePage: 'Mon profil',

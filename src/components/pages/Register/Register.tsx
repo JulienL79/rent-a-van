@@ -11,7 +11,7 @@ export function Register() {
                 description="Créez votre compte RentAVan et réservez votre van en quelques clics."
             />
 
-            <Form fields={registerFormData.fields} buttonContent={registerFormData.buttonContent} onSubmit={registerFormData.onSubmit} title={registerFormData.title} type={"register"} />
+            <Form {...registerFormData} />
         </div>
     )
 }

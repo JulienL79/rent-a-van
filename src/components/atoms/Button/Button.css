@@ -34,6 +34,16 @@
     background-color: var(--danger-color-darked);
 }
 
+.disabled-button {
+    background-color: var(--disabled-color);
+    pointer-events: none;
+}
+
+.disabled-button:hover {
+    background-color: var(--disabled-color);
+    cursor: default;
+}
+
 /* ============================================================================================
 DESKTOP VERSION
 =============================================================================================== */

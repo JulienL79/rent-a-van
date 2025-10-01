@@ -11,7 +11,7 @@ export function Login() {
                 description="Connectez-vous à votre compte RentAVan"
             />
 
-            <Form fields={loginFormData.fields} buttonContent={loginFormData.buttonContent} onSubmit={loginFormData.onSubmit} title={loginFormData.title} type={"login"} />
+            <Form {...loginFormData} />
         </div>
     )
 }

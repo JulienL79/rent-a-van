@@ -1,3 +1,4 @@
+import { VehicleRegisterPayload, VehicleUpdatePayload } from "../types/Vehicle";
 import { api, handleError } from "./core";
 
 export const fetchAllVehicles = async () => {
@@ -38,7 +39,7 @@ export const fetchVehicleById = async (id: string) => {
     }
 };
 
-export const createVehicle = async (vehicleData: FormData) => {
+export const createVehicle = async (vehicleData: VehicleRegisterPayload) => {
     try {
         return await api.post<any>("/vehicles", vehicleData);
     } catch (err) {
@@ -46,7 +47,7 @@ export const createVehicle = async (vehicleData: FormData) => {
     }
 };
 
-export const updateVehicle = async (id: string, vehicleData: any) => {
+export const updateVehicle = async (id: string, vehicleData: VehicleUpdatePayload) => {
     try {
         return await api.put<any>(`/vehicles/${id}`, vehicleData);
     } catch (err) {

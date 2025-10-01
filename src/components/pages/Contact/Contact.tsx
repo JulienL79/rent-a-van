@@ -10,7 +10,7 @@ export function Contact() {
                 description="Contactez notre équipe RentAVan pour toute question ou demande."
             />
 
-            <Form fields={contactFormData.fields} buttonContent={contactFormData.buttonContent} onSubmit={contactFormData.onSubmit} title={contactFormData.title} type={"contact"} />
+            <Form {...contactFormData} />
         </div>
     )
 }

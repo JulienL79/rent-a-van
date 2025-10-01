@@ -12,18 +12,23 @@ export const NavItem : React.FC<INavItemProps> = ({
 }) => {
     const navigate = useNavigate()
 
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
     const handleClick = (e: React.MouseEvent) => {
         if (onClick) {
             e.preventDefault();
             onClick();
         }
-        navigate(to)
+        scrollToTop();
+        navigate(to);
     };
 
 
     if(onClick === undefined) {
         return (
-            <Link to={to} className={`${className}`}>
+            <Link to={to} className={`${className}`} onClick={handleClick}>
                 {content}
             </Link>
         )

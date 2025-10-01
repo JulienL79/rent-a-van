@@ -34,7 +34,7 @@ export type EmailPayload = {
 export type UpdateCredentialsPayload = {
   email: string;
   password?: string;
-  confirmPassword: string;
+  confirmPassword?: string;
   oldPassword: string;
 };
 

@@ -1,9 +1,12 @@
+import { IFormProps } from "@organisms/Form";
 import { FormSubmitResult } from "../../../types/FormSubmitResult"
 
-export const contactFormData = {
-    title: "Contactez-nous",
+export const contactFormData : IFormProps = {
+    title: "Contactez-Nous",
+    type: "contact",
     fields: [
         {
+            kind: "base",
             id: "email",
             type: "email",
             placeholder: "",
@@ -13,6 +16,7 @@ export const contactFormData = {
             onChange: () => {},
         },
         {
+            kind: "base",
             id: "phone",
             type: "tel",
             placeholder: "",
@@ -22,6 +26,7 @@ export const contactFormData = {
             onChange: () => {},
         },
         {
+            kind: "base",
             id: "subject",
             type: "text",
             placeholder: "",
@@ -31,6 +36,7 @@ export const contactFormData = {
             onChange: () => {},
         },
         {
+            kind: "base",
             id: "message",
             type: "textarea",
             placeholder: "",
@@ -42,7 +48,7 @@ export const contactFormData = {
     ],
     buttonContent: "Envoyer",
     onSubmit: async (
-        formData: { [key: string]: string | File | boolean }
+        formData: { [key: string]: string | File | boolean | string[] }
       ): Promise<FormSubmitResult> => {
         console.log("Données du formulaire de contact :", formData);
         return { ok : true, errors: {}}

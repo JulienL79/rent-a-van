@@ -18,6 +18,7 @@ export const FormField: React.FC<IFormFieldProps> = ({
     min,
     max,
     step,
+    isDisabled = false,
     error
 }) => {
 
@@ -40,6 +41,7 @@ export const FormField: React.FC<IFormFieldProps> = ({
                     autoComplete={autoComplete}
                     step={step}
                     classNameInput={classNameInput}
+                    isDisabled={isDisabled}
                 />
                 <Label htmlFor={id}>{label}</Label>
 
@@ -63,6 +65,7 @@ export const FormField: React.FC<IFormFieldProps> = ({
                 autoComplete={autoComplete}
                 step={step}
                 classNameInput={classNameInput}
+                isDisabled={isDisabled}
             />
             {Array.isArray(error) &&
 

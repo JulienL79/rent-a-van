@@ -64,12 +64,12 @@ export const Header: React.FC = () => {
                                 <>
                                     <NavItem to={`/profile/home`} content={"Mon espace"} onClick={handleNavClick} />
                                     <ul className="dropdown">
-                                        <li><NavItem to={`/profile/home`} content={"Mon profil"} onClick={handleNavClick} /></li>
+                                        <li><NavItem to={`/profile/home`} content={"Mon Profil"} onClick={handleNavClick} /></li>
                                         <li><NavItem to={`/profile/bookings`} content={"Mes Réservations"} onClick={handleNavClick} /></li>
                                         <li><NavItem to={`/profile/vehicles`} content={"Mes Véhicules"} onClick={handleNavClick} /></li>
                                         <li><NavItem to={`/profile/mailbox`} content={"Messagerie"} onClick={handleNavClick} /></li>
                                         <li><NavItem to={`/profile/settings`} content={"Paramètres"} onClick={handleNavClick} /></li>
-                                        <li><NavItem to={`/logout`} content={"Se Déconnecter"} onClick={handleNavClick} /></li>
+                                        <li><NavItem to={`/logout`} content={"Déconnexion"} onClick={handleNavClick} /></li>
                                     </ul>
                                 </>
                                 :

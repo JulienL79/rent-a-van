@@ -16,6 +16,7 @@ export const FormFieldWithSuggestion: React.FC<IFormFieldWithSuggestionProps> = 
     value = "",
     classNameInput = "",
     required = false,
+    isDisabled = false,
     error
 }) => {
 
@@ -73,6 +74,7 @@ export const FormFieldWithSuggestion: React.FC<IFormFieldWithSuggestionProps> = 
                 required={required}
                 autoComplete={autoComplete}
                 classNameInput={classNameInput}
+                isDisabled={isDisabled}
             />
             {Array.isArray(error) && (
                 <div className="form-field-errors">
@@ -83,7 +85,7 @@ export const FormFieldWithSuggestion: React.FC<IFormFieldWithSuggestionProps> = 
                     ))}
                 </div>
             )}
-            {suggestions.length > 0 && (
+            {suggestions.length > 0 && !isDisabled &&(
                 <ul className="suggestion-list">
                     {suggestions.map((city) => (
                         <li key={city.code} onClick={() => handleSelect(city)}>

@@ -1,8 +1,24 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { useModalStore } from "@store/useModalStore";
+import { useAuthStore } from "@store/useAuthStore";
 
 export const API_URL = import.meta.env.VITE_API_URL;
 axios.defaults.withCredentials = true;
+
+axios.interceptors.response.use(
+  response => response,
+  error => {
+    const status = error.response?.status;
+    const message = error.response?.data;
+
+    if (status === 401 && message === "Votre session a expiré, veuillez vous reconnecter") {
+      const { logout } = useAuthStore.getState();
+      logout();
+    }
+    return Promise.reject(error);
+  }
+);
+
 
 export const extractData = <T>(response: { data: any }): T => response.data;
 

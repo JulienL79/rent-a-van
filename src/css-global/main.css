@@ -16,6 +16,7 @@ VARIABLES
     --bg-color: #f8f9fa;
     --bg-color-secondary: #f1f3f5;
     --active-color: #e9ecef;
+    --disabled-color: #a0a0a0;
     --message-received-color: rgba(52, 152, 219, 0.3);
     --message-sent-color: rgba(46, 204, 113, 0.3);
     --font-size-logo: 3rem;
@@ -51,6 +52,7 @@ TOOLS
 
 html {
     font-size: 62.5%;
+    overflow-y: scroll;
 }
 
 body {

@@ -7,6 +7,7 @@ export const loginFormData: IFormProps = {
 	type: "login",
 	fields: [
 		{
+			kind: "base",
 			id: "email",
 			type: "email",
 			placeholder: "",
@@ -16,6 +17,7 @@ export const loginFormData: IFormProps = {
 			onChange: () => {},
 		},
 		{
+			kind: "base",
 			id: "password",
 			type: "password",
 			placeholder: "",
@@ -27,7 +29,7 @@ export const loginFormData: IFormProps = {
 	],
 	buttonContent: "Se connecter",
 	onSubmit: async (
-		formData: { [key: string]: string | File | boolean },
+		formData: { [key: string]: string | File | boolean | string[] },
 	): Promise<FormSubmitResult> => {
 		const { login } = useAuthStore.getState();
 
