@@ -100,7 +100,7 @@ export const Home = () => {
                 description="Bienvenue sur RentAVan, votre plateforme de location de vans partout en France."
             />
 
-            <div className="home-search">
+            <div className={`home-search ${vehicleType}-background`}>
                 <Form {...formDataWithStoreValues} />
             </div>
             <ArticleCardContainer {...articles} />

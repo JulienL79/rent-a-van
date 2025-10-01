@@ -1,7 +1,6 @@
 .home-search {
     height: 85vh;
     width: 100%;
-    background-image: url('https://placehold.co/1920x1080');
     background-size: cover;
     background-position: center;
     display: flex;
@@ -10,6 +9,10 @@
     transition: background-image 0.5s ease;
 }
 
-.home-search form {
-    background: rgba(255, 255, 255, 0.9);
+.van-background {
+    background-image: url('/assets/img/home-van.jpg');
+}
+
+.camping-car-background {
+    background-image: url('/assets/img/home-camping-car.jpg');
 }

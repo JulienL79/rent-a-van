@@ -2,6 +2,10 @@
     width: 100%;
 }
 
+.profile-page h2 {
+    color: inherit;
+}
+
 .card-list {
     gap: 1.5rem;
     display: flex;

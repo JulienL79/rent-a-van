@@ -93,7 +93,7 @@ export const Form: React.FC<IFormProps> = ({ fields, onSubmit, buttonContent, ti
     }, [fields]);
 
     return (
-        <div className="form-container">
+        <div className={`form-container ${type}-form`}>
             {type !== "search" && <h2 className="form-title">{title}</h2>}
             <form onSubmit={handleSubmit} className="form">
                 {type === "search" && (
