@@ -43,7 +43,6 @@ export const loginFormData: IFormProps = {
 			if (error.data && typeof error.data === "object") {
 				return { ok: false, errors: error.data };
 			}
-
 			return { ok: false, errors: {} };
 		}
 	},

@@ -42,6 +42,7 @@ export interface IVehicleCardPropsResult {
 export interface IVehicleCardPropsProfile {
     type: 'my-vehicles',
     data: IVehicleCardProfile,
+    onDelete: () => void
 }
 
 export interface IBookingCardPropsOwner {

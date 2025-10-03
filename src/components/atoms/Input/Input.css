@@ -1,5 +1,6 @@
 input,
-textarea {
+textarea,
+select {
     width: 100%;
     padding: 0.75rem;
     border: 1px solid #ddd;
@@ -12,7 +13,8 @@ textarea {
 }
 
 input:focus,
-textarea:focus {
+textarea:focus,
+select:focus {
     outline: 2px solid var(--primary-color);
 }
 
@@ -24,4 +26,14 @@ input[type="range"] {
 
 input[type="range"] {
     padding: 0;
+}
+
+select {
+    outline: none;
+}
+
+select[multiple] {
+  height: auto;
+  max-height: 8rem;
+  overflow-y: auto;
 }

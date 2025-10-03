@@ -1,5 +1,6 @@
 import { VehicleRegisterPayload, VehicleUpdatePayload } from "../types/Vehicle";
-import { api, handleError } from "./core";
+import { api } from "./core";
+import { handleError } from "@utils/feedbackHandler";
 
 export const fetchAllVehicles = async () => {
     try {

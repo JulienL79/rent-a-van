@@ -9,15 +9,14 @@ import { reviews } from "./HomeReviewData";
 import './Home.css'
 import { FormSubmitResult } from "../../../types/FormSubmitResult";
 import { fetchCityCoordinates } from "@api/addressApi";
-import { useModalStore } from "@store/useModalStore";
 import { RawSearchPayload } from "../../../types/Search";
 import { searchVehicles } from "@api/searchApi";
 import { PageMeta } from "@atoms/PageMeta";
+import { handleError } from "@utils/feedbackHandler";
 
 export const Home = () => {
     const [articles, setArticles] = useState(campingcarArticles)
     const { vehicleType, startDate, endDate, radius, locationCity, locationCode } = useFilterStore()
-    const { setMessage } = useModalStore()
 
     const handleSubmit = async (): Promise<FormSubmitResult> => {
         try {
@@ -26,16 +25,10 @@ export const Home = () => {
                 !startDate || !endDate ||
                 !radius || !locationCode
             ) {
-                setMessage({
-                    content: "Veuillez compléter tous les champs",
-                    type: "error",
-                });
                 throw new Error("Veuillez compléter tous les champs");
             }
 
             const coords = await fetchCityCoordinates(locationCode);
-            console.log(coords)
-            console.log(vehicleType)
 
             const payload: RawSearchPayload = {
                 startDate: startDate?.toISOString(),
@@ -47,16 +40,15 @@ export const Home = () => {
             };
 
             const searchResult = await searchVehicles(payload)
-            console.log(searchResult)
 
             return { ok: true, datas: searchResult?.data };
         } catch (error: any) {
             if (error.data && typeof error.data === "object") {
                 return { ok: false, errors: error.data };
             }
-
             return { ok: false, errors: {} };
         }
+
     }
 
     const formDataWithStoreValues = useMemo(() => {

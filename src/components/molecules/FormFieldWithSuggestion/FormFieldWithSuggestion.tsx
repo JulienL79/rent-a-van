@@ -17,6 +17,7 @@ export const FormFieldWithSuggestion: React.FC<IFormFieldWithSuggestionProps> = 
     classNameInput = "",
     required = false,
     isDisabled = false,
+    options = [],
     error
 }) => {
 
@@ -24,7 +25,7 @@ export const FormFieldWithSuggestion: React.FC<IFormFieldWithSuggestionProps> = 
     const debounceTimer = useRef<number | undefined>(undefined);
     const { setLocationCode } = useFilterStore()
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLSelectElement>) => {
         const newValue = e.target.value;
         onChange(e);
 
@@ -48,8 +49,9 @@ export const FormFieldWithSuggestion: React.FC<IFormFieldWithSuggestionProps> = 
             target: {
                 value: city.nom,
                 id,
+                dataset: { code: city.code }
             },
-        } as React.ChangeEvent<HTMLInputElement>;
+        } as unknown as React.ChangeEvent<HTMLInputElement>;
         console.log(city.code)
 
         if (id === "city") {
@@ -74,6 +76,7 @@ export const FormFieldWithSuggestion: React.FC<IFormFieldWithSuggestionProps> = 
                 required={required}
                 autoComplete={autoComplete}
                 classNameInput={classNameInput}
+                options={options}
                 isDisabled={isDisabled}
             />
             {Array.isArray(error) && (

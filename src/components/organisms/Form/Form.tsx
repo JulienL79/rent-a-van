@@ -5,10 +5,10 @@ import { Button } from "@atoms/Button";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ContactInfo } from "@molecules/ContactInfo";
-import { useModalStore } from "@store/useModalStore";
 import { useFilterStore } from "@store/useFilterStore";
 import "./Form.css"
 import { FormFieldWithSuggestion, IFormFieldWithSuggestionProps } from "@molecules/FormFieldWithSuggestion";
+import { handleError, handleSuccess } from "@utils/feedbackHandler";
 
 type FormValue = string | File | boolean | string[];
 
@@ -16,7 +16,6 @@ export const Form: React.FC<IFormProps> = ({ fields, onSubmit, buttonContent, ti
     const [formData, setFormData] = useState<{ [key: string]: any }>({})
     const [formErrors, setFormErrors] = useState<{ [key: string]: string[] }>({});
     const navigate = useNavigate()
-    const { setMessage, clearMessage } = useModalStore()
     const { vehicleType, setVehicleType } = useFilterStore()
 
     const isFieldWithSuggestion = (
@@ -80,24 +79,28 @@ export const Form: React.FC<IFormProps> = ({ fields, onSubmit, buttonContent, ti
 
                 const messageToast = type === "register" ? "Inscription réussie ! Vous pouvez maintenant vous connecter." : null;
                 if (messageToast) {
-                    clearMessage()
-                    setMessage({ type: "success", content: messageToast });
+                    handleSuccess(messageToast)
                 }
             } else if (result?.errors) {
                 console.log(result.errors);
                 setFormErrors(result.errors);
             }
         } catch (err) {
-            console.error("Erreur inattendue :", err);
+            handleError(err, "Une erreur est survenue lors de la soumission du formulaire");
         }
-
     };
 
     useEffect(() => {
         const initialValues: { [key: string]: any } = {};
 
         fields.forEach((field) => {
-            initialValues[field.id] = field.value ?? "";
+            if (field.type === "checkbox") {
+                initialValues[field.id] = field.checked ?? false;
+            } else if (field.type === "select-multiple") {
+                initialValues[field.id] = field.value ?? [];
+            } else {
+                initialValues[field.id] = field.value ?? field.options?.[0]?.value ?? "";
+            }
         });
 
         setFormData(initialValues);
@@ -116,6 +119,7 @@ export const Form: React.FC<IFormProps> = ({ fields, onSubmit, buttonContent, ti
                 )}
 
                 {fields.map((field) => {
+
                     // Si le champ doit afficher des suggestions
                     if (isFieldWithSuggestion(field) && field.withSuggestions === true) {
                         return (
@@ -131,17 +135,19 @@ export const Form: React.FC<IFormProps> = ({ fields, onSubmit, buttonContent, ti
                                 fetchSuggestions={field.fetchSuggestions}
                                 withSuggestions={true}
                                 value={formData[field.id] || ""}
+                                options={field.options as IFormFieldWithSuggestionProps["options"] || undefined}
                                 error={formErrors[field.id]}
                                 isDisabled={isDisabled}
                             />
                         )
 
                     } else {
-                        const value = formData[field.id] || "";
+                        const fieldValue = formData[field.id];
                         const isRange = field.type === "range";
 
+                        // Pour les labels dynamiques sur les range
                         const dynamicLabel = isRange
-                            ? `${field.label} : ${value} km`
+                            ? `${field.label} : ${fieldValue} km`
                             : field.label;
 
                         return (
@@ -157,7 +163,9 @@ export const Form: React.FC<IFormProps> = ({ fields, onSubmit, buttonContent, ti
                                 min={field.min}
                                 max={field.max}
                                 step={field.step}
-                                value={value}
+                                value={field.type === 'checkbox' ? undefined : formData[field.id]}
+                                checked={field.type === 'checkbox' ? formData[field.id] : undefined}
+                                options={field.options || undefined}
                                 error={formErrors[field.id]}
                                 isDisabled={isDisabled}
                             />
@@ -166,7 +174,7 @@ export const Form: React.FC<IFormProps> = ({ fields, onSubmit, buttonContent, ti
 
 
                 })}
-                {!isDisabled && (<Button content={buttonContent} isDisabled={isDisabled} />)}
+                {!isDisabled && (<Button content={buttonContent} isDisabled={isDisabled} className="primary-button form-button"/>)}
             </form>
 
             {/* ====================================================

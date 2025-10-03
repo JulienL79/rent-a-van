@@ -3,44 +3,63 @@ import './Card.css'
 import { Image } from "@atoms/Image"
 import { Link } from "react-router-dom"
 import { Button } from "@atoms/Button"
-import { formatShortDateFr } from "@utils/DateConverter"
+import { formatShortDateFr } from "@utils/dateConverter"
+import { useState } from "react"
+import { Modal } from "@organisms/Modal"
 
-export const Card: React.FC<IVehicleCardPropsProfile | IVehicleCardPropsResult | IBookingCardPropsOwner | IBookingCardPropsRenter> = ({
-    type,
-    data
-}) => {
+export const Card: React.FC<IVehicleCardPropsProfile | IVehicleCardPropsResult | IBookingCardPropsOwner | IBookingCardPropsRenter> = (props) => {
+    const { type, data } = props
+    const [isConfirmModalOpened, setIsConfirmModalOpened] = useState<boolean>(false);
 
-    if (type === 'result' || type === 'my-vehicles') {
+    if (type === 'result') {
         return (
             <div className={`card ${type}-card`}>
                 <Image className='card-image' src={data.picture || 'https://placehold.co/400x300'} alt={`${data.brand} ${data.model}`} />
                 <div className="card-details">
                     <h2>{data.brand} {data.model}</h2>
-                    {type === "result" ? (
-                        <>
-                            <p>Prix total : {data.totalPrice}</p>
-                            <p>{data.description}</p>
-                        </>
-                    ) : (
-                        <>
-                            <p>Type : {data.category}</p>
-                        </>
-                    )}
+                    <>
+                        <p>Prix total : {data.totalPrice}</p>
+                        <p>{data.description}</p>
+                    </>
                     <div className="card-actions">
-                        {type === "result" ? (
-                            <Link to={`result/vehicle/${data.id}`} className="btn-link">
-                                <Button className="primary-button" content="Voir l'annonce" />
-                            </Link>
-                        ) : (
-                            <Link to={`profile/vehicle/edit/${data.id}`} className="btn-link">
-                                <Button className="primary-button" content="Voir l'annonce" />
-                            </Link>
-                        )}
+                        <Link to={`result/vehicle/${data.id}`} className="btn-link">
+                            <Button className="primary-button" content="Voir l'annonce" />
+                        </Link>
                     </div>
                 </div>
             </div>
         )
-    } else {
+    }
+
+    if (type === 'my-vehicles') {
+        const { onDelete } = props;
+        return (
+            <>
+                <div className={`card ${type}-card`}>
+                    <Image className='card-image' src={data.picture || 'https://placehold.co/400x300'} alt={`${data.brand} ${data.model}`} />
+                    <div className="card-details">
+                        <h2>{data.brand} {data.model}</h2>
+                        <p>Type : {data.category}</p>
+                        <div className="card-actions">
+                            <Link to={`profile/vehicle/edit/${data.id}`} className="btn-link">
+                                <Button className="primary-button" content="Voir" />
+                            </Link>
+                            <Button className="danger-button" content="Supprimer" onClick={() => setIsConfirmModalOpened(true)} />
+                        </div>
+                    </div>
+                </div>
+                {isConfirmModalOpened &&
+                    <Modal onClose={() => setIsConfirmModalOpened(false)} onConfirm={() => {
+                        setIsConfirmModalOpened(false)
+                        onDelete()
+                    }} modalType="confirm" />
+                }
+            </>
+
+        )
+    }
+
+    if (type === 'renter' || type === 'owner') {
         return (
             <div className={`card ${type}-card`}>
                 <div className="card-details">
@@ -60,4 +79,6 @@ export const Card: React.FC<IVehicleCardPropsProfile | IVehicleCardPropsResult |
             </div>
         )
     }
+
+    return null
 }

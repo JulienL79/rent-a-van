@@ -1,25 +1,23 @@
-import { useAuthStore } from "@store/useAuthStore"
-import { useModalStore } from "@store/useModalStore"
-import { useEffect } from "react"
-import { useNavigate } from "react-router-dom"
+import { useAuthStore } from "@store/useAuthStore";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { handleError, handleSuccess } from "@utils/feedbackHandler";
 
 export function Logout() {
     const { logout } = useAuthStore()
     const navigate = useNavigate()
-    const { setMessage, clearMessage } = useModalStore()
 
     useEffect(() => {
         const performLogout = async () => {
             try {
                 await logout();
                 navigate("/login", { replace: true });
-                clearMessage()
-                setMessage({ type: "success", content: "Déconnexion réussie." });
+                handleSuccess("Déconnexion réussie.")
             } catch (error) {
                 navigate("/", { replace: true });
-                clearMessage();
-                setMessage({ type: "error", content: "Erreur lors de la déconnexion. Veuillez réessayer." });
+                handleError(error, "Erreur lors de la déconnexion. Veuillez réessayer.");
             }
+
         };
 
         performLogout();

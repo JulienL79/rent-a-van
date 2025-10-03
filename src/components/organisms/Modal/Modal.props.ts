@@ -1,0 +1,15 @@
+import { IFormProps, TFormValue } from "@organisms/Form/Form.props";
+import { FormSubmitResult } from "../../../types/FormSubmitResult";
+export interface IFormModalProps {
+    onClose: () => void;
+    onSubmit: (data: { [key: string]: TFormValue }) => Promise<FormSubmitResult>;
+    formType: "addVehicle";
+    form: IFormProps;
+    modalType: "form";
+}
+
+export interface IConfirmModalProps {
+    onClose: () => void;
+    onConfirm: () => void;
+    modalType: "confirm";
+}

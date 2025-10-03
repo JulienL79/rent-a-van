@@ -16,16 +16,32 @@ export const Input: React.FC<IInputProps> = ({
     isDisabled = false,
     autoComplete = "on",
     onChange,
+    checked = false,
     options = [],
 }) => {
+
+    if (type === "checkbox") {
+        return (
+            <input
+                id={id}
+                type="checkbox"
+                name={name ?? id}
+                className={classNameInput}
+                checked={checked}
+                onChange={onChange}
+                disabled={isDisabled}
+            />
+        );
+    }
+
     if (type === "number" || type === "range") {
         return (
             <input
                 id={id}
                 type={type}
-                placeholder={placeholder}
+                placeholder={!isDisabled ? placeholder : ""}
                 className={classNameInput}
-                value={value}
+                value={value as string | number }
                 required={required}
                 min={min}
                 max={max}
@@ -41,7 +57,7 @@ export const Input: React.FC<IInputProps> = ({
         return (
             <textarea
                 id={id}
-                placeholder={placeholder}
+                placeholder={!isDisabled ? placeholder : ""}
                 className={classNameInput}
                 value={value as string}
                 required={required}
@@ -64,11 +80,11 @@ export const Input: React.FC<IInputProps> = ({
                 required={required}
                 disabled={isDisabled}
                 multiple={type === "select-multiple"}
-                value={value}
+                value={type === "select-multiple" ? value || [] : value ?? options[0]?.value ?? ""}
                 onChange={onChange}
             >
-                {options.map((opt) => (
-                    <option key={opt.value} value={opt.value}>
+                {options.map((opt, index) => (
+                    <option key={`${opt.value}-${index}`} value={opt.value}>
                         {opt.label}
                     </option>
                 ))}
@@ -80,9 +96,9 @@ export const Input: React.FC<IInputProps> = ({
         <input
             id={id}
             type={type}
-            placeholder={placeholder}
+            placeholder={!isDisabled ? placeholder : ""}
             className={classNameInput}
-            value={value}
+            value={value as string}
             required={required}
             autoComplete={autoComplete}
             minLength={min ? Number(min) : undefined}

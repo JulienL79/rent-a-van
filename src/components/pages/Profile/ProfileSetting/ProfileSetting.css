@@ -1,0 +1,9 @@
+.setting-option {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+}
+
+.setting-option p {
+    align-content: center;
+}

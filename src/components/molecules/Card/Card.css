@@ -33,6 +33,7 @@
 
 .card-actions {
     display: flex;
+    flex-direction: column;
     gap: 1rem;
     margin-top: 1rem;
 }
@@ -49,6 +50,7 @@ TABLET VERSION
     }
 
     .card-actions {
+        flex-direction: row;
         justify-content: flex-end;
         position: absolute;
         bottom: 1.5rem;

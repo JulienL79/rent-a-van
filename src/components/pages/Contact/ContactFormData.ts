@@ -1,7 +1,7 @@
 import { IFormProps } from "@organisms/Form";
-import { FormSubmitResult } from "../../../types/FormSubmitResult"
+import { FormSubmitResult } from "../../../types/FormSubmitResult";
 
-export const contactFormData : IFormProps = {
+export const contactFormData: IFormProps = {
     title: "Contactez-Nous",
     type: "contact",
     fields: [
@@ -44,13 +44,21 @@ export const contactFormData : IFormProps = {
             autoComplete: "off",
             label: "Message",
             onChange: () => {},
-        }
+        },
     ],
     buttonContent: "Envoyer",
     onSubmit: async (
-        formData: { [key: string]: string | File | boolean | string[] }
-      ): Promise<FormSubmitResult> => {
-        console.log("Données du formulaire de contact :", formData);
-        return { ok : true, errors: {}}
+        formData: { [key: string]: string | File | boolean | string[] },
+    ): Promise<FormSubmitResult> => {
+        try {
+            console.log("Données du formulaire de contact :", formData);
+            return { ok: true };
+        } catch (error: any) {
+            if (error.data && typeof error.data === "object") {
+                return { ok: false, errors: error.data };
+            }
+
+            return { ok: false, errors: {} };
+        }
     },
-}
+};

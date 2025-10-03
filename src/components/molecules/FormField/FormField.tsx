@@ -19,6 +19,8 @@ export const FormField: React.FC<IFormFieldProps> = ({
     max,
     step,
     isDisabled = false,
+    options = [],
+    checked = false,
     error
 }) => {
 
@@ -28,24 +30,38 @@ export const FormField: React.FC<IFormFieldProps> = ({
 
     if (type === "checkbox") {
         return (
-            <div className="form-field checkbox-field">
-                <Input
-                    id={id}
-                    value={value}
-                    onChange={onChange}
-                    placeholder={placeholder}
-                    type={type}
-                    required={required}
-                    min={min}
-                    max={max}
-                    autoComplete={autoComplete}
-                    step={step}
-                    classNameInput={classNameInput}
-                    isDisabled={isDisabled}
-                />
-                <Label htmlFor={id}>{label}</Label>
+            <>
+                <div className="form-field checkbox-field">
+                    <Input
+                        id={id}
+                        checked={checked}
+                        onChange={onChange}
+                        placeholder={placeholder}
+                        type={type}
+                        required={required}
+                        min={min}
+                        max={max}
+                        autoComplete={autoComplete}
+                        step={step}
+                        classNameInput={classNameInput}
+                        options={options}
+                        isDisabled={isDisabled}
+                    />
+                    <Label htmlFor={id}>{label}</Label>
 
-            </div>
+                </div>
+                {Array.isArray(error) &&
+
+                    <div className="form-field-errors">
+                        {error.map((errMsg, index) => (
+                            <p key={`error-${index}`} className="form-field-error">
+                                {errMsg}
+                            </p>
+                        ))}
+                    </div>
+                }
+            </>
+
         )
     }
 
@@ -64,6 +80,7 @@ export const FormField: React.FC<IFormFieldProps> = ({
                 max={max}
                 autoComplete={autoComplete}
                 step={step}
+                options={options}
                 classNameInput={classNameInput}
                 isDisabled={isDisabled}
             />

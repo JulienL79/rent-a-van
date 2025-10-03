@@ -1,4 +1,5 @@
-import { api, handleError } from "./core";
+import { api } from "./core";
+import { handleError } from "@utils/feedbackHandler";
 import {
     UpdateCredentialsPayload,
     UserRegisterPayload,

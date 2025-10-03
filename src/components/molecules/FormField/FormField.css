@@ -15,6 +15,10 @@
     text-align: left;
 }
 
+.checkbox-field .label-app {
+    margin-bottom: 0;
+}
+
 .form-field-errors {
     background-color: var(--danger-color);
     border-radius: 5px;

@@ -2,52 +2,63 @@ import { checkAuth, loginAPI, logoutAPI } from "@api/userApi";
 import { create } from "zustand";
 
 interface IDataUser {
-    id: string,
-    firstName: string,
-    lastName: string,
+    id: string;
+    firstName: string;
+    lastName: string;
+    role: "admin" | "user";
 }
 
 interface IDataState {
-    isAuthenticated : boolean,
-    user: IDataUser | null,
-    isLoading: boolean,
-    login: (email: string, password: string) => Promise<void>,
-    logout: () => Promise<void>,
-    checkAuth: () => Promise<void>,
+    isAuthenticated: boolean;
+    user: IDataUser | null;
+    isLoading: boolean;
+    login: (email: string, password: string) => Promise<void>;
+    logout: () => Promise<void>;
+    checkAuth: () => Promise<void>;
+    setIsAuthenticated: (param: boolean) => void;
 }
 
 export const useAuthStore = create<IDataState>((set) => ({
     user: null,
-    isAuthenticated : false,
+    isAuthenticated: false,
     isLoading: true,
     // Connexion
     login: async (email, password) => {
         try {
+            set({ isLoading: true });
             await loginAPI(email, password);
             const user = await checkAuth();
-            set({ user, isAuthenticated: true });
+            set({ user, isAuthenticated: true, isLoading: false });
         } catch (error) {
+            set({ isLoading: false });
             throw error;
         }
     },
     // Déconnexion
     logout: async () => {
-		try {
-			await logoutAPI();
-			set({ user: null, isAuthenticated: false });
-		} catch (error) {
+        try {
+            set({ isLoading: true });
+            await logoutAPI();
+            set({ user: null, isAuthenticated: false, isLoading: false });
+        } catch (error) {
             throw error;
-		}
-
+        } finally {
+            set({ user: null, isAuthenticated: false, isLoading: false });
+        }
     },
-	checkAuth: async () => {
-		try {
-			const user = await checkAuth()
-			console.log("user dans checkAuth", user)
-			set({ user, isAuthenticated: true, isLoading: false });
-		} catch (error) {
-			set({ user: null, isAuthenticated: false, isLoading: false });
+    // Appliquer le statut de connexion (pour le cas du 401 "Vous devez être déconnecté")
+    setIsAuthenticated: (param) => {
+        set({ isAuthenticated: param });
+    },
+    // Vérifier la connexion
+    checkAuth: async () => {
+        try {
+            set({ isLoading: true });
+            const user = await checkAuth();
+            set({ user, isAuthenticated: true, isLoading: false });
+        } catch (error) {
+            set({ user: null, isAuthenticated: false, isLoading: false });
             throw error;
-		}
-	}
-}))
+        }
+    },
+}));

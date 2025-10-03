@@ -11,6 +11,8 @@ import { Legal } from "@pages/Legal"
 import { Contact } from "@pages/Contact"
 import { Logout } from "@pages/Logout"
 import { Profile } from "@pages/Profile"
+import { PrivateAdminRoute } from "./PrivateAdminRoute"
+import { Admin } from "@pages/Admin"
 
 
 export const Router = () => {
@@ -22,6 +24,8 @@ export const Router = () => {
                     <Home />
                 </>
             } />
+
+            {/* ELEMENTS LIES AUX ROUTES AUTH */}
 
             <Route element={<PrivateNonAuthRoute />}>
                 <Route path="/login" element={
@@ -47,6 +51,8 @@ export const Router = () => {
                 } />
             </Route>
 
+            {/* ELEMENTS LIES A L'ESPACE PROFIL */}
+
             <Route element={<PrivateAuthRoute />}>
                 <Route path="/profile/:page" element={
                     <>
@@ -54,6 +60,18 @@ export const Router = () => {
                     </>
                 } />
             </Route>
+
+            {/* ELEMENTS LIES A L'ESPACE ADMIN */}
+
+            <Route element={<PrivateAdminRoute />}>
+                <Route path="/admin/:page" element={
+                    <>
+                        <Admin />
+                    </>
+                } />
+            </Route>
+
+            {/* ELEMENTS ANNEXES */}
 
             <Route path="/privacy" element={
                 <>

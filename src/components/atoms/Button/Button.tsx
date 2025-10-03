@@ -2,7 +2,7 @@ import { IButtonProps } from "./Button.props";
 import React from "react";
 import "./Button.css"
 
-export const Button : React.FC<IButtonProps> = ({className = "primary-button", content, onClick, isDisabled = false, isScrollToTop = true}) => {
+export const Button : React.FC<IButtonProps> = ({className = "primary-button", content, onClick, isDisabled = false, isScrollToTop = false}) => {
 
     const handleClick = () => {
         if(isScrollToTop) {
@@ -14,6 +14,6 @@ export const Button : React.FC<IButtonProps> = ({className = "primary-button", c
     }
 
     return (
-        <button className={`button-app ${className} ${isDisabled && 'disabled-button'}`} onClick={handleClick} disabled={isDisabled}>{content}</button>
+        <button className={`button-app ${className} ${isDisabled ? 'disabled-button' : ''}`} onClick={handleClick} disabled={isDisabled}>{content}</button>
     )
 }

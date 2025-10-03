@@ -15,7 +15,7 @@ export const registerFormData: IFormProps = {
             placeholder: "",
             required: true,
             autoComplete: "given-name",
-            label: "Prénom",
+            label: "Prénom*",
             onChange: () => {},
         },
         {
@@ -25,77 +25,77 @@ export const registerFormData: IFormProps = {
             placeholder: "",
             required: true,
             autoComplete: "family-name",
-            label: "Nom de famille",
+            label: "Nom de famille*",
             onChange: () => {},
         },
         {
             kind: "base",
             id: "birthdate",
             type: "date",
-            placeholder: "",
+            placeholder: "Sélectionnez votre date de naissance",
             required: true,
             autoComplete: "bday",
-            label: "Date de naissance",
+            label: "Date de naissance*",
             onChange: () => {},
         },
         {
             kind: "base",
             id: "addressStreet",
             type: "text",
-            placeholder: "",
+            placeholder: "Ex : 12 rue des Lilas",
             required: true,
             autoComplete: "street-address",
-            label: "Adresse",
+            label: "Adresse*",
             onChange: () => {},
         },
         {
             kind: "base",
             id: "addressCity",
             type: "text",
-            placeholder: "",
+            placeholder: "Ex : Paris",
             required: true,
             autoComplete: "address-level2",
-            label: "Ville",
+            label: "Ville*",
             onChange: () => {},
         },
         {
             kind: "base",
             id: "addressZip",
             type: "text",
-            placeholder: "",
+            placeholder: "Ex : 75001",
             required: true,
             autoComplete: "postal-code",
-            label: "Code postal",
+            label: "Code postal*",
             onChange: () => {},
         },
         {
             kind: "base",
             id: "addressCountry",
             type: "text",
-            placeholder: "",
+            placeholder: "Ex : France",
             required: true,
             autoComplete: "country-name",
-            label: "Pays",
+            label: "Pays*",
             onChange: () => {},
         },
         {
             kind: "base",
             id: "email",
             type: "email",
-            placeholder: "",
+            placeholder: "Ex : nom@domaine.com",
             required: true,
             autoComplete: "email",
-            label: "Adresse e-mail",
+            label: "Adresse e-mail*",
             onChange: () => {},
         },
         {
             kind: "base",
             id: "phoneNumber",
             type: "tel",
-            placeholder: "",
+            placeholder: "Ex : 0612754862",
             required: true,
             autoComplete: "tel",
-            label: "Numéro de téléphone",
+            label: "Numéro de téléphone*",
             onChange: () => {},
         },
         {
@@ -105,7 +105,7 @@ export const registerFormData: IFormProps = {
             placeholder: "",
             required: true,
             autoComplete: "current-password",
-            label: "Mot de passe",
+            label: "Mot de passe*",
             onChange: () => {},
         },
         {
@@ -115,7 +115,7 @@ export const registerFormData: IFormProps = {
             placeholder: "",
             required: true,
             autoComplete: "new-password",
-            label: "Confirmer le mot de passe",
+            label: "Confirmer le mot de passe*",
             onChange: () => {},
         },
         {
@@ -125,7 +125,7 @@ export const registerFormData: IFormProps = {
             placeholder: "",
             required: true,
             autoComplete: "",
-            label: TermsAndPrivacy,
+            label: TermsAndPrivacy, // ce composant affiche déjà le texte complet
             onChange: () => {},
         },
     ],
@@ -152,11 +152,9 @@ export const registerFormData: IFormProps = {
             await createUser(payload);
             return { ok: true };
         } catch (error: any) {
-
             if (error.data && typeof error.data === "object") {
-                return { ok: false, errors:  error.data };
+                return { ok: false, errors: error.data };
             }
-
             return { ok: false, errors: {} };
         }
     },

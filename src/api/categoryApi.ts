@@ -1,8 +1,9 @@
-import { api, handleError } from "./core";
+import { api } from "./core";
+import { handleError } from "@utils/feedbackHandler";
 
 export const fetchAllCategories = async () => {
     try {
-        return await api.get<any[]>("/categories");
+        return await api.get<{ message: string; data: any[] }>("/categories");
     } catch (err) {
         handleError(err, "Erreur lors de la récupération des catégories");
     }

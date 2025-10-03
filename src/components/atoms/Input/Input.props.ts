@@ -1,7 +1,7 @@
 export interface IInputProps {
     id: string,
     classNameInput?: string,
-    value?: string | number,
+    value?: string | number | readonly string[],
     type: string,
     name?: string,
     placeholder: string,
@@ -11,6 +11,7 @@ export interface IInputProps {
     autoComplete?: string,
     step?: string,
     isDisabled?: boolean,
-    options?: { label: string; value: string }[];
-    onChange: (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement> |React.ChangeEvent<HTMLSelectElement>) => void
+    options?: { label: string; value: string }[],
+    checked?: boolean,
+    onChange: (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLSelectElement>) => void
 }

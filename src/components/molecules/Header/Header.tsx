@@ -5,7 +5,7 @@ import "./Header.css"
 import { useFilterStore } from "@store/useFilterStore";
 
 export const Header: React.FC = () => {
-    const { isAuthenticated } = useAuthStore();
+    const { isAuthenticated, user } = useAuthStore();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isClosing, setIsClosing] = useState(false);
     const { setVehicleType } = useFilterStore();
@@ -65,10 +65,11 @@ export const Header: React.FC = () => {
                                     <NavItem to={`/profile/home`} content={"Mon espace"} onClick={handleNavClick} />
                                     <ul className="dropdown">
                                         <li><NavItem to={`/profile/home`} content={"Mon Profil"} onClick={handleNavClick} /></li>
-                                        <li><NavItem to={`/profile/bookings`} content={"Mes Réservations"} onClick={handleNavClick} /></li>
-                                        <li><NavItem to={`/profile/vehicles`} content={"Mes Véhicules"} onClick={handleNavClick} /></li>
+                                        <li><NavItem to={`/profile/bookings`} content={"Réservations"} onClick={handleNavClick} /></li>
+                                        <li><NavItem to={`/profile/vehicles`} content={"Véhicules"} onClick={handleNavClick} /></li>
                                         <li><NavItem to={`/profile/mailbox`} content={"Messagerie"} onClick={handleNavClick} /></li>
                                         <li><NavItem to={`/profile/settings`} content={"Paramètres"} onClick={handleNavClick} /></li>
+                                        { user && user.role === "admin" && <li><NavItem to={`/admin/home`} content={"Administration"} onClick={handleNavClick} /></li>}
                                         <li><NavItem to={`/logout`} content={"Déconnexion"} onClick={handleNavClick} /></li>
                                     </ul>
                                 </>
