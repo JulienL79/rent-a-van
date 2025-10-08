@@ -13,6 +13,7 @@ import { Logout } from "@pages/Logout"
 import { Profile } from "@pages/Profile"
 import { PrivateAdminRoute } from "./PrivateAdminRoute"
 import { Admin } from "@pages/Admin"
+import { Result } from "@pages/Result"
 
 
 export const Router = () => {
@@ -25,7 +26,11 @@ export const Router = () => {
                 </>
             } />
 
-            {/* ELEMENTS LIES AUX ROUTES AUTH */}
+            {/* ======================= ELEMENTS LIES A LA RECHERCHE ======================= */}
+
+            <Route path="/search" element={<Result />} />
+
+            {/* ======================= ELEMENTS LIES AUX ROUTES AUTH ======================= */}
 
             <Route element={<PrivateNonAuthRoute />}>
                 <Route path="/login" element={
@@ -51,7 +56,15 @@ export const Router = () => {
                 } />
             </Route>
 
-            {/* ELEMENTS LIES A L'ESPACE PROFIL */}
+            {/* ======================= ELEMENTS LIES A L'ESPACE PROFIL ======================= */}
+
+            <Route element={<PrivateAuthRoute />}>
+                <Route path="/profile/:page/:id" element={
+                    <>
+                        <Profile />
+                    </>
+                } />
+            </Route>
 
             <Route element={<PrivateAuthRoute />}>
                 <Route path="/profile/:page" element={
@@ -61,7 +74,7 @@ export const Router = () => {
                 } />
             </Route>
 
-            {/* ELEMENTS LIES A L'ESPACE ADMIN */}
+            {/* ======================= ELEMENTS LIES A L'ESPACE ADMIN ======================= */}
 
             <Route element={<PrivateAdminRoute />}>
                 <Route path="/admin/:page" element={
@@ -71,7 +84,7 @@ export const Router = () => {
                 } />
             </Route>
 
-            {/* ELEMENTS ANNEXES */}
+            {/* ======================= ELEMENTS ANNEXES ======================= */}
 
             <Route path="/privacy" element={
                 <>

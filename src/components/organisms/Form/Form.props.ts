@@ -14,5 +14,5 @@ export interface IFormProps {
     buttonContent: ReactNode,
     title: string,
     isDisabled?: boolean,
-    type: "login" | "register" | "resetPassword" | "updateProfile" | "updateCredentials" | "contact" | "search" | "addVehicle"
+    type: "login" | "register" | "resetPassword" | "updateProfile" | "updateVehicle" | "updateCredentials" | "contact" | "search" | "addVehicle"
 }

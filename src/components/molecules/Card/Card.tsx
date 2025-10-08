@@ -12,6 +12,7 @@ export const Card: React.FC<IVehicleCardPropsProfile | IVehicleCardPropsResult |
     const [isConfirmModalOpened, setIsConfirmModalOpened] = useState<boolean>(false);
 
     if (type === 'result') {
+        const { onSelect } = props;
         return (
             <div className={`card ${type}-card`}>
                 <Image className='card-image' src={data.picture || 'https://placehold.co/400x300'} alt={`${data.brand} ${data.model}`} />
@@ -22,8 +23,8 @@ export const Card: React.FC<IVehicleCardPropsProfile | IVehicleCardPropsResult |
                         <p>{data.description}</p>
                     </>
                     <div className="card-actions">
-                        <Link to={`result/vehicle/${data.id}`} className="btn-link">
-                            <Button className="primary-button" content="Voir l'annonce" />
+                        <Link to={`/search/details/${data.id}`} className="btn-link">
+                            <Button className="primary-button" content="Voir" onClick={onSelect} />
                         </Link>
                     </div>
                 </div>
@@ -41,7 +42,7 @@ export const Card: React.FC<IVehicleCardPropsProfile | IVehicleCardPropsResult |
                         <h2>{data.brand} {data.model}</h2>
                         <p>Type : {data.category}</p>
                         <div className="card-actions">
-                            <Link to={`profile/vehicle/edit/${data.id}`} className="btn-link">
+                            <Link to={`/profile/vehicle-details/${data.id}`} className="btn-link">
                                 <Button className="primary-button" content="Voir" />
                             </Link>
                             <Button className="danger-button" content="Supprimer" onClick={() => setIsConfirmModalOpened(true)} />

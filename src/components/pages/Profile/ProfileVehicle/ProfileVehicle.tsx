@@ -11,14 +11,13 @@ import { fuelTypeOptions, gearTypeOptions } from "./VehicleData";
 import { VehicleRegisterPayload } from "../../../../types/Vehicle";
 import { FormSubmitResult } from "../../../../types/FormSubmitResult";
 import { IFormProps } from "@organisms/Form";
-import { fetchCityCoordinates } from "@api/addressApi";
 import { handleError, handleSuccess } from "@utils/feedbackHandler";
 
 
 export const ProfileVehicle = () => {
     const [vehicleDatas, setVehicleDatas] = useState<IVehicleCardPropsProfile[] | null>(null)
     const [isAddingVehicle, setIsAddingVehicle] = useState<boolean>(false);
-
+    const [isLoading, setIsLoading] = useState<boolean>(true);
     const [formDataWithOptions, setFormDataWithOptions] = useState<IFormProps>(addVehicleFormData);
     const [locationCode, setLocationCode] = useState<string>("");
     const [deletedVehicleCount, setDeletedVehicleCount] = useState<number>(0);
@@ -91,13 +90,13 @@ export const ProfileVehicle = () => {
     // Gère la soumission du form de création de véhicule
     const handleSubmit = async (formData: { [key: string]: any }): Promise<FormSubmitResult> => {
         try {
-            const coords = await fetchCityCoordinates(locationCode);
+            if (!locationCode) throw new Error("Le code de la ville est manquant")
 
             const payload: { [key: string]: any } = {
                 ...formData,
-                latCoordinates: coords.data.lat.toString(),
-                lonCoordinates: coords.data.lon.toString(),
+                cityCode: locationCode
             }
+
             await createVehicle(payload as VehicleRegisterPayload);
             setIsAddingVehicle(false);
             setLocationCode("")
@@ -134,7 +133,6 @@ export const ProfileVehicle = () => {
     const fetchVehicles = async () => {
         if (!user) return [];
         const vehicles = await fetchVehiclesByUser(user.id);
-        console.log(vehicles);
         if (!vehicles) return [];
         return vehicles.data.map((vehicle) => ({
             id: vehicle.id,
@@ -148,6 +146,7 @@ export const ProfileVehicle = () => {
     // Charger les données des véhicules ou des réservations en fonction de la page
     useEffect(() => {
         const loadData = async () => {
+            setIsLoading(true)
             const vehicleResponses = await fetchVehicles();
             const vehicles: IVehicleCardPropsProfile[] = vehicleResponses.map(vehicle => ({
                 type: 'my-vehicles',
@@ -155,30 +154,39 @@ export const ProfileVehicle = () => {
                 onDelete: () => deleteVehicleById(vehicle.id)
             }));
             setVehicleDatas(vehicles);
+            setIsLoading(false);
         };
-        loadData();
+            loadData();
+
     }, [deletedVehicleCount, addedVehicleCount]);
 
     return (
         <>
-            <div className="button-group">
-                <Button onClick={handleOpenForm} content='Ajouter un véhicule' />
-            </div>
-            <div className="card-list">
-                {!vehicleDatas || vehicleDatas.length === 0 ? (
-                    <h2>Aucun véhicule trouvé</h2>
-                ) : (
-                    <>
-                        {(vehicleDatas as IVehicleCardPropsProfile[]).map(vehicle => (
-                            <Card key={vehicle.data.id} type="my-vehicles" data={vehicle.data} onDelete={vehicle.onDelete} />
-                        ))}
-                    </>
-                )}
-            </div>
+            <>
+                <div className="button-group">
+                    <Button onClick={handleOpenForm} content='Ajouter un véhicule' />
+                </div>
+                {
+                    !isLoading && (
+                        <div className="card-list">
+                            {!vehicleDatas || vehicleDatas.length === 0 ? (
+                                <h2>Aucun véhicule trouvé</h2>
+                            ) : (
+                                <>
+                                    {(vehicleDatas as IVehicleCardPropsProfile[]).map(vehicle => (
+                                        <Card key={vehicle.data.id} type="my-vehicles" data={vehicle.data} onDelete={vehicle.onDelete}/>
+                                    ))}
+                                </>
+                            )}
+                        </div >
+                    )
+                }
 
-            {isAddingVehicle &&
-                <Modal onClose={() => setIsAddingVehicle(false)} formType="addVehicle" form={formDataWithOptions} onSubmit={handleSubmit} modalType="form" />
-            }
+                {
+                    isAddingVehicle &&
+                    <Modal onClose={() => setIsAddingVehicle(false)} formType="addVehicle" form={formDataWithOptions} onSubmit={handleSubmit} modalType="form" />
+                }
+            </>
         </>
     );
 }

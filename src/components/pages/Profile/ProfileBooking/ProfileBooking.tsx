@@ -1,10 +1,11 @@
-import { Card, IBookingCardPropsOwner, IBookingCardPropsRenter, IVehicleCardPropsProfile } from "@molecules/Card";
+import { Card, IBookingCardPropsOwner, IBookingCardPropsRenter } from "@molecules/Card";
 import { useEffect, useState } from "react";
 import { useAuthStore } from "@store/useAuthStore";
 import { fetchBookingsByOwner, fetchBookingsByRenter } from "@api/bookingApi";
 
 export const ProfileBooking = () => {
     const [bookingFilter, setBookingFilter] = useState<'owner' | 'renter'>('renter');
+    const [isLoading, setIsLoading] = useState<boolean>(true);
     const [bookingDatas, setBookingDatas] = useState<IBookingCardPropsOwner[] | IBookingCardPropsRenter[] | null>(null)
     const { user } = useAuthStore();
 
@@ -12,7 +13,6 @@ export const ProfileBooking = () => {
     const fetchOwnerBookings = async () => {
         if (!user) return [];
         const bookings = await fetchBookingsByOwner(user.id);
-        console.log(bookings);
         if (!bookings) return [];
         return bookings.data.map((booking) => ({
             id: booking.id,
@@ -29,7 +29,6 @@ export const ProfileBooking = () => {
     const fetchRenterBookings = async () => {
         if (!user) return [];
         const bookings = await fetchBookingsByRenter(user.id);
-        console.log(bookings);
         if (!bookings) return [];
         return bookings.data.map((booking) => ({
             id: booking.id,
@@ -44,6 +43,7 @@ export const ProfileBooking = () => {
     // Charger les données des véhicules ou des réservations en fonction de la page
     useEffect(() => {
         const loadData = async () => {
+            setIsLoading(true);
             if (bookingFilter === 'owner') {
                 const bookingResponses = await fetchOwnerBookings();
                 const bookings: IBookingCardPropsOwner[] = bookingResponses.map(booking => ({
@@ -59,6 +59,7 @@ export const ProfileBooking = () => {
                 }));
                 setBookingDatas(bookings);
             }
+            setIsLoading(false);
         };
         loadData();
     }, []);
@@ -78,24 +79,27 @@ export const ProfileBooking = () => {
                 ))}
             </nav>
 
-            <div className="card-list">
-                {(!bookingDatas || bookingDatas.length === 0) ? (
-                    <h2>Aucune réservation trouvée</h2>
-                ) : bookingFilter === 'owner' ? (
-                    <>
-                        {(bookingDatas as IBookingCardPropsOwner[]).map(booking => (
-                            <Card key={booking.data.id} type="owner" data={booking.data} />
-                        ))}
-                    </>
-                ) : (
-                    <>
-                        {(bookingDatas as IBookingCardPropsRenter[]).map(booking => (
-                            <Card key={booking.data.id} type="renter" data={booking.data} />
-                        ))}
-                    </>
-                )}
-            </div>
-
+            {
+                !isLoading && (
+                    <div className="card-list">
+                        {(!bookingDatas || bookingDatas.length === 0) ? (
+                            <h2>Aucune réservation trouvée</h2>
+                        ) : bookingFilter === 'owner' ? (
+                            <>
+                                {(bookingDatas as IBookingCardPropsOwner[]).map(booking => (
+                                    <Card key={booking.data.id} type="owner" data={booking.data} />
+                                ))}
+                            </>
+                        ) : (
+                            <>
+                                {(bookingDatas as IBookingCardPropsRenter[]).map(booking => (
+                                    <Card key={booking.data.id} type="renter" data={booking.data} />
+                                ))}
+                            </>
+                        )}
+                    </div>
+                )
+            }
         </>
     );
 }

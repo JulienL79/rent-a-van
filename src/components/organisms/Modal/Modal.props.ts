@@ -3,7 +3,7 @@ import { FormSubmitResult } from "../../../types/FormSubmitResult";
 export interface IFormModalProps {
     onClose: () => void;
     onSubmit: (data: { [key: string]: TFormValue }) => Promise<FormSubmitResult>;
-    formType: "addVehicle";
+    formType: "addVehicle" | "updateVehicle";
     form: IFormProps;
     modalType: "form";
 }

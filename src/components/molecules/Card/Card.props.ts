@@ -37,12 +37,14 @@ export interface IBookingCardRenter {
 export interface IVehicleCardPropsResult {
     type: 'result',
     data: IVehicleCardResult,
+    onSelect: () => void
 }
 
 export interface IVehicleCardPropsProfile {
     type: 'my-vehicles',
     data: IVehicleCardProfile,
-    onDelete: () => void
+    onDelete: () => void,
+    onSelect?: () => void
 }
 
 export interface IBookingCardPropsOwner {

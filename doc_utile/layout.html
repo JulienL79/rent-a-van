@@ -51,102 +51,91 @@
   </header>
 
   <main class="container">
-<aside>
-    <div class="filter-section">
-      <h3>Nombre de couchages</h3>
-      <div class="filter-option">
-        <label><input type="checkbox" name="beds" value="2"> 2 places</label>
-      </div>
-      <div class="filter-option">
-        <label><input type="checkbox" name="beds" value="4"> 4 places</label>
-      </div>
-      <div class="filter-option">
-        <label><input type="checkbox" name="beds" value="6"> 6 places</label>
-      </div>
-    </div>
-    <div class="filter-section">
-      <h3>Options</h3>
-      <div class="filter-option">
-        <label><input type="checkbox" name="option" value="climatisation"> Climatisation</label>
-      </div>
-      <div class="filter-option">
-        <label><input type="checkbox" name="option" value="tv"> TV</label>
-      </div>
-      <div class="filter-option">
-        <label><input type="checkbox" name="option" value="douche"> Douche</label>
-      </div>
-    </div>
-    <div class="filter-section">
-      <h3>Tri</h3>
-      <div class="filter-option">
-        <label><input type="radio" name="sort" value="price_asc"> Prix croissant</label>
-      </div>
-      <div class="filter-option">
-        <label><input type="radio" name="sort" value="price_desc"> Prix décroissant</label>
-      </div>
-    </div>
-  </aside>
-
-  <section class="results">
-    <div class="result-item">
-      <div class="result-image">
-        <img src="https://source.unsplash.com/random/250x200/?campervan-1" alt="Camping-car Aventure Plus">
-      </div>
-      <div class="result-info">
-        <h2 class="result-title">Camping-car Aventure Plus</h2>
-        <p class="result-price">100€ / jour</p>
-        <p class="result-description">Partez à l'aventure avec ce camping-car tout équipé. Parfait pour les familles ou les groupes d'amis, il offre tout le confort nécessaire pour des vacances inoubliables.</p>
-        <div class="result-options">
-          <span class="option-tag">4 couchages</span>
-          <span class="option-tag">Climatisation</span>
-          <span class="option-tag">TV</span>
-          <span class="option-tag">Douche</span>
+    <aside>
+      <div class="filter-section">
+        <h3>Nombre de couchages</h3>
+        <div class="filter-option">
+          <label><input type="checkbox" name="beds" value="2"> 2 places</label>
+        </div>
+        <div class="filter-option">
+          <label><input type="checkbox" name="beds" value="4"> 4 places</label>
+        </div>
+        <div class="filter-option">
+          <label><input type="checkbox" name="beds" value="6"> 6 places</label>
         </div>
       </div>
-    </div>
-
-    <div class="result-item">
-      <div class="result-image">
-        <img src="https://source.unsplash.com/random/250x200/?campervan-2" alt="Van Compact Liberté">
-      </div>
-      <div class="result-info">
-        <h2 class="result-title">Van Compact Liberté</h2>
-        <p class="result-price">80€ / jour</p>
-        <p class="result-description">Ce van compact est idéal pour les couples ou les petites familles. Facile à conduire et à garer, il vous offre une grande liberté de mouvement.</p>
-        <div class="result-options">
-          <span class="option-tag">2 couchages</span>
-          <span class="option-tag">Climatisation</span>
+      <div class="filter-section">
+        <h3>Options</h3>
+        <div class="filter-option">
+          <label><input type="checkbox" name="option" value="climatisation"> Climatisation</label>
+        </div>
+        <div class="filter-option">
+          <label><input type="checkbox" name="option" value="tv"> TV</label>
+        </div>
+        <div class="filter-option">
+          <label><input type="checkbox" name="option" value="douche"> Douche</label>
         </div>
       </div>
-    </div>
-
-    <div class="result-item">
-      <div class="result-image">
-        <img src="https://source.unsplash.com/random/250x200/?campervan-3" alt="Camping-car Luxe Étoile">
-      </div>
-      <div class="result-info">
-        <h2 class="result-title">Camping-car Luxe Étoile</h2>
-        <p class="result-price">150€ / jour</p>
-        <p class="result-description">Vivez une expérience de camping haut de gamme avec ce camping-car de luxe. Équipements dernier cri et finitions soignées pour un confort optimal.</p>
-        <div class="result-options">
-          <span class="option-tag">6 couchages</span>
-          <span class="option-tag">Climatisation</span>
-          <span class="option-tag">TV</span>
-          <span class="option-tag">Douche</span>
+      <div class="filter-section">
+        <h3>Tri</h3>
+        <div class="filter-option">
+          <label><input type="radio" name="sort" value="price_asc"> Prix croissant</label>
+        </div>
+        <div class="filter-option">
+          <label><input type="radio" name="sort" value="price_desc"> Prix décroissant</label>
         </div>
       </div>
-    </div>
+    </aside>
 
-    <!-- Ajoutez plus d'éléments .result-item ici pour simuler plus de résultats -->
+    <section class="vehicle-details">
+      <div class="vehicle-images">
+        <img src="https://source.unsplash.com/random/800x600/?campervan" alt="Camping-car Aventure Plus"
+          class="main-image">
+        <div class="image-thumbnails">
+          <img src="https://source.unsplash.com/random/100x100/?campervan-interior" alt="Intérieur" class="thumbnail">
+          <img src="https://source.unsplash.com/random/100x100/?campervan-kitchen" alt="Cuisine" class="thumbnail">
+          <img src="https://source.unsplash.com/random/100x100/?campervan-bed" alt="Couchage" class="thumbnail">
+        </div>
+      </div>
+      <div class="vehicle-info">
+        <h1 class="vehicle-title">Camping-car Aventure Plus</h1>
+        <p class="vehicle-price">100€ / jour</p>
+        <p class="vehicle-description">Partez à l'aventure avec ce camping-car tout équipé. Parfait pour les familles ou
+          les groupes d'amis, il offre tout le confort nécessaire pour des vacances inoubliables.</p>
+        <div class="vehicle-features">
+          <span class="feature">4 couchages</span>
+          <span class="feature">Climatisation</span>
+          <span class="feature">TV</span>
+          <span class="feature">Douche</span>
+          <span class="feature">Cuisine équipée</span>
+          <span class="feature">Porte-vélos</span>
+        </div>
+      </div>
+    </section>
 
-    <div class="pagination">
-      <button disabled>&lt; Précédent</button>
-      <button>1</button>
-      <button>2</button>
-      <button>3</button>
-      <button>Suivant &gt;</button>
-    </div>
-  </section>
+    <section class="availability-calendar">
+      <h2>Disponibilités</h2>
+      <div class="calendar-container">
+        <div class="calendar-nav" id="prevMonth">&lt;</div>
+        <div class="calendar" id="calendar">
+          <!-- Le calendrier sera généré ici par JavaScript -->
+        </div>
+        <div class="calendar-nav" id="nextMonth">&gt;</div>
+      </div>
+    </section>
+
+    <section class="booking-section">
+      <h2>Réserver ce camping-car</h2>
+      <form class="booking-form">
+        <input type="date" placeholder="Date de début">
+        <input type="date" placeholder="Date de fin">
+        <input type="number" placeholder="Nombre de voyageurs">
+        <button type="submit">Réserver maintenant</button>
+      </form>
+      <div class="owner-profile">
+        <p>Vous avez des questions ? <a href="/proprietaire/jean-dupont">Contactez Jean, le propriétaire</a></p>
+      </div>
+    </section>
   </main>
 
   <footer>

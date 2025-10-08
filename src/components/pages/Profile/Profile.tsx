@@ -10,9 +10,10 @@ import { ProfileBooking } from "./ProfileBooking";
 import { ProfileVehicle } from "./ProfileVehicle";
 import { ProfileSetting } from "./ProfileSetting";
 import { ProfileMessage } from "./ProfileMessage";
+import { Vehicle } from "@organisms/Vehicle";
 
 export const Profile = () => {
-    const { page } = useParams();
+    const { page, id } = useParams();
     const [pageMetaData, setPageMetaData] = useState<IProfileMetaData>(profileMetaDatas.find(meta => meta.page === (page || 'home'))!);
 
     // Charger les métadonnées de la page en fonction du paramètre d'URL
@@ -34,12 +35,13 @@ export const Profile = () => {
             <Aside page="profile" active={pageMetaData.page} />
 
             <section className="content">
-                <h1>{pageMetaData.titlePage}</h1>
+                {page !== 'vehicle-details' && <h1>{pageMetaData.titlePage}</h1>}
                 {page === 'home' && <ProfileHome />}
                 {page === 'vehicles' && <ProfileVehicle />}
                 {page === 'bookings' && <ProfileBooking />}
                 {page === 'settings' && <ProfileSetting />}
                 {page === 'mailbox' && <ProfileMessage />}
+                {page === 'vehicle-details' && id && <Vehicle page="profile" id={id} onInteract={() => {}} />}
             </section>
 
         </div>

@@ -2,7 +2,13 @@ import { IButtonProps } from "./Button.props";
 import React from "react";
 import "./Button.css"
 
-export const Button : React.FC<IButtonProps> = ({className = "primary-button", content, onClick, isDisabled = false, isScrollToTop = false}) => {
+export const Button : React.FC<IButtonProps> = ({
+    className = "primary-button", 
+    content, 
+    onClick, 
+    isDisabled = false, 
+    isScrollToTop = false
+}) => {
 
     const handleClick = () => {
         if(isScrollToTop) {

@@ -15,7 +15,6 @@ interface IDataState {
     login: (email: string, password: string) => Promise<void>;
     logout: () => Promise<void>;
     checkAuth: () => Promise<void>;
-    setIsAuthenticated: (param: boolean) => void;
 }
 
 export const useAuthStore = create<IDataState>((set) => ({
@@ -45,10 +44,6 @@ export const useAuthStore = create<IDataState>((set) => ({
         } finally {
             set({ user: null, isAuthenticated: false, isLoading: false });
         }
-    },
-    // Appliquer le statut de connexion (pour le cas du 401 "Vous devez être déconnecté")
-    setIsAuthenticated: (param) => {
-        set({ isAuthenticated: param });
     },
     // Vérifier la connexion
     checkAuth: async () => {

@@ -140,18 +140,18 @@ export const ProfileHome = () => {
                 <div className="button-group">
                     {!isUpdatingUserDetails && !isUpdatingUserCredentials && (
                         <>
-                            <Button onClick={() => setIsUpdatingUserDetails(true)} content='Modifier mes informations' />
-                            <Button onClick={() => setIsUpdatingUserCredentials(true)} content='Modifier mes identifiants' />
+                            <Button onClick={() => setIsUpdatingUserDetails(true)} content='Modifier mes informations' isScrollToTop={true} />
+                            <Button onClick={() => setIsUpdatingUserCredentials(true)} content='Modifier mes identifiants' isScrollToTop={true}/>
                         </>
                     )}
                     {isUpdatingUserDetails && (
                         <>
-                            <Button onClick={() => setIsUpdatingUserDetails(false)} content='Annuler' className="danger-button" />
+                            <Button onClick={() => setIsUpdatingUserDetails(false)} content='Annuler' className="danger-button" isScrollToTop={true}/>
                         </>
                     )}
                     {isUpdatingUserCredentials && (
                         <>
-                            <Button onClick={() => setIsUpdatingUserCredentials(false)} content='Annuler' className="danger-button" />
+                            <Button onClick={() => setIsUpdatingUserCredentials(false)} content='Annuler' className="danger-button" isScrollToTop={true}/>
                         </>
                     )}
                 </div>

@@ -29,7 +29,7 @@ export const FormFieldWithSuggestion: React.FC<IFormFieldWithSuggestionProps> = 
         const newValue = e.target.value;
         onChange(e);
 
-        if (newValue.length > 3) {
+        if (newValue.length > 2) {
             if (debounceTimer.current) clearTimeout(debounceTimer.current);
             debounceTimer.current = window.setTimeout(async () => {
                 const results = await fetchSuggestions(newValue);
