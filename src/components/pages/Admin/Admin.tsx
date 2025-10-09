@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { IAdminMetaData } from "./Admin.props";
 import { useEffect, useState } from "react";
 import './Admin.css';
+import { AuthRedirector } from "@routes/AuthRedirector";
 
 export const Admin = () => {
     const { page } = useParams();
@@ -25,6 +26,7 @@ export const Admin = () => {
                 description="Interface d’administration de RentAVan pour gérer les utilisateurs, les réservations et les contenus de la plateforme."
             />
 
+            <AuthRedirector />
             <Aside page="admin" active={pageMetaData.page} />
 
             <section className="content">

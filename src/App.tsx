@@ -8,7 +8,6 @@ import "./css-global/main.css"
 import { useEffect } from "react"
 import { useAuthStore } from "@store/useAuthStore"
 import { useAlertStore } from "@store/useAlertStore"
-import { AuthRedirector } from "@routes/AuthRedirector"
 
 export const App = () => {
 
@@ -22,7 +21,6 @@ export const App = () => {
     return (
         <div className="app-container">
             <InitialLoader/>
-            <AuthRedirector />
             <Header/>
             {message && type && <Alert type={type} message={message} onClose={() => clearMessage()} />}
             <main>

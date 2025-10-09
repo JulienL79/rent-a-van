@@ -13,7 +13,7 @@ import { Logout } from "@pages/Logout"
 import { Profile } from "@pages/Profile"
 import { PrivateAdminRoute } from "./PrivateAdminRoute"
 import { Admin } from "@pages/Admin"
-import { Result } from "@pages/Result"
+import { Search } from "@pages/Search"
 
 
 export const Router = () => {
@@ -28,7 +28,7 @@ export const Router = () => {
 
             {/* ======================= ELEMENTS LIES A LA RECHERCHE ======================= */}
 
-            <Route path="/search" element={<Result />} />
+            <Route path="/search/:page" element={<Search />} />
 
             {/* ======================= ELEMENTS LIES AUX ROUTES AUTH ======================= */}
 

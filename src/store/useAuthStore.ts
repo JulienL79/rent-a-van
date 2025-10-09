@@ -53,7 +53,6 @@ export const useAuthStore = create<IDataState>((set) => ({
             set({ user, isAuthenticated: true, isLoading: false });
         } catch (error) {
             set({ user: null, isAuthenticated: false, isLoading: false });
-            throw error;
         }
     },
 }));

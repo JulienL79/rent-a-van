@@ -1,15 +1,14 @@
-import { IAsideAdminPageProps, IAsideProfilePageProps } from "./Aside.props"
+import { IAsideAdminPageProps, IAsideProfilePageProps, IAsideResultPageProps } from "./Aside.props"
 import { NavItem } from '@atoms/NavItem'
 import './Aside.css'
 import { useAuthStore } from "@store/useAuthStore"
 
-export const Aside: React.FC<IAsideAdminPageProps | IAsideProfilePageProps> = ({
-    page,
-    active
-}) => {
+export const Aside: React.FC<IAsideAdminPageProps | IAsideProfilePageProps | IAsideResultPageProps> = (props) => {
     const { user } = useAuthStore()
+    const { page } = props
 
     if (page === 'profile' || page === 'admin') {
+        const { active } = props
         return (
             <aside className="sidebar">
                 <h2>Menu</h2>
@@ -21,7 +20,7 @@ export const Aside: React.FC<IAsideAdminPageProps | IAsideProfilePageProps> = ({
                             <li><NavItem to="/profile/vehicles" content="Véhicules" className={active === 'vehicles' ? 'active' : ''} /></li>
                             <li><NavItem to="/profile/mailbox" content="Messagerie" className={active === 'mailbox' ? 'active' : ''} /></li>
                             <li><NavItem to="/profile/settings" content="Paramètres" className={active === 'settings' ? 'active' : ''} /></li>
-                            { user && user.role === 'admin' && <li><NavItem to="/admin/home" content="Administration" /></li>}
+                            {user && user.role === 'admin' && <li><NavItem to="/admin/home" content="Administration" /></li>}
                             <li><NavItem to="/logout" content="Déconnexion" /></li>
                         </ul>
                     )}
@@ -43,4 +42,13 @@ export const Aside: React.FC<IAsideAdminPageProps | IAsideProfilePageProps> = ({
             </aside>
         )
     }
+    if (page === 'results') {
+        return (
+            <aside className="sidebar">
+                <h2>Filtre</h2>
+            </aside>
+        )
+    }
+
+    return null
 }

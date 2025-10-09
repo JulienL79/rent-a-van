@@ -11,6 +11,7 @@ import { ProfileVehicle } from "./ProfileVehicle";
 import { ProfileSetting } from "./ProfileSetting";
 import { ProfileMessage } from "./ProfileMessage";
 import { Vehicle } from "@organisms/Vehicle";
+import { AuthRedirector } from "@routes/AuthRedirector";
 
 export const Profile = () => {
     const { page, id } = useParams();
@@ -32,6 +33,7 @@ export const Profile = () => {
                 description={pageMetaData.description}
             />
 
+            <AuthRedirector />
             <Aside page="profile" active={pageMetaData.page} />
 
             <section className="content">
