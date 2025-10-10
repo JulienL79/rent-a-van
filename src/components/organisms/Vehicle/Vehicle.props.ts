@@ -61,7 +61,7 @@ export type TVehicleDetails = {
     }[];
 };
 
-export type TVehicleViewer = {
+export type TVehicleBooker = {
     id: string;
     brand: string;
     model: string;
@@ -80,7 +80,10 @@ export type TVehicleViewer = {
     cityCode: string;
     latCoordinates: string;
     lonCoordinates: string;
-    basePrice: string;
+    priceByDay: number;
+    durationDays: number;
+    totalPrice: number;
+    basePrice: number;
     isAvailable: boolean;
 
     pictures: {

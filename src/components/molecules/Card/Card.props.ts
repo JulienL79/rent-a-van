@@ -1,11 +1,4 @@
-export interface IVehicleCardResult {
-    id: string,
-    picture: string | null
-    brand: string,
-    model: string,
-    description: string,
-    totalPrice: number,
-}
+import { IVehicleResult } from "@pages/Search/Result"
 
 export interface IVehicleCardProfile {
     id: string,
@@ -36,7 +29,7 @@ export interface IBookingCardRenter {
 
 export interface IVehicleCardPropsResult {
     type: 'result',
-    data: IVehicleCardResult,
+    data: IVehicleResult,
     onSelect: () => void
 }
 

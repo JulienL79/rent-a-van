@@ -3,7 +3,7 @@ import { ISearchMetaData } from "./Search.props";
 export const searchMetaDatas: ISearchMetaData[] = [
   {
     page: 'results',
-    titlePage: 'Résultats de recherche',
+    titlePage: 'Résultats',
     title: 'RentAVan - Résultats',
     description: 'Découvrez les véhicules disponibles selon vos critères de recherche : dates, localisation, type et options.'
   },

@@ -15,17 +15,18 @@ export const Card: React.FC<IVehicleCardPropsProfile | IVehicleCardPropsResult |
         const { onSelect } = props;
         return (
             <div className={`card ${type}-card`}>
-                <Image className='card-image' src={data.picture || 'https://placehold.co/400x300'} alt={`${data.brand} ${data.model}`} />
+                <Image className='card-image' src={data.pictures[0]?.src || 'https://placehold.co/400x300'} alt={`${data.brand} ${data.model}`} />
                 <div className="card-details">
                     <h2>{data.brand} {data.model}</h2>
                     <>
-                        <p>Prix total : {data.totalPrice}</p>
-                        <p>{data.description}</p>
+                        <p><strong>Prix total : </strong>{data.totalPrice}€</p>
+                        <p><strong>Description : </strong>{data.description}</p>
                     </>
                     <div className="card-actions">
-                        <Link to={`/search/details/${data.id}`} className="btn-link">
-                            <Button className="primary-button" content="Voir" onClick={onSelect} />
+                        <Link to={`/search/vehicle/${data.id}`} className="btn-link">
+                            <Button className="primary-button" content="Voir"/>
                         </Link>
+                        <Button className="primary-button" content="Réserver" onClick={onSelect} />
                     </div>
                 </div>
             </div>

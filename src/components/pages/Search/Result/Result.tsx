@@ -1,12 +1,25 @@
 import { Card } from "@molecules/Card";
+import { IResultProps, IVehicleResult } from "./Result.props";
+import { Link } from "react-router-dom";
+import { Button } from "@atoms/Button";
 
-export function Result() {
+export const Result: React.FC<IResultProps> = ({ data }) => {
 
-    return (
-        <>
-            {/* {data.map(vehicle => (
-                <Card key={vehicle.id} type="result" data={vehicle} />
-            ))} */}
-        </>
-    );
+    if (data) {
+        return (
+            <>
+                <Link to={`/`} className="btn-link">
+                    <Button className="secondary-button inline-button back-button" content="Retour" />
+                </Link>
+                <div className="card-list">
+                    {data.length === 0 ? (<h2>Aucun véhicule trouvé</h2>)
+                        : (data as IVehicleResult[]).map(vehicle => (
+                            <Card key={vehicle.id} type="result" data={vehicle} onSelect={() => { }} />
+                        ))}
+                </div>
+            </>
+
+        );
+    }
+
 }

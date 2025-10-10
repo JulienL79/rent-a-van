@@ -4,14 +4,15 @@ import { useLocation, useParams } from "react-router-dom";
 import { ISearchMetaData } from "./Search.props";
 import { searchMetaDatas } from "./SearchMetaData";
 import { useEffect, useState } from "react";
-import { Result } from "./Result";
+import { IVehicleResult, Result } from "./Result";
+import './Search.css';
+import { Vehicle } from "@organisms/Vehicle";
 
 export function Search() {
     const { state } = useLocation();
-    const { page } = useParams();
+    const { page, id } = useParams();
     const [pageMetaData, setPageMetaData] = useState<ISearchMetaData>(searchMetaDatas.find(meta => meta.page === (page || 'results'))!);
-    const results = state?.results ?? [];
-
+    const [filteredResults, setFilteredResults] = useState<IVehicleResult[]>(state?.results ?? [])
 
     // Charger les métadonnées de la page en fonction du paramètre d'URL
     useEffect(() => {
@@ -22,8 +23,10 @@ export function Search() {
         }
     }, [page]);
 
+    // Filtrage des résultats à gérer ici
+
     return (
-        <div className="page">
+        <div className="page search-page">
             <PageMeta
                 title={pageMetaData.title}
                 description={pageMetaData.description}
@@ -32,10 +35,10 @@ export function Search() {
             <Aside page="results" />
 
             <section className="content">
-                {page === "results" && <Result/>}
-                {page === "vehicle" && <></>}
+                {page !== 'vehicle' && <h1>{pageMetaData.titlePage}</h1>}
+                {page === "results" && <Result data={filteredResults}/>}
+                {page === 'vehicle' && id && <Vehicle page="search" id={id} onInteract={() => {}} />}
             </section>
-
         </div>
     );
 }

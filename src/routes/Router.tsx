@@ -28,6 +28,8 @@ export const Router = () => {
 
             {/* ======================= ELEMENTS LIES A LA RECHERCHE ======================= */}
 
+            <Route path="/search/:page/:id" element={<Search />} />
+
             <Route path="/search/:page" element={<Search />} />
 
             {/* ======================= ELEMENTS LIES AUX ROUTES AUTH ======================= */}

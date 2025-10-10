@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { IVehicleProps, TVehicleDetails, TVehicleViewer } from "./Vehicle.props";
+import { IVehicleProps, TVehicleBooker, TVehicleDetails } from "./Vehicle.props";
 import { deleteVehicle, fetchVehicleById, fetchVehicleDetails, updateVehicle } from "@api/vehicleApi";
 import { handleError, handleSuccess } from "@utils/feedbackHandler";
 import { Button } from "@atoms/Button";
@@ -13,11 +13,11 @@ import { fetchAllCategories } from "@api/categoryApi";
 import { fetchAllEquipments } from "@api/equipmentApi";
 import Carousel from "@molecules/Carousel/Carousel";
 import './Vehicle.css'
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Vehicle: React.FC<IVehicleProps> = ({ page, id, onInteract }) => {
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [vehicleDatas, setVehicleDatas] = useState<TVehicleViewer | TVehicleDetails | null>(null)
+    const [vehicleDatas, setVehicleDatas] = useState<TVehicleBooker | TVehicleDetails | null>(null)
     const [isConfirmModalOpened, setIsConfirmModalOpened] = useState<boolean>(false);
     const [isUpdatingVehicle, setIsUpdatingVehicle] = useState<boolean>(false)
     const [formDatas, setFormDatas] = useState<IFormProps>(updateVehicleFormData)
@@ -172,7 +172,7 @@ export const Vehicle: React.FC<IVehicleProps> = ({ page, id, onInteract }) => {
                 try {
                     const data = await fetchVehicleById(id)
                     console.log("Response of fecthByID: ", data)
-                    setVehicleDatas(data.data as TVehicleViewer)
+                    setVehicleDatas(data.data as TVehicleBooker)
                 } catch (err) {
                     handleError(err, "Impossible de récupérer les informations du véhicule");
                 }
@@ -190,7 +190,13 @@ export const Vehicle: React.FC<IVehicleProps> = ({ page, id, onInteract }) => {
     }
 
     if (!vehicleDatas) {
-        return (<h2>Véhicule introuvable</h2>)
+        return (
+            <>
+                <h1>Véhicule introuvable</h1>
+                <Link to={`/profile/vehicles`} className="btn-link">
+                    <Button className="secondary-button inline-button back-button" content="Retour" />
+                </Link>
+            </>)
     }
 
     if (page === "profile" || page === "admin") {
@@ -205,6 +211,9 @@ export const Vehicle: React.FC<IVehicleProps> = ({ page, id, onInteract }) => {
 
                     <div className="vehicle-header">
                         <h1>{vehicle.brand} - {vehicle.model}</h1>
+                        <Link to={`/profile/vehicles`} className="btn-link">
+                            <Button className="secondary-button inline-button back-button" content="Retour" />
+                        </Link>
 
                         <p className="price"><strong>Prix de base : </strong>{vehicle.basePrice}€ / jour</p>
                         <p className="availability">
@@ -319,9 +328,21 @@ export const Vehicle: React.FC<IVehicleProps> = ({ page, id, onInteract }) => {
     }
 
     if (page === "search") {
+        const vehicle = vehicleDatas as TVehicleBooker;
         return (
             <>
-                <h1>{vehicleDatas.brand} - {vehicleDatas.model}</h1>
+                <div className="vehicle-header">
+                    <h1>{vehicle.brand} - {vehicle.model}</h1>
+                    <Link to={`/search/results`} className="btn-link">
+                        <Button className="secondary-button inline-button back-button" content="Retour" />
+                    </Link>
+
+                    <p className="price"><strong>Prix total : </strong>{vehicle.totalPrice}€</p>
+                </div>
+
+                <div className="button-group">
+                    <Button className="primary-button" content="Réserver" onClick={() => {}} />
+                </div>
             </>
         );
     }
