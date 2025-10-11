@@ -11,7 +11,7 @@ export const fetchAllCategories = async () => {
 
 export const fetchCategoryById = async (categoryId: string) => {
     try {
-        return await api.get<any>(`/categories/${categoryId}`);
+        return await api.get<{ message: string; data: any }>(`/categories/${categoryId}`);
     } catch (err) {
         handleError(err, "Erreur lors de la récupération de la catégorie");
     }

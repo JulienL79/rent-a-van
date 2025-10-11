@@ -11,7 +11,7 @@ export const fetchAllEquipments = async () => {
 
 export const fetchEquipmentById = async (equipmentId: string) => {
     try {
-        return await api.get<any>(`/equipments/${equipmentId}`);
+        return await api.get<{ message: string; data: any }>(`/equipments/${equipmentId}`);
     } catch (err) {
         handleError(err, "Erreur lors de la récupération de l'équipement");
     }

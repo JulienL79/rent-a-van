@@ -79,6 +79,14 @@ export const Router = () => {
             {/* ======================= ELEMENTS LIES A L'ESPACE ADMIN ======================= */}
 
             <Route element={<PrivateAdminRoute />}>
+                <Route path="/admin/:page/:id" element={
+                    <>
+                        <Admin />
+                    </>
+                } />
+            </Route>
+
+            <Route element={<PrivateAdminRoute />}>
                 <Route path="/admin/:page" element={
                     <>
                         <Admin />

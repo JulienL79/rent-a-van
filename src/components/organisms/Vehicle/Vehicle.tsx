@@ -193,7 +193,7 @@ export const Vehicle: React.FC<IVehicleProps> = ({ page, id, onInteract }) => {
         return (
             <>
                 <h1>Véhicule introuvable</h1>
-                <Link to={`/profile/vehicles`} className="btn-link">
+                <Link to={page === "search" ? "/search/results" : `/${page === "admin" ? "admin" : "profile"}/vehicles`} className="btn-link">
                     <Button className="secondary-button inline-button back-button" content="Retour" />
                 </Link>
             </>)
@@ -211,7 +211,7 @@ export const Vehicle: React.FC<IVehicleProps> = ({ page, id, onInteract }) => {
 
                     <div className="vehicle-header">
                         <h1>{vehicle.brand} - {vehicle.model}</h1>
-                        <Link to={`/profile/vehicles`} className="btn-link">
+                        <Link to={`/${page === "admin" ? "admin" : "profile"}/vehicles`} className="btn-link">
                             <Button className="secondary-button inline-button back-button" content="Retour" />
                         </Link>
 
@@ -220,6 +220,18 @@ export const Vehicle: React.FC<IVehicleProps> = ({ page, id, onInteract }) => {
                             <strong>Disponibilité : </strong> {vehicle.isAvailable ? "Disponible" : "Indisponible"}
                         </p>
                     </div>
+
+                    {
+                        page === "admin" && (
+                            <div className="vehicle-section">
+                                <h2>Informations administrateur</h2>
+                                <ul className="vehicle-specs">
+                                    <li><strong>ID du véhicule :</strong> {vehicle.id}</li>
+                                    <li><strong>ID du propriétaire :</strong> {vehicle.user.id}</li>
+                                </ul>
+                            </div>
+                        )
+                    }
 
                     <div className="vehicle-section">
                         <h2>Description</h2>
@@ -341,7 +353,7 @@ export const Vehicle: React.FC<IVehicleProps> = ({ page, id, onInteract }) => {
                 </div>
 
                 <div className="button-group">
-                    <Button className="primary-button" content="Réserver" onClick={() => {}} />
+                    <Button className="primary-button" content="Réserver" onClick={() => { }} />
                 </div>
             </>
         );

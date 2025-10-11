@@ -3,7 +3,7 @@ import { handleError } from "@utils/feedbackHandler";
 
 export const fetchAllMessages = async () => {
     try {
-        return await api.get<any[]>("/messages");
+        return await api.get<{ message: string; data: any[] }>("/messages");
     } catch (err) {
         handleError(err, "Erreur lors de la récupération des messages");
     }
@@ -11,7 +11,7 @@ export const fetchAllMessages = async () => {
 
 export const fetchAllChatsByUser = async () => {
     try {
-        return await api.get<any[]>("/messages/chat");
+        return await api.get<{ message: string; data: any[] }>("/messages/chat");
     } catch (err) {
         handleError(err, "Erreur lors de la récupération des conversations");
     }
@@ -19,7 +19,7 @@ export const fetchAllChatsByUser = async () => {
 
 export const fetchMessagesFromChat = async (chatId: string) => {
     try {
-        return await api.get<any[]>(`/messages/chat/${chatId}`);
+        return await api.get<{ message: string; data: any[] }>(`/messages/chat/${chatId}`);
     } catch (err) {
         handleError(err, "Erreur lors de la récupération des messages du chat");
     }
@@ -27,7 +27,7 @@ export const fetchMessagesFromChat = async (chatId: string) => {
 
 export const fetchMessageById = async (messageId: string) => {
     try {
-        return await api.get<any>(`/messages/${messageId}`);
+        return await api.get<{ message: string; data: any }>(`/messages/${messageId}`);
     } catch (err) {
         handleError(err, "Erreur lors de la récupération du message");
     }

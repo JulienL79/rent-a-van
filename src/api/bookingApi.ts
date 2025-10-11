@@ -44,7 +44,7 @@ export const fetchBookingsByVehicle = async (vehicleId: string) => {
 
 export const fetchBookingById = async (bookingId: string) => {
     try {
-        return await api.get<any>(`/bookings/${bookingId}`);
+        return await api.get<{ message: string; data: any }>(`/bookings/${bookingId}`);
     } catch (err) {
         handleError(err, "Erreur lors de la récupération de la réservation");
     }

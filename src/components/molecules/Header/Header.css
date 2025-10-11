@@ -60,16 +60,25 @@
     flex-direction: column;
     align-items: start;
     width: 100%;
-    height: 100%;
+    height: 100vh;
+    /* pleine hauteur */
+    overflow-y: auto;
+    /* scroll si contenu dépasse */
     padding-left: 2rem;
+    padding-top: 10rem;
+    padding-bottom: 2rem;
     position: fixed;
     top: 0;
-    bottom: 0;
     left: 0;
-    right: 0;
     z-index: 98;
     background-color: var(--bg-color);
     animation: slideRight ease-out 1s;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE et Edge */
+}
+
+.nav-links.open::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
 
 .nav-links.closing {
@@ -98,31 +107,21 @@
 }
 
 .dropdown {
-    display: flex;
-    /* La sous-liste est cachée par défaut */
-    flex-direction: column;
-    align-items: start;
-    width: 150%;
-    margin-top: 1rem;
+    position: relative;
+    z-index: 99;
     margin-left: 5rem;
-    position: absolute;
-    top: 120%;
-    /* Pour positionner la sous-liste sous l'élément parent */
+    margin-top: 1rem;
+    padding-left: 1rem;
     background-color: var(--bg-color);
-    z-index: 1;
+    width: calc(100% - 3rem);
 }
+
 
 .dropdown a {
     display: block;
-    margin: 5px 0;
     padding: 5px;
-    text-align: center;
-}
-
-.profile-menu:hover .dropdown,
-.profile-menu:focus-within .dropdown {
-    display: flex;
-    /* Affiche la sous-liste quand on survole ou clique */
+    margin: 5px 0;
+    text-align: left;
 }
 
 .menu-hamburger {
@@ -182,22 +181,26 @@ DESKTOP VERSION
 
     .dropdown {
         display: none;
-        /* La sous-liste est cachée par défaut */
+        position: absolute;
+        top: 120%;
+        background-color: var(--bg-color);
+        z-index: 1;
         width: 130%;
         left: -2rem;
         margin: 0;
+        padding: 0;
         background-color: var(--bg-color-secondary);
         z-index: 1;
     }
 
     .dropdown a {
+        text-align: center;
         padding: .5rem 1rem;
     }
 
-    .profile-menu:hover .dropdown,
-    .profile-menu:focus-within .dropdown {
+    .profile-menu:hover .open-dropdown,
+    .profile-menu:focus-within .open-dropdown {
         display: block;
-        /* Affiche la sous-liste quand on survole ou clique */
     }
 }
 

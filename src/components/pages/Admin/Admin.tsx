@@ -6,9 +6,16 @@ import { IAdminMetaData } from "./Admin.props";
 import { useEffect, useState } from "react";
 import './Admin.css';
 import { AuthRedirector } from "@routes/AuthRedirector";
+import { AdminVehicle } from "./AdminVehicle";
+import { AdminUser } from "./AdminUser";
+import { AdminBooking } from "./AdminBooking";
+import { AdminCategory } from "./AdminCategory";
+import { AdminEquipment } from "./AdminEquipment";
+import { AdminPicture } from "./AdminPictures";
+import { AdminMessage } from "./AdminMessage";
 
 export const Admin = () => {
-    const { page } = useParams();
+    const { page, id } = useParams();
     const [pageMetaData, setPageMetaData] = useState<IAdminMetaData>(adminMetaDatas.find(meta => meta.page === (page || 'home'))!);
 
     // Charger les métadonnées de la page en fonction du paramètre d'URL
@@ -30,7 +37,17 @@ export const Admin = () => {
             <Aside page="admin" active={pageMetaData.page} />
 
             <section className="content">
-                <h1>{pageMetaData.titlePage}</h1>
+                {!id && <h1>{pageMetaData.titlePage}</h1>}
+                {page === 'users' && <AdminUser />}
+                {page === 'vehicles' && <AdminVehicle />}
+                {page === 'bookings' && <AdminBooking />}
+                {page === 'categories' && <AdminCategory />}
+                {page === 'equipments' && <AdminEquipment />}
+                {page === 'pictures' && <AdminPicture />}
+                {page === 'messages' && <AdminMessage />}
+                {page === 'home' && (
+                    <p>Bienvenue dans votre espace administrateur. Gérez les utilisateurs, les véhicules, les réservations et bien plus encore depuis cette interface dédiée.</p>
+                )}
             </section>
         </div>
     )

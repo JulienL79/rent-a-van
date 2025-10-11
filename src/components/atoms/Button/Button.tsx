@@ -10,12 +10,12 @@ export const Button : React.FC<IButtonProps> = ({
     isScrollToTop = false
 }) => {
 
-    const handleClick = () => {
+    const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         if(isScrollToTop) {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
         if(onClick) {
-            onClick();
+            onClick(e);
         }
     }
 

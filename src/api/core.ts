@@ -11,30 +11,9 @@ axios.interceptors.response.use(
         const requestUrl = error.config?.url;
         const isAuthCheck = requestUrl?.includes("/auth/me");
 
-        const publicRoutes = [
-            "/",
-            "/search",
-            "/login",
-            "/register",
-            "/privacy",
-            "/terms",
-            "/legal",
-            "/contact",
-        ];
-
         if (status === 401 && !isAuthCheck) {
-            const currentRoute = window.location.pathname;
-            const isPublic = publicRoutes.some((route) =>
-                currentRoute.startsWith(route)
-            );
-            if (!isPublic) {
-                const { checkAuth } = useAuthStore.getState();
-                checkAuth();
-            } else {
-                // Optionnel : purge du token ou redirection si l'API indique une déconnexion
-                const { logout } = useAuthStore.getState();
-                logout();
-            }
+            const { checkAuth } = useAuthStore.getState();
+            checkAuth();
         }
         return Promise.reject(error);
     },

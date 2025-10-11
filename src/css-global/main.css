@@ -35,6 +35,9 @@ VARIABLES
     --font-size-body-sm: 1.4rem;
     --font-size-body-md: 1.6rem;
     --font-size-body-lg: 1.8rem;
+    --font-size-table-sm: 1rem;
+    --font-size-table-md: 1.2rem;
+    --font-size-table-lg: 1.4rem;
     --font-weight-logo: 800;
     --font-weight-icon-after: 700;
     --font-weight-title: 600;
@@ -196,6 +199,10 @@ TABLET VERSION
     body {
         font-size: var(--font-size-body-md);
     }
+
+    .page {
+        padding: 2rem 0;
+    }
 }
 
 /* ============================================================================================
@@ -218,5 +225,9 @@ DESKTOP VERSION
 
     h3 {
         font-size: var(--font-size-h3-lg)
+    }
+
+    .page {
+        padding: 2rem 5%;
     }
 }

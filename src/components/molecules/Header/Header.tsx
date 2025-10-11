@@ -8,6 +8,7 @@ export const Header: React.FC = () => {
     const { isAuthenticated, user } = useAuthStore();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isClosing, setIsClosing] = useState(false);
+    const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
     const { setVehicleType } = useFilterStore();
     const isBurgerActive = isMenuOpen && !isClosing;
 
@@ -58,31 +59,111 @@ export const Header: React.FC = () => {
                         scrollToTop()
                         handleNavClick()
                     }} /></li>
-                    <li className='profile-menu'>
+                    <li className='profile-menu'
+                        onMouseEnter={() => setActiveDropdown('user')}
+                        onMouseLeave={() => setActiveDropdown(null)}
+                    >
                         {
                             isAuthenticated ?
                                 <>
-                                    <NavItem to={`/profile/home`} content={"Mon espace"} onClick={handleNavClick} />
-                                    <ul className="dropdown">
-                                        <li><NavItem to={`/profile/home`} content={"Mon Profil"} onClick={handleNavClick} /></li>
-                                        <li><NavItem to={`/profile/bookings`} content={"Réservations"} onClick={handleNavClick} /></li>
-                                        <li><NavItem to={`/profile/vehicles`} content={"Véhicules"} onClick={handleNavClick} /></li>
-                                        <li><NavItem to={`/profile/mailbox`} content={"Messagerie"} onClick={handleNavClick} /></li>
-                                        <li><NavItem to={`/profile/settings`} content={"Paramètres"} onClick={handleNavClick} /></li>
-                                        { user && user.role === "admin" && <li><NavItem to={`/admin/home`} content={"Administration"} onClick={handleNavClick} /></li>}
-                                        <li><NavItem to={`/logout`} content={"Déconnexion"} onClick={handleNavClick} /></li>
+                                    <NavItem to={`/profile/home`} content={"Mon espace"} onClick={() => {
+                                        setActiveDropdown(null)
+                                        handleNavClick()
+                                    }} />
+                                    <ul className={`dropdown ${activeDropdown === "user" ? "open-dropdown" : ""}`}>
+                                        <li><NavItem to={`/profile/home`} content={"Mon Profil"} onClick={() => {
+                                            setActiveDropdown(null)
+                                            handleNavClick()
+                                        }} /></li>
+                                        <li><NavItem to={`/profile/bookings`} content={"Réservations"} onClick={() => {
+                                            setActiveDropdown(null)
+                                            handleNavClick()
+                                        }} /></li>
+                                        <li><NavItem to={`/profile/vehicles`} content={"Véhicules"} onClick={() => {
+                                            setActiveDropdown(null)
+                                            handleNavClick()
+                                        }} /></li>
+                                        <li><NavItem to={`/profile/mailbox`} content={"Messagerie"} onClick={() => {
+                                            setActiveDropdown(null)
+                                            handleNavClick()
+                                        }} /></li>
+                                        <li><NavItem to={`/profile/settings`} content={"Paramètres"} onClick={() => {
+                                            setActiveDropdown(null)
+                                            handleNavClick()
+                                        }} /></li>
+                                        <li><NavItem to={`/logout`} content={"Déconnexion"} onClick={() => {
+                                            setActiveDropdown(null)
+                                            handleNavClick()
+                                        }} /></li>
                                     </ul>
                                 </>
                                 :
                                 <>
-                                    <NavItem to={`/login`} content={"Mon espace"} onClick={handleNavClick} />
-                                    <ul className="dropdown">
-                                        <li><NavItem to={`/login`} content={"Se Connecter"} onClick={handleNavClick} /></li>
-                                        <li><NavItem to={`/register`} content={"S'inscrire"} onClick={handleNavClick} /></li>
+                                    <NavItem to={`/login`} content={"Mon espace"} onClick={() => {
+                                        setActiveDropdown(null)
+                                        handleNavClick()
+                                    }} />
+                                    <ul className={`dropdown ${activeDropdown === "user" ? "open-dropdown" : ""}`}>
+                                        <li><NavItem to={`/login`} content={"Se Connecter"} onClick={() => {
+                                            setActiveDropdown(null)
+                                            handleNavClick()
+                                        }} /></li>
+                                        <li><NavItem to={`/register`} content={"S'inscrire"} onClick={() => {
+                                            setActiveDropdown(null)
+                                            handleNavClick()
+                                        }} /></li>
                                     </ul>
                                 </>
                         }
                     </li>
+
+                    {
+                        user && user.role === "admin" &&
+                        <li className='profile-menu'
+                            onMouseEnter={() => setActiveDropdown('admin')}
+                            onMouseLeave={() => setActiveDropdown(null)}
+                        >
+                            <NavItem to={`/admin/home`} content={"Administration"} onClick={() => {
+                                setActiveDropdown(null)
+                                handleNavClick()
+                            }} />
+                            <ul className={`dropdown ${activeDropdown === "admin" ? "open-dropdown" : ""}`}>
+                                <li><NavItem to="/admin/home" content="Accueil" onClick={() => {
+                                    setActiveDropdown(null)
+                                    handleNavClick()
+                                }} /></li>
+                                <li><NavItem to="/admin/users" content="Utilisateurs" onClick={() => {
+                                    setActiveDropdown(null)
+                                    handleNavClick()
+                                }} /></li>
+                                <li><NavItem to="/admin/vehicles" content="Véhicules" onClick={() => {
+                                    setActiveDropdown(null)
+                                    handleNavClick()
+                                }} /></li>
+                                <li><NavItem to="/admin/categories" content="Catégories" onClick={() => {
+                                    setActiveDropdown(null)
+                                    handleNavClick()
+                                }} /></li>
+                                <li><NavItem to="/admin/equipments" content="Équipements" onClick={() => {
+                                    setActiveDropdown(null)
+                                    handleNavClick()
+                                }} /></li>
+                                <li><NavItem to="/admin/pictures" content="Photos" onClick={() => {
+                                    setActiveDropdown(null)
+                                    handleNavClick()
+                                }} /></li>
+                                <li><NavItem to="/admin/bookings" content="Réservations" onClick={() => {
+                                    setActiveDropdown(null)
+                                    handleNavClick()
+                                }} /></li>
+                                <li><NavItem to="/admin/messages" content="Messages" onClick={() => {
+                                    setActiveDropdown(null)
+                                    handleNavClick()
+                                }} /></li>
+                            </ul>
+                        </li>
+                    }
+
                 </ul>
                 <div className={`menu-hamburger ${isBurgerActive ? "active" : ""}`} id="burger-menu" onClick={handleClick}>
                     <div className="line"></div>

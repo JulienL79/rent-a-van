@@ -3,7 +3,7 @@ import { IAdminMetaData } from "./Admin.props";
 export const adminMetaDatas: IAdminMetaData[] = [
     {
         page: 'home',
-        titlePage: 'Administration',
+        titlePage: 'Accueil',
         title: 'RentAVan - Espace Administrateur',
         description: 'Accédez au tableau de bord administrateur pour superviser l’activité de la plateforme et gérer les contenus clés.'
     },
@@ -45,8 +45,8 @@ export const adminMetaDatas: IAdminMetaData[] = [
     },
     {
         page: 'messages',
-        titlePage: 'Messagerie',
-        title: 'RentAVan - Messagerie administrateur',
+        titlePage: 'Messages',
+        title: 'RentAVan - Suivi des Messages',
         description: 'Accédez aux échanges entre utilisateurs pour assurer le bon déroulement des communications.'
     }
 ];

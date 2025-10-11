@@ -1,3 +1,13 @@
 export type CategoryPayload = {
-  name: "van" | "camping-car";
+	name: "van" | "camping-car";
+};
+
+export type TAdminCategoryData = {
+	id: string;
+	name: string;
+};
+
+export type TAdminCategoryRow = {
+	id: string;
+	name: string;
 };

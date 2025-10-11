@@ -8,7 +8,7 @@ import {
 
 export const fetchAllUsers = async () => {
     try {
-        return await api.get<any[]>("/users");
+        return await api.get<{ message: string; data: any[] }>("/users");
     } catch (err) {
         handleError(err, "Erreur lors de la récupération des utilisateurs");
     }
@@ -16,7 +16,7 @@ export const fetchAllUsers = async () => {
 
 export const fetchUserById = async (userId: string) => {
     try {
-        return await api.get<any>(`/users/${userId}`);
+        return await api.get<{ message: string; data: any }>(`/users/${userId}`);
     } catch (err) {
         handleError(err, "Erreur lors de la récupération de l'utilisateur");
     }
@@ -24,7 +24,7 @@ export const fetchUserById = async (userId: string) => {
 
 export const fetchUserByIdWithDetails = async (userId: string) => {
     try {
-        return await api.get<any>(`/users/details/${userId}`);
+        return await api.get<{ message: string; data: any[] }>(`/users/details/${userId}`);
     } catch (err) {
         handleError(
             err,

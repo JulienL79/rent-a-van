@@ -1,0 +1,103 @@
+.table-container {
+	width: 100%;
+	padding: 2rem;
+	background-color: var(--bg-color-secondary);
+	border-radius: 0.5rem;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	overflow-x: auto;
+}
+
+.styled-table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: var(--font-size-table-sm);
+	font-family: 'Poppins', sans-serif;
+	color: var(--text-color);
+}
+
+.styled-table thead {
+	background-color: var(--primary-color);
+	color: white;
+}
+
+.styled-table th,
+.styled-table td {
+	padding: 1rem;
+	text-align: left;
+	border-bottom: 1px solid var(--active-color);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: 50px;
+}
+
+.styled-table tbody td {
+	padding: 0.5rem 1rem;
+}
+
+.styled-table tbody {
+	background-color: var(--bg-color);
+}
+
+.styled-table tbody tr:hover {
+	background-color: var(--active-color);
+	cursor: pointer;
+}
+
+.styled-table tbody .no-data-table:hover {
+	background-color: var(--bg-color);
+	cursor: default;
+}
+
+.styled-table .actions {
+	display: flex;
+	gap: 1rem;
+	width: 100px;
+}
+
+.styled-table .actions button {
+	padding: 0.25rem 0;
+}
+
+/* ============================================================================================
+TABLET VERSION
+=============================================================================================== */
+
+@media screen and (min-width: 768px) {
+
+	.styled-table {
+		font-size: var(--font-size-table-md);
+	}
+
+	.styled-table th,
+	.styled-table td {
+		max-width: 90px;
+	}
+}
+
+/* ============================================================================================
+DESKTOP VERSION
+=============================================================================================== */
+
+@media screen and (min-width: 1024px) {
+
+	.styled-table {
+		font-size: var(--font-size-table-lg);
+	}
+
+	.styled-table th,
+	.styled-table td {
+		max-width: 150px;
+	}
+
+	.styled-table .actions {
+		display: flex;
+		gap: 1rem;
+		width: auto;
+	}
+
+	.styled-table .actions button {
+		padding: 0.75rem 2rem;
+		width: auto;
+	}
+}
