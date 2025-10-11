@@ -161,7 +161,7 @@ export const Vehicle: React.FC<IVehicleProps> = ({ page, id, onInteract }) => {
             if (page === "profile" || page === "admin") {
                 try {
                     const data = await fetchVehicleDetails(id)
-                    console.log("Response of fecthDetails: ", data)
+                    if(!data) throw new Error
                     setVehicleDatas(data.data as TVehicleDetails)
                     setLocationCode(data.data.cityCode)
                 } catch (err) {
@@ -171,7 +171,7 @@ export const Vehicle: React.FC<IVehicleProps> = ({ page, id, onInteract }) => {
             } else {
                 try {
                     const data = await fetchVehicleById(id)
-                    console.log("Response of fecthByID: ", data)
+                    if(!data) throw new Error
                     setVehicleDatas(data.data as TVehicleBooker)
                 } catch (err) {
                     handleError(err, "Impossible de récupérer les informations du véhicule");

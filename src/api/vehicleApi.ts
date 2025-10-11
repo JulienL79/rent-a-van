@@ -12,7 +12,7 @@ export const fetchAllVehicles = async () => {
 
 export const fetchVehicleDetails = async (id: string) => {
     try {
-        return await api.get<{ message: string; data: any[] }>(`/vehicles/details/${id}`);
+        return await api.get<{ message: string; data: any }>(`/vehicles/details/${id}`);
     } catch (err) {
         handleError(
             err,

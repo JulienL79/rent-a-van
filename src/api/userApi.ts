@@ -24,7 +24,7 @@ export const fetchUserById = async (userId: string) => {
 
 export const fetchUserByIdWithDetails = async (userId: string) => {
     try {
-        return await api.get<{ message: string; data: any[] }>(`/users/details/${userId}`);
+        return await api.get<{ message: string; data: any }>(`/users/details/${userId}`);
     } catch (err) {
         handleError(
             err,
