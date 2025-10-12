@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './DataTable.scss'; // Tu peux intégrer ce CSS dans ton fichier global si tu préfères
 import { IDataTableAdmin } from './DataTable.props';
 import { Button } from '@atoms/Button';
-import { formatShortDateFr } from '@utils/dateConverter';
+import { formatShortDateFr } from '@utils/DateConverter';
 import { Modal } from '@organisms/Modal';
 
 export const DataTable: React.FC<IDataTableAdmin> = ({ pageData, onSelect, onDelete }) => {

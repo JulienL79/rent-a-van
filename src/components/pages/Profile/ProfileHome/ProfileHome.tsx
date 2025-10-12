@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useAuthStore } from "@store/useAuthStore";
 import { profileCredentialsFormData, profileDetailsFormData } from "./ProfileUserFormData";
 import { Form, IFormProps } from "@organisms/Form";
-import { formatShortDateFr } from "@utils/dateConverter";
+import { formatShortDateFr } from "@utils/DateConverter";
 import { Button } from "@atoms/Button";
 import { FormSubmitResult } from "../../../../types/FormSubmitResult";
 import { UpdateCredentialsPayload, UserUpdatePayload } from "../../../../types/User";
