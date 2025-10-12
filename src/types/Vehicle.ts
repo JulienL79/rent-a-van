@@ -1,0 +1,66 @@
+export type VehicleRegisterPayload = {
+	categoryId: string;
+	brand: string;
+	model: string;
+	mileage: string;
+	registrationDate: string;
+	registrationPlate: string;
+	description: string;
+	numberOfSeats: string;
+	numberOfSleepingPlaces: string;
+	length: string;
+	height: string;
+	weight: string;
+	fuelType: "diesel" | "petrol" | "electric" | "hybrid" | "other";
+	gearType: "manual" | "automatic";
+	consumption: string;
+	cityName: string;
+	cityCode: string;
+	insuranceNumber: string;
+	insuranceExpirationDate: string;
+	basePrice: string;
+	isAvailable?: boolean;
+	equipmentIds: string[];
+	pictures: string[];
+};
+
+export type VehicleUpdatePayload = {
+	categoryId: string;
+	brand: string;
+	model: string;
+	mileage: string;
+	registrationDate: string;
+	registrationPlate: string;
+	description: string;
+	numberOfSeats: string;
+	numberOfSleepingPlaces: string;
+	length: string;
+	height: string;
+	weight: string;
+	fuelType: "diesel" | "petrol" | "electric" | "hybrid" | "other";
+	gearType: "manual" | "automatic";
+	consumption: string;
+	cityName: string;
+	cityCode: string;
+	insuranceNumber: string;
+	insuranceExpirationDate: string;
+	basePrice: string;
+	isAvailable?: boolean;
+	equipmentIds?: string[];
+};
+
+export type TAdminVehicleData = {
+	id: string;
+	brand: string;
+	model: string;
+	registrationPlate: string;
+	cityName: string;
+	userId: string;
+	createdAt: Date,
+};
+
+export type TAdminVehicleRow = {
+	id: string;
+	registrationPlate: string;
+	createdAt: Date,
+};
