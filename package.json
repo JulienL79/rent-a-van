@@ -1,5 +1,5 @@
 {
-  "name": "rent-a-van-front",
+  "name": "rent-a-van",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -7,10 +7,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "deploy": "npm run build && gh-pages -d dist"
+    "preview": "vite preview"
   },
-  "homepage": "https://julienl79.github.io/rent-a-van",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^7.0.0",
     "@fortawesome/fontawesome-svg-core": "^7.0.1",

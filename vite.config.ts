@@ -10,7 +10,7 @@ const __dirname = path.dirname(__filename);
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tsconfigPaths()],
-  base: "/rent-a-van/",
+  base: "/",
   resolve: {
     alias: {
       "@style": path.resolve(__dirname, "src/style"),
