@@ -114,6 +114,7 @@
   position: relative; // repère pour le dropdown
 
   .dropdown {
+    display: block;
     position: relative;
     z-index: 99;
     margin-left: 5rem;
@@ -132,7 +133,7 @@
 
   @include tablet {
     .dropdown {
-      display: none;
+      display: block;
       position: absolute; // maintenant en flottant
       top: 100%;
       left: -2rem;
@@ -149,13 +150,13 @@
       }
     }
 
-    &:hover .dropdown,
-    &:focus-within .dropdown {
-      display: block;
-    }
   }
 
   @include desktop {
+    .dropdown {
+      display: none;
+    }
+
     &:hover .dropdown,
     &:focus-within .dropdown {
       display: none;
