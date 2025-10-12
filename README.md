@@ -9,7 +9,7 @@ Interface front-end du projet **Rent-a-Van**, développé avec **React 19**, **V
 ### 1. Cloner le projet
 
 ```bash
-git clone https://github.com/ton-utilisateur/rent-a-van-front.git
+git clone https://github.com/JulienL79/rent-a-van.git
 cd rent-a-van-front
 ```
 ### 2. Installer les dépendances
