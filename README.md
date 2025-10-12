@@ -1,54 +1,99 @@
-# React + TypeScript + Vite
+# 🚐 Rent-a-Van Front
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Interface front-end du projet **Rent-a-Van**, développé avec **React 19**, **Vite**, **TypeScript** et une architecture **Atomic Design**. Ce projet permet la location et la gestion de véhicules utilitaires via une interface utilisateur moderne et responsive.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🛠️ Installation
 
-## Expanding the ESLint configuration
+### 1. Cloner le projet
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+```bash
+git clone https://github.com/ton-utilisateur/rent-a-van-front.git
+cd rent-a-van-front
+```
+### 2. Installer les dépendances
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+### 3. Configuration des variables d’environnement
+Créer un fichier .env.local à la racine du projet :
+```bash
+VITE_API_URL=https://ton-api-url.com
 ```
+
+### 4. Lancer le projet en développement
+```bash
+npm run dev
+```
+
+### 5. Build pour la production
+```bash
+npm run build
+```
+
+### 6. Lancer le serveur de preview
+```bash
+npm run preview
+```
+
+## 🧩 Architecture & Fonctionnalités
+Le projet suit une architecture Atomic Design avec des composants organisés par niveau (Atoms, Molecules, Organisms, Pages).
+
+## 📄 Pages principales
+| Page      | Description                                                                 |
+|-----------|-----------------------------------------------------------------------------|
+| Home      | Page d’accueil avec navigation vers les articles et moteur de recherche    |
+| Profile   | Espace utilisateur pour gérer ses véhicules, réservations et informations  |
+| Admin     | Interface d’administration pour gérer les réservations et les véhicules    |
+| Search    | Affichage des résultats de recherche pour préparer une réservation         |
+| Annexes   | Pages légales, login, register, etc.                                       |
+
+
+
+## 📁 Structure du projet
+```
+src/
+├── api/           # Appels API centralisés
+├── assets/        # Images, icônes, polices
+├── components/    # Composants atomiques et composés
+├── pages/         # Pages principales du site
+├── routes/        # Définition des routes de navigation
+├── store/         # Stores Zustand (auth, alertes, filtres)
+├── style/         # Styles globaux SCSS
+├── types/         # Déclarations TypeScript
+├── utils/         # Fonctions utilitaires
+```
+
+## 🧠 Stores Zustand
+- useAlertStore : gestion des messages et alertes
+- useAuthStore : authentification utilisateur
+- useFilterStore : filtres de recherche de véhicules
+
+## 🧱 Stack technique
+- React 19
+- Vite 6
+- TypeScript
+- Sass
+- Zustand
+- React Query
+- FontAwesome & Lucide Icons
+- Framer Motion
+- Flatpickr
+- Zod (validation)
+- ESLint + TypeScript ESLint
+
+## ✅ Linting
+Pour vérifier la qualité du code :
+```bash
+npm run lint
+```
+
+
+
+
+
+
