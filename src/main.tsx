@@ -11,7 +11,7 @@ createRoot(document.getElementById('root')!).render(
     <StrictMode>
         <QueryClientProvider client={queryClient}>
             <HeadProvider>
-                <BrowserRouter basename="/rent-a-van/">
+                <BrowserRouter basename="/">
                     <App />
                 </BrowserRouter>
             </HeadProvider>
