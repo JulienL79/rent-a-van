@@ -61,6 +61,7 @@ export const AdminPicture = () => {
 
         if (!id) {
             loadData()
+            if(datas) console.log("Données récupérées")
         }
     }, [id, deletedPictureCount])
 

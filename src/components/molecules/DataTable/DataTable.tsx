@@ -5,8 +5,8 @@ import { Button } from '@atoms/Button';
 import { formatShortDateFr } from '@utils/dateConverter';
 import { Modal } from '@organisms/Modal';
 
-export const DataTable: React.FC<IDataTableAdmin> = ({ pageData, onSelect, onUpdate, onDelete }) => {
-    const { datas, page, columns } = pageData
+export const DataTable: React.FC<IDataTableAdmin> = ({ pageData, onSelect, onDelete }) => {
+    const { datas, columns } = pageData
     const [idGoingToBeDelete, setIdGoingToBeDelete] = useState<string | null>(null);
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 

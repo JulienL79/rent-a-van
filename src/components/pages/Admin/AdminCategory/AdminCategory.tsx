@@ -60,6 +60,7 @@ export const AdminCategory = () => {
 
         if (!id) {
             loadData()
+            if(datas) console.log("Données récupérées")
         }
     }, [id, deletedCategoryCount])
 

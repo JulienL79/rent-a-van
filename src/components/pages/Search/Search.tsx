@@ -24,6 +24,11 @@ export function Search() {
     }, [page]);
 
     // Filtrage des résultats à gérer ici
+    useEffect(() => {
+        if (state) {
+            setFilteredResults(state.results ?? [])
+        }
+    }, [state]);
 
     return (
         <div className="page search-page">
