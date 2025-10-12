@@ -2,7 +2,7 @@ import React from "react"
 import { IUserProps } from "./User.props"
 import { Link } from "react-router-dom"
 import { Button } from "@atoms/Button"
-import './User.css'
+import './User.scss'
 
 export const User: React.FC<IUserProps> = ({ page, id, onInteract }) => {
     if (page && id && onInteract)

@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { INavItemProps } from "./NavItem.props";
 import { useNavigate } from "react-router-dom";
-import "./NavItem.css"
+import "./NavItem.scss"
 
 export const NavItem : React.FC<INavItemProps> = ({
     to,

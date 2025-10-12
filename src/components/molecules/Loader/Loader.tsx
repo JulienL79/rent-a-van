@@ -2,7 +2,7 @@ import React from "react";
 import { ILoaderProps } from "./LoaderProps";
 import { Image } from "@atoms/Image";
 import Logo from '/assets/img/icon.png'
-import "./Loader.css"
+import "./Loader.scss"
 
 export const Loader : React.FC<ILoaderProps> = ({
     mainMessage,

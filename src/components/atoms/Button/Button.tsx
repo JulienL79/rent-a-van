@@ -1,6 +1,6 @@
 import { IButtonProps } from "./Button.props";
 import React from "react";
-import "./Button.css"
+import "./Button.scss"
 
 export const Button : React.FC<IButtonProps> = ({
     className = "primary-button", 

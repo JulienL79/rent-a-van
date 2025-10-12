@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "./InitialLoader.css";
+import "./InitialLoader.scss";
 
 export const InitialLoader = () => {
     const [visible, setVisible] = useState(true);

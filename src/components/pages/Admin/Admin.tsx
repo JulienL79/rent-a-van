@@ -4,7 +4,7 @@ import { adminMetaDatas } from "./AdminMetaData"
 import { useParams } from "react-router-dom";
 import { IAdminMetaData } from "./Admin.props";
 import { useEffect, useState } from "react";
-import './Admin.css';
+import './Admin.scss';
 import { AuthRedirector } from "@routes/AuthRedirector";
 import { AdminVehicle } from "./AdminVehicle";
 import { AdminUser } from "./AdminUser";

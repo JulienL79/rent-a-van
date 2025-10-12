@@ -1,4 +1,4 @@
-import "./Separator.css"
+import "./Separator.scss"
 
 export const Separator = () => {
     return (

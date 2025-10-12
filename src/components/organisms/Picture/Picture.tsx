@@ -2,7 +2,7 @@ import React from "react"
 import { Link } from "react-router-dom"
 import { Button } from "@atoms/Button"
 import { IPictureProps } from "./Picture.props"
-import './Picture.css'
+import './Picture.scss'
 
 export const Picture: React.FC<IPictureProps> = ({ page, id, onInteract }) => {
     if (page && id && onInteract)

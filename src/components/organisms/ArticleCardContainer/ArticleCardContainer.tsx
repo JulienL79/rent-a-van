@@ -1,5 +1,5 @@
 import { IArticleCardContainerProps } from "./ArticleCardContainer.props"
-import "./ArticleCardContainer.css"
+import "./ArticleCardContainer.scss"
 import { ArticleCard } from "@molecules/ArticleCard"
 
 export const ArticleCardContainer : React.FC<IArticleCardContainerProps> = ({

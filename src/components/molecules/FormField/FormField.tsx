@@ -1,6 +1,6 @@
 import { IFormFieldProps } from "./FormField.props"
 import React from "react"
-import "./FormField.css"
+import "./FormField.scss"
 import { Label } from "@atoms/Label"
 import { Input } from "@atoms/Input"
 

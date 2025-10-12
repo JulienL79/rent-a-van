@@ -1,6 +1,6 @@
 import React from "react";
 import { ILabelProps } from "./Label.props";
-import "./Label.css"
+import "./Label.scss"
 
 export const Label : React.FC<ILabelProps> = ({
     htmlFor,

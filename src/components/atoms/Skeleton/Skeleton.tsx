@@ -1,6 +1,6 @@
 import { ISkeletonProps } from "./Skeleton.props";
 import React from "react";
-import "./Skeleton.css"
+import "./Skeleton.scss"
 
 export const Skeleton: React.FC<ISkeletonProps> = ({
     width = "100%",

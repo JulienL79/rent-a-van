@@ -1,6 +1,6 @@
 import React from "react";
 import { IImageProps } from "./Image.props";
-import './Image.css'
+import './Image.scss'
 
 export const Image : React.FC<IImageProps> = ({className = "", src, alt = ""}) => {
 

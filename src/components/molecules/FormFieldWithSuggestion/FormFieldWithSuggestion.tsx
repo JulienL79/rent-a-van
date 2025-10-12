@@ -1,6 +1,6 @@
 import { IFormFieldWithSuggestionProps } from "./FormFieldWithSuggestion.props"
 import React, { useRef, useState } from "react"
-import "./FormFieldWithSuggestion.css"
+import "./FormFieldWithSuggestion.scss"
 import { Label } from "@atoms/Label"
 import { Input } from "@atoms/Input"
 import { useFilterStore } from "@store/useFilterStore"

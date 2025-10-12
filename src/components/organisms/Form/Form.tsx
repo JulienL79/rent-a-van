@@ -6,7 +6,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ContactInfo } from "@molecules/ContactInfo";
 import { useFilterStore } from "@store/useFilterStore";
-import "./Form.css"
+import "./Form.scss"
 import { FormFieldWithSuggestion, IFormFieldWithSuggestionProps } from "@molecules/FormFieldWithSuggestion";
 import { handleError, handleSuccess } from "@utils/feedbackHandler";
 

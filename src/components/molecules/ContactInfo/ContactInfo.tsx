@@ -1,4 +1,4 @@
-import "./ContactInfo.css"
+import "./ContactInfo.scss"
 import { FontAwesomeIconWrapper } from "@atoms/FontAwesomeIconWrapper"
 
 export const ContactInfo = () => {

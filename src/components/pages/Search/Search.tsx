@@ -5,7 +5,7 @@ import { ISearchMetaData } from "./Search.props";
 import { searchMetaDatas } from "./SearchMetaData";
 import { useEffect, useState } from "react";
 import { IVehicleResult, Result } from "./Result";
-import './Search.css';
+import './Search.scss';
 import { Vehicle } from "@organisms/Vehicle";
 
 export function Search() {

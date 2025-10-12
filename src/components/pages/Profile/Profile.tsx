@@ -3,7 +3,7 @@ import { IProfileMetaData } from "./Profile.props";
 import { profileMetaDatas } from "./ProfileMetaData";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import './Profile.css'
+import './Profile.scss'
 import { Aside } from "@molecules/Aside";
 import { ProfileHome } from "./ProfileHome";
 import { ProfileBooking } from "./ProfileBooking";

@@ -2,7 +2,7 @@ import React from "react"
 import { Link } from "react-router-dom"
 import { Button } from "@atoms/Button"
 import { IMessageProps } from "./Message.props"
-import './Message.css';
+import './Message.scss';
 
 export const Message: React.FC<IMessageProps> = ({ page, id, onInteract }) => {
     if (page && id && onInteract)

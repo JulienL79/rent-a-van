@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import './DataTable.css'; // Tu peux intégrer ce CSS dans ton fichier global si tu préfères
+import React, { useEffect, useState } from 'react';
+import './DataTable.scss'; // Tu peux intégrer ce CSS dans ton fichier global si tu préfères
 import { IDataTableAdmin } from './DataTable.props';
 import { Button } from '@atoms/Button';
 import { formatShortDateFr } from '@utils/dateConverter';
@@ -8,6 +8,18 @@ import { Modal } from '@organisms/Modal';
 export const DataTable: React.FC<IDataTableAdmin> = ({ pageData, onSelect, onUpdate, onDelete }) => {
     const { datas, page, columns } = pageData
     const [idGoingToBeDelete, setIdGoingToBeDelete] = useState<string | null>(null);
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+
+        window.addEventListener("resize", handleResize);
+
+        // Nettoyage
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
 
     return (
         <>
@@ -46,7 +58,7 @@ export const DataTable: React.FC<IDataTableAdmin> = ({ pageData, onSelect, onUpd
                                     onUpdate(item.id);
                                 }}
                                 /> */}
-                                    <Button className="danger-button" content="Supprimer" onClick={(e) => {
+                                    <Button className="danger-button" content={isMobile ? "Supp" : "Supprimer"} onClick={(e) => {
                                         if (e) e.stopPropagation();
                                         setIdGoingToBeDelete(item.id);
                                     }}

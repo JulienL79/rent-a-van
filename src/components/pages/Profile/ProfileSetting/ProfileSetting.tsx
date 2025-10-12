@@ -4,7 +4,7 @@ import { useState } from "react";
 import { handleError, handleSuccess } from "@utils/feedbackHandler";
 import { Modal } from "@organisms/Modal";
 import { Button } from "@atoms/Button";
-import './ProfileSetting.css'
+import './ProfileSetting.scss'
 
 export const ProfileSetting = () => {
     const [isConfirmModalOpened, setIsConfirmModalOpened] = useState<boolean>(false);

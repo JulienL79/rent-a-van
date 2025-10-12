@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/swiper-bundle.css";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/thumbs";
 import { Navigation, Autoplay, Thumbs } from "swiper/modules";
 import { ICarouselProps } from "./Carousel.props";
 import { IImageProps } from "@atoms/Image";

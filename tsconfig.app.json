@@ -36,7 +36,8 @@
       "@api/*": ["api/*"],
       "@types/*": ["types/*"],
       "@utils/*": ["utils/*"],
-      "@routes/*": ["routes/*"]
+      "@routes/*": ["routes/*"],
+      "@style/*": ["style/*"]
     },
   },
   "include": [

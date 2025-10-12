@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import { IArticleCardProps } from "./ArticleCard.props"
-import "./ArticleCard.css"
+import "./ArticleCard.scss"
 
 export const ArticleCard : React.FC<IArticleCardProps> = ({
     image,

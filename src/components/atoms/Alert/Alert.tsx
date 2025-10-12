@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import React from "react";
-import "./Alert.css"
+import "./Alert.scss"
 import { IAlert } from "./Alert.props";
 
 export const Alert: React.FC<IAlert> = ({ message, type, onClose }) => {

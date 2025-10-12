@@ -2,7 +2,7 @@ import React from "react";
 import { IConfirmModalProps, IFormModalProps } from "./Modal.props";
 import { Form } from "@organisms/Form";
 import { Button } from "@atoms/Button";
-import './Modal.css'
+import './Modal.scss'
 
 export const Modal: React.FC<IFormModalProps | IConfirmModalProps> = (props) => {
     const { modalType, onClose } = props;

@@ -6,7 +6,7 @@ import { useFilterStore } from "@store/useFilterStore";
 import { Form } from "@organisms/Form";
 import { TestimonialSlider } from "@atoms/TestimonialSlider";
 import { reviews } from "./HomeReviewData";
-import './Home.css'
+import './Home.scss'
 import { FormSubmitResult } from "../../../types/FormSubmitResult";
 import { RawSearchPayload } from "../../../types/Search";
 import { searchVehicles } from "@api/searchApi";

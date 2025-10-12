@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
 import { IPaginationProps } from "./PaginationProps";
-import "./Pagination.css"
+import "./Pagination.scss"
 import { Button } from "@atoms/Button";
 
 export const Pagination: React.FC<IPaginationProps> = ({

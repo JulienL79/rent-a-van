@@ -2,7 +2,7 @@ import React from "react"
 import { Link } from "react-router-dom"
 import { Button } from "@atoms/Button"
 import { ICategoryProps } from "./Category.props";
-import './Category.css';
+import './Category.scss';
 
 export const Category: React.FC<ICategoryProps> = ({ page, id, onInteract }) => {
     if (page && id && onInteract)

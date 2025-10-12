@@ -12,7 +12,7 @@ import { fuelTypeOptions, gearTypeOptions } from "@pages/Profile/ProfileVehicle/
 import { fetchAllCategories } from "@api/categoryApi";
 import { fetchAllEquipments } from "@api/equipmentApi";
 import Carousel from "@molecules/Carousel/Carousel";
-import './Vehicle.css'
+import './Vehicle.scss'
 import { Link, useNavigate } from "react-router-dom";
 
 export const Vehicle: React.FC<IVehicleProps> = ({ page, id, onInteract }) => {

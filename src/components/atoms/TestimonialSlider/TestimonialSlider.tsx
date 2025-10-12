@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import "./TestimonialSlider.css";
+import "./TestimonialSlider.scss";
 import { ITestimonialSliderProps } from "./TestimonialSlider.props";
 
 export const TestimonialSlider: React.FC<ITestimonialSliderProps> = ({

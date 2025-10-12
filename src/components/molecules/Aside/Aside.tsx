@@ -1,6 +1,6 @@
 import { IAsideAdminPageProps, IAsideProfilePageProps, IAsideResultPageProps } from "./Aside.props"
 import { NavItem } from '@atoms/NavItem'
-import './Aside.css'
+import './Aside.scss'
 
 export const Aside: React.FC<IAsideAdminPageProps | IAsideProfilePageProps | IAsideResultPageProps> = (props) => {
     const { page } = props

@@ -1,6 +1,6 @@
 import React from "react";
 import { IInputProps } from "./Input.props";
-import "./Input.css";
+import "./Input.scss";
 
 export const Input: React.FC<IInputProps> = ({
     id,

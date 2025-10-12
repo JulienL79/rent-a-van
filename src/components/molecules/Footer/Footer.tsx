@@ -1,5 +1,5 @@
 import { NavItem } from "@atoms/NavItem"
-import "./Footer.css"
+import "./Footer.scss"
 
 export const Footer = () => {
 

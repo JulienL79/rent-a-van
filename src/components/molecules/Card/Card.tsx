@@ -1,5 +1,5 @@
 import { IVehicleCardPropsResult, IVehicleCardPropsProfile, IBookingCardPropsOwner, IBookingCardPropsRenter } from "./Card.props"
-import './Card.css'
+import './Card.scss'
 import { Image } from "@atoms/Image"
 import { Link } from "react-router-dom"
 import { Button } from "@atoms/Button"
