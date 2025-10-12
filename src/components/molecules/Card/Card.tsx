@@ -3,7 +3,7 @@ import './Card.scss'
 import { Image } from "@atoms/Image"
 import { Link } from "react-router-dom"
 import { Button } from "@atoms/Button"
-import { formatShortDateFr } from "@utils/dateConverter"
+import { formatShortDateFr } from "@utils/DateConverter"
 import { useState } from "react"
 import { Modal } from "@organisms/Modal"
 
