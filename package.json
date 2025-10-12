@@ -10,7 +10,7 @@
     "preview": "vite preview",
     "deploy": "npm run build && gh-pages -d dist"
   },
-  "homepage": "https://julienl79.github.io/rent-a-van/",
+  "homepage": "https://julienl79.github.io/rent-a-van",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^7.0.0",
     "@fortawesome/fontawesome-svg-core": "^7.0.1",
