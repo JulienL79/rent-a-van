@@ -62,6 +62,7 @@ export const AdminBooking = () => {
 
         if (!id) {
             loadData()
+            if(datas) console.log("Données récupérées")
         }
     }, [id, deletedBookingCount])
 
